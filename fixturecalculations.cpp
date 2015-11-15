@@ -44,7 +44,7 @@ void clearScreen()
     for (int cls = 1;cls <= nLinesToClear; cls++)
     {
 
-        //1sleep(0);
+
         std::cout << " \n";
     }
 }

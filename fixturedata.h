@@ -1,15 +1,10 @@
 #ifndef FIXTUREDATA
 #define FIXTUREDATA
 
+#ifndef CONSTANTS_H
+#include "constsants.h"
+#endif // Constants
 
-#define PI 3.14159265
-#define LuxToFootcandleRatio 0.09290304
-//#define EmperialToMetricCoefficient 10.7631
-#define FeetPerMeter 3.28
-#define MAX_NUMBER_OF_FIXTURES 11
-#define NUMOFDECIMALS 2
-#define NUMOFDECIMALSLIGHTLEVELS 0
-#define UNKNOWN "???"
 
 class FixtureData
 {
@@ -86,12 +81,14 @@ std::ostream& operator << (std::ostream &out, FixtureData &cSource);
 class AllData
 {
 public:
+    bool bInitialized;
     unsigned int nNumberOfFixtures;
     unsigned int nCurrentFixture;
     FixtureData Fixture[MAX_NUMBER_OF_FIXTURES];
 
     AllData()
         {
+            bInitialized = 0;
             nNumberOfFixtures = 1;
             nCurrentFixture = 1;
         }

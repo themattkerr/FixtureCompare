@@ -15,10 +15,14 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     fixturecalculations.cpp \
-    fixturedata.cpp
+    fixturedata.cpp \
+    startupdialog.cpp
 
 HEADERS  += mainwindow.h \
     fixtruecalculations.h \
-    fixturedata.h
+    fixturedata.h \
+    constsants.h \
+    startupdialog.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    startupdialog.ui
