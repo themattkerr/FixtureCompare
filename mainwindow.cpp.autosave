@@ -1,0 +1,17 @@
+#include "mainwindow.h"
+#include "ui_mainwindow.h"
+#include "fixturedata.h"
+#include "fixtruecalculations.h"
+
+MainWindow::MainWindow(QWidget *parent) :
+    QMainWindow(parent),
+    ui(new Ui::MainWindow)
+{
+    ui->setupUi(this);
+    AllData cData;
+}
+
+MainWindow::~MainWindow()
+{
+    delete ui;
+}
