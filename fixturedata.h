@@ -89,7 +89,7 @@ public:
     AllData()
         {
             bInitialized = 0;
-            nNumberOfFixtures = 1;
+            nNumberOfFixtures = 0;
             nCurrentFixture = 1;
         }
     ~AllData(){}

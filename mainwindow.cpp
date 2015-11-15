@@ -16,7 +16,7 @@ MainWindow::MainWindow(QWidget *parent) :
         HowManyStart->exec();
     }
 
-    SetupFixtureTable(cData);
+    SetupFixtureTable();
 
 }
 
@@ -25,7 +25,7 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::SetupFixtureTable(AllData &cData)
+void MainWindow::SetupFixtureTable()
 {
     ui->tableWidget->setColumnCount(NUM_FIELDS_SHOWN_IN_MAIN_TABLE);
     QStringList qstrlFieldHeaders;
@@ -34,12 +34,13 @@ void MainWindow::SetupFixtureTable(AllData &cData)
 
     ui->tableWidget->setRowCount(cData.nNumberOfFixtures);
 
-    for (int iii = 0; iii < cData.nNumberOfFixtures;iii++)
+/*
+    for (int iii = 1; iii <= 3;iii++)//cData.nNumberOfFixtures
     {
-        for (jjj = 0; iii < NUM_FIELDS_SHOWN_IN_MAIN_TABLE;jjj++)
+        for (int jjj = 0; iii < NUM_FIELDS_SHOWN_IN_MAIN_TABLE;jjj++)
         {
             // table assignments here...
         }
     }
-
+*/
 }

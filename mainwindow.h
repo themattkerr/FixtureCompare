@@ -21,7 +21,7 @@ public:
 
 private:
     Ui::MainWindow *ui;
-    void SetupFixtureTable(AllData &cData);
+    void SetupFixtureTable();
 
 
 
