@@ -14,7 +14,7 @@
     {
         m_FixtureName = "New Fixture";
         m_bMeasurementSystem = 0;
-        m_dCandela = 0, m_dDistanceMeters = .001, m_dLux = 0, m_dDistanceFeet = .00328,  m_dFc = 0, m_dFieldAngle = 0, m_dFieldDiameterMeters = 0, m_dFieldDiameterFeet = 0;
+        m_dCandela = 0, m_dLumens = 0, m_dDistanceMeters = .001, m_dLux = 0, m_dDistanceFeet = .00328,  m_dFc = 0, m_dFieldAngle = 0, m_dFieldDiameterMeters = 0, m_dFieldDiameterFeet = 0;
     }
 
     FixtureData::~FixtureData(){}
@@ -27,6 +27,12 @@
         calculateLux();
         convertLuxToFootcandles();
     }
+    void FixtureData::enterLumens(double dLumens)
+    {
+        assert (dLumens >=0);
+        m_dLumens = dLumens;
+    }
+
     void FixtureData::enterDistanceMeters(double dDistanceMeters)
     {
         assert (dDistanceMeters > 0);
@@ -87,6 +93,12 @@
         if(m_dCandela <= 0)
             return UNKNOWN;
         return PlaceCommas(m_dCandela,NUMOFDECIMALSLIGHTLEVELS);}
+    std::string FixtureData::getLumens()
+    {
+        if(m_dLumens <= 0)
+            return UNKNOWN;
+        return PlaceCommas (m_dLumens, NUMOFDECIMALS);
+    }
     std::string FixtureData::getDistanceMeters()
     {
         if (m_dDistanceMeters <= .001)
@@ -114,6 +126,7 @@
     std::string FixtureData::getFieldAngle()
     {
         if (m_dFieldAngle <= 0 )
+
             return UNKNOWN;
         return PlaceCommas(m_dFieldAngle, NUMOFDECIMALS);
     }
@@ -130,21 +143,79 @@
         return PlaceCommas(m_dFieldDiameterFeet, NUMOFDECIMALS);
     }
 
+    double FixtureData::getValueCandela()
+    {
+       if (isNotValid(m_dCandela))
+            return 0;
+        return m_dCandela;
+    }
+    double FixtureData::getValueLumens()
+    {
+        if (isNotValid(m_dLumens))
+            return 0;
+        return m_dLumens;
+    }
 
-    /*
-    double FixtureData::getCandela() {return ((static_cast<int>((100*m_dCandela) + 0.5))/100.00);}
-    double FixtureData::getDistanceMeters() {return ((static_cast<int>((100*m_dDistanceMeters) + 0.5))/100.00);}
-    double FixtureData::getDistanceFeet() {return (static_cast<int>((100*m_dDistanceFeet) + 0.5)/100.00);}
-    double FixtureData::getLux() {return (static_cast<int>((100*m_dLux) + 0.5)/100.00);}
-    double FixtureData::getdFootcandles() {return (static_cast<int> ((100*m_dFc) + 0.5)/100.00);}
-    double FixtureData::getFieldAngle() {return (static_cast<int>((100*m_dFieldAngle) + 0.5)/100.00);}
-    double FixtureData::getFieldSizeMeters() {return (static_cast<int>((100*m_dFieldDiameterMeters) + 0.5)/100.00);}
-    double FixtureData::getFieldSizeFeet() {return (static_cast<int>((100*m_dFieldDiameterFeet) + 0.5)/100.00);}
-    */
+    double FixtureData::getValueDistanceMeters()
+    {
+        if (isNotValid(m_dDistanceMeters))
+            return 0.001;
+        return m_dDistanceMeters;
+    }
+
+    double FixtureData::getValueDistanceFeet()
+    {
+        if (isNotValid(m_dDistanceFeet))
+            return .00328;
+        return m_dDistanceFeet;
+    }
+
+    double FixtureData::getValueLux()
+    {
+        if (isNotValid(m_dLux))
+            return 0;
+        return m_dLux;
+    }
+
+    double FixtureData::getValueFootCandles()
+    {
+        if (isNotValid(m_dFc))
+            return 0;
+        return m_dFc;
+    }
+
+    double FixtureData::getValueFieldAngle()
+    {
+        if (isNotValid(m_dFieldAngle))
+            return 0;
+        return m_dFieldAngle;
+    }
+
+    double FixtureData::getValueFieldSizeMeters()
+    {
+        if (isNotValid(m_dFieldDiameterMeters))
+            return 0;
+        return m_dFieldDiameterMeters;
+    }
+
+    double FixtureData::getValueFieldSizeFeet()
+    {
+        if(isNotValid(m_dFieldDiameterFeet))
+            return 0;
+        return m_dFieldDiameterFeet;}
+
+   bool FixtureData::isNotValid(double dNumToTest)
+    {
+        if (dNumToTest > 10000000|| dNumToTest < 0)
+            return true;
+        return false;
+    }
+
     FixtureData& FixtureData::operator= (const FixtureData &cSource)
     {
         m_FixtureName = cSource.m_FixtureName;
         m_dCandela = cSource.m_dCandela;
+        m_dLumens = cSource.m_dLumens;
         m_dDistanceMeters = cSource.m_dDistanceMeters;
         m_dLux = cSource.m_dLux;
         m_dDistanceFeet = cSource.m_dDistanceFeet;
@@ -159,6 +230,7 @@
     {
 
         out	<< cSource.m_FixtureName			<<","
+            << cSource.m_dLumens                <<","
             << cSource.m_dCandela				<<","
             << cSource.m_dDistanceMeters		<<","
             << cSource.m_dLux					<<","
@@ -169,20 +241,7 @@
             << cSource.m_dFieldDiameterFeet		<<","
 
             << std::endl;
-        /*
-        out << cSource.getFixtureName() <<"\t"
-            << cSource.getCandela() <<"\t"
-            << cSource.getDistanceMeters() <<"\t"
-            << cSource.getLux() <<"\t"
-            << cSource.getDistanceFeet() <<"\t"
-            << cSource.getdFootcandles() <<"\t"
-            << cSource.getFieldAngle() <<"\t"
-            << cSource.getFieldSizeMeters() <<"\t"
-            << cSource.getFieldSizeFeet() <<"\t"
 
-
-            << std::endl;
-        */
         return out;
     }
 

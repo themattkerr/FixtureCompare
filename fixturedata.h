@@ -16,6 +16,7 @@ public:
 
     void enterFixtureName(std::string FixtureName);
     void enterCandela(double dCandela);
+    void enterLumens (double dLumens);
     void enterDistanceMeters(double dDistanceMeters);
     void enterDistanceFeet(double dDistanceFeet);
     void enterLux(double dLux);
@@ -27,6 +28,7 @@ public:
 
     std::string getFixtureName();
     std::string getCandela();
+    std::string getLumens();
     std::string getDistanceMeters();
     std::string getDistanceFeet();
     std::string getLux();
@@ -34,6 +36,17 @@ public:
     std::string getFieldAngle();
     std::string getFieldSizeMeters();
     std::string getFieldSizeFeet();
+
+    double getValueCandela();
+    double getValueLumens();
+
+    double getValueDistanceMeters();
+    double getValueDistanceFeet();
+    double getValueLux();
+    double getValueFootCandles();
+    double getValueFieldAngle();
+    double getValueFieldSizeMeters();
+    double getValueFieldSizeFeet();
 
     FixtureData &operator =(const FixtureData &cSource);
     friend std::ostream& operator << (std::ostream &out, FixtureData &cSource);
@@ -46,6 +59,7 @@ private:
     // Fixture Data
     std::string m_FixtureName;
     double	m_dCandela,
+            m_dLumens,
             m_dDistanceMeters,
             m_dDistanceFeet,
             m_dLux,
@@ -53,7 +67,7 @@ private:
             m_dFieldAngle,
             m_dFieldDiameterMeters,
             m_dFieldDiameterFeet;
-
+    bool isNotValid(double dNumToTest);
     /*
     All calculations are done in Metric.
     Anything entered in Emperial will be converted first.

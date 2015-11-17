@@ -4,6 +4,7 @@
 #include "startupdialog.h"
 #include "fixturedata.h"
 #include "fixtruecalculations.h"
+#include "fixtureeditdialog.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -12,12 +13,17 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     if (!(cData.bInitialized))
     {
+        cData.bInitialized = true;
         startUpDialog *HowManyStart = new startUpDialog (this, &cData);
         HowManyStart->exec();
     }
-
+    if(cData.nNumberOfFixtures == 1)
+    {
+        cData.nCurrentFixture = 1;
+        FixtureEditDialog *AddEdit = new FixtureEditDialog (this, &cData);
+        AddEdit->exec();
+    }
     SetupFixtureTable();
-
 }
 
 MainWindow::~MainWindow()
@@ -34,13 +40,12 @@ void MainWindow::SetupFixtureTable()
 
     ui->tableWidget->setRowCount(cData.nNumberOfFixtures);
 
-/*
-    for (int iii = 1; iii <= 3;iii++)//cData.nNumberOfFixtures
+    for (cData.nCurrentFixture=1; cData.nCurrentFixture <= cData.nNumberOfFixtures; cData.nCurrentFixture++)
     {
-        for (int jjj = 0; iii < NUM_FIELDS_SHOWN_IN_MAIN_TABLE;jjj++)
-        {
-            // table assignments here...
-        }
+        int nColumn = 0;
+        ui->tableWidget->setItem(cData.nCurrentFixture-1, nColumn, new QTableWidgetItem(QString::fromStdString(cData.Fixture[cData.nCurrentFixture].getFixtureName())));
+        ui->tableWidget->setItem(cData.nCurrentFixture-1, ++nColumn, new QTableWidgetItem(QString::fromStdString(cData.Fixture[cData.nCurrentFixture].getCandela())));
+        ui->tableWidget->setItem(cData.nCurrentFixture-1, ++nColumn, new QTableWidgetItem(QString::fromStdString(cData.Fixture[cData.nCurrentFixture].getLumens())));
+
     }
-*/
 }

@@ -16,13 +16,18 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     fixturecalculations.cpp \
     fixturedata.cpp \
-    startupdialog.cpp
+    startupdialog.cpp \
+    fixtureeditdialog.cpp \
+    commonconversions.cpp
 
 HEADERS  += mainwindow.h \
     fixtruecalculations.h \
     fixturedata.h \
     constsants.h \
-    startupdialog.h
+    startupdialog.h \
+    fixtureeditdialog.h \
+    commonconversions.h
 
 FORMS    += mainwindow.ui \
-    startupdialog.ui
+    startupdialog.ui \
+    fixtureeditdialog.ui
