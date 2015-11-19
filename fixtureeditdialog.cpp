@@ -3,6 +3,7 @@
 #include "QKeyEvent"
 #include "fixturedata.h"
 #include "commonconversions.h"
+#include "mainwindow.h"
 
 
 enum fixtureID
@@ -36,10 +37,10 @@ FixtureEditDialog::~FixtureEditDialog()
 void FixtureEditDialog::setEditFieldsToCurrentState()
 {
     ui->FixtureNumberDisplay->setText(QString::number(m_cData->nCurrentFixture,10));
-    ui->FixtureName->setText(QString::fromStdString(m_cData->Fixture[EDITING].getFixtureName()));
+
+    ui->FixtureName->setText((m_cData->Fixture[EDITING].getFixtureName()));
     ui->Lumens->setText(QString::number(m_cData->Fixture[EDITING].getValueLumens(),'g',10));
     ui->CandelaBox->setText(QString::number(m_cData->Fixture[EDITING].getValueCandela(),'g',10));
-
 
     ui->DistMetersSpinBox->setValue((m_cData->Fixture[EDITING].getValueDistanceMeters()));
     ui->DistFeetSpinBox_2->setValue(( m_cData->Fixture[EDITING].getValueDistanceFeet()));
@@ -50,28 +51,6 @@ void FixtureEditDialog::setEditFieldsToCurrentState()
     ui->BeamSizeMetersSpinBox_2->setValue((m_cData->Fixture[EDITING].getValueFieldSizeMeters()));
     ui->BeamSizeFeetSpinBox_3->setValue((m_cData->Fixture[EDITING].getValueFieldSizeFeet()));
     ui->FieldAngleSpinBox->setValue((m_cData->Fixture[EDITING].getValueFieldAngle()));
-
-    //ui->FieldAngleSpinBox->setValue("---");
-
-    /*
-    ui->FixtureNumberDisplay->setText(QString::number(m_cData->nCurrentFixture,10));
-    ui->FixtureName->setText(QString::fromStdString(m_cData->Fixture[EDITING].getFixtureName()));
-    ui->Lumens->setText(QString::fromStdString(m_cData->Fixture[EDITING].getLumens()));
-    ui->CandelaBox->setText(QString::fromStdString(m_cData->Fixture[EDITING].getCandela()));
-
-
-    ui->DistMetersSpinBox->setValue((m_cData->Fixture[EDITING].getValueDistanceMeters()));
-    ui->DistFeetSpinBox_2->setValue(convertStdStringToDouble( m_cData->Fixture[EDITING].getDistanceFeet()));
-
-    ui->LuxSpinBox->setValue(convertStdStringToDouble(m_cData->Fixture[EDITING].getLux()));
-    ui->FootCandleSpinBox->setValue(convertStdStringToDouble(m_cData->Fixture[EDITING].getdFootcandles()));
-
-    ui->BeamSizeMetersSpinBox_2->setValue(convertStdStringToDouble(m_cData->Fixture[EDITING].getFieldSizeMeters()));
-    ui->BeamSizeFeetSpinBox_3->setValue(convertStdStringToDouble(m_cData->Fixture[EDITING].getFieldSizeFeet()));
-    ui->FieldAngleSpinBox->setValue(convertStdStringToDouble(m_cData->Fixture[EDITING].getFieldAngle()));
-
-    //ui->FieldAngleSpinBox->setValue("---");
-*/
 }
 
 
@@ -79,7 +58,6 @@ void FixtureEditDialog::setEditFieldsToCurrentState()
 void FixtureEditDialog::on_Lumens_editingFinished()
 {
     bool *ok;
-    *ok = 1;
     m_cData->Fixture[EDITING].enterLumens((ui->Lumens->text()).toDouble(ok));
     setEditFieldsToCurrentState();
 }
@@ -90,48 +68,43 @@ void FixtureEditDialog::on_CandelaBox_editingFinished()
     m_cData->Fixture[EDITING].enterCandela((ui->CandelaBox->text().toDouble(ok)));
     setEditFieldsToCurrentState();
 }
-//void FixtureEditDialog::on_DistMetersSpinBox_valueChanged(double arg1)
+
 void FixtureEditDialog::on_DistMetersSpinBox_editingFinished()
 {
     m_cData->Fixture[EDITING].enterDistanceMeters(ui->DistMetersSpinBox->value());
     setEditFieldsToCurrentState();
 }
-//void FixtureEditDialog::on_LuxSpinBox_valueChanged(double arg1)
+
 void FixtureEditDialog::on_LuxSpinBox_editingFinished()
 {
     m_cData->Fixture[EDITING].enterLux(ui->LuxSpinBox->value());
     setEditFieldsToCurrentState();
 }
 
-//void FixtureEditDialog::on_FootCandleSpinBox_valueChanged(double arg1)
 void FixtureEditDialog::on_FootCandleSpinBox_editingFinished()
 {
     m_cData->Fixture[EDITING].enterFootcandles(ui->FootCandleSpinBox->value() );
     setEditFieldsToCurrentState();
 }
 
-//void FixtureEditDialog::on_BeamSizeMetersSpinBox_2_valueChanged(double arg1)
 void FixtureEditDialog::on_BeamSizeMetersSpinBox_2_editingFinished()
 {
     m_cData->Fixture[EDITING].enterFieldSizeMeters(ui->BeamSizeMetersSpinBox_2->value());
     setEditFieldsToCurrentState();
 }
 
-//void FixtureEditDialog::on_BeamSizeFeetSpinBox_3_valueChanged(double arg1)
 void FixtureEditDialog::on_BeamSizeFeetSpinBox_3_editingFinished()
 {
     m_cData->Fixture[EDITING].enterFieldSizeFeet(ui->BeamSizeFeetSpinBox_3->value());
     setEditFieldsToCurrentState();
 }
 
-//void FixtureEditDialog::on_FieldAngleSpinBox_valueChanged(double arg1)
 void FixtureEditDialog::on_FieldAngleSpinBox_editingFinished()
 {
     m_cData->Fixture[EDITING].enterFieldAngle(ui->FieldAngleSpinBox->value());
     setEditFieldsToCurrentState();
 }
 
-//void FixtureEditDialog::on_DistFeetSpinBox_2_valueChanged(double arg1)
 void FixtureEditDialog::on_DistFeetSpinBox_2_editingFinished()
 {
     m_cData->Fixture[EDITING].enterDistanceFeet(ui->DistFeetSpinBox_2->value());
@@ -140,13 +113,14 @@ void FixtureEditDialog::on_DistFeetSpinBox_2_editingFinished()
 
 void FixtureEditDialog::on_FixtureName_editingFinished()
 {
-    m_cData->Fixture[EDITING].enterFixtureName(ui->FixtureName->text().toStdString());
+    m_cData->Fixture[EDITING].enterFixtureName(ui->FixtureName->text());
     setEditFieldsToCurrentState();
 }
 
 void FixtureEditDialog::on_NavigationButtons_accepted()
 {
     m_cData->Fixture[m_cData->nCurrentFixture] = m_cData->Fixture[EDITING];
+    close();
 }
 
 

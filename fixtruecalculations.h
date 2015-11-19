@@ -32,12 +32,12 @@ enum ProgramFlow
 class AllData;
 void clearScreen();
 //bool EditFixturesMenu(AllData &cData);
-int GetNumberOfFixtures(AllData &cData);
+//int GetNumberOfFixtures(AllData &cData);
 void SaveToFile(AllData &cData);
-void printFixtureInfo(AllData &cData, int nFixtureNumber);
-void printAllFixtures(AllData &cData);
-void PrintLine();
-bool AddEditQuit(AllData &cData);
+//void printFixtureInfo(AllData &cData, int nFixtureNumber);
+//void printAllFixtures(AllData &cData);
+//void PrintLine();
+//bool AddEditQuit(AllData &cData);
 bool editSingleFixture(AllData &cData);
 void MakeEditsTofixture (AllData &cData);
 bool EditFixturesMenu(AllData &cData, unsigned int nLowRange, unsigned int nHighRange);

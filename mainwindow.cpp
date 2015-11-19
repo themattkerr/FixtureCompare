@@ -43,9 +43,31 @@ void MainWindow::SetupFixtureTable()
     for (cData.nCurrentFixture=1; cData.nCurrentFixture <= cData.nNumberOfFixtures; cData.nCurrentFixture++)
     {
         int nColumn = 0;
-        ui->tableWidget->setItem(cData.nCurrentFixture-1, nColumn, new QTableWidgetItem(QString::fromStdString(cData.Fixture[cData.nCurrentFixture].getFixtureName())));
-        ui->tableWidget->setItem(cData.nCurrentFixture-1, ++nColumn, new QTableWidgetItem(QString::fromStdString(cData.Fixture[cData.nCurrentFixture].getCandela())));
-        ui->tableWidget->setItem(cData.nCurrentFixture-1, ++nColumn, new QTableWidgetItem(QString::fromStdString(cData.Fixture[cData.nCurrentFixture].getLumens())));
+        ui->tableWidget->setItem(cData.nCurrentFixture-1, nColumn, new QTableWidgetItem((cData.Fixture[cData.nCurrentFixture].getFixtureName())));
+        ui->tableWidget->setItem(cData.nCurrentFixture-1, ++nColumn, new QTableWidgetItem((cData.Fixture[cData.nCurrentFixture].getCandela())));
+        ui->tableWidget->setItem(cData.nCurrentFixture-1, ++nColumn, new QTableWidgetItem((cData.Fixture[cData.nCurrentFixture].getLumens())));
 
     }
+}
+
+void MainWindow::on_tableWidget_cellClicked(int row, int column)
+{
+    cData.nCurrentFixture = (row + 1);
+    FixtureEditDialog *AddEdit = new FixtureEditDialog (this, &cData);
+    AddEdit->exec();
+    SetupFixtureTable();
+}
+
+void MainWindow::on_addNewFixtureButton_clicked()
+{
+    cData.nNumberOfFixtures++;
+    cData.nCurrentFixture = cData.nNumberOfFixtures;
+    FixtureEditDialog *AddEdit = new FixtureEditDialog (this, &cData);
+    AddEdit->exec();
+    SetupFixtureTable();
+}
+
+void MainWindow::on_createCSVButton_clicked()
+{
+    SaveToFile(cData);
 }

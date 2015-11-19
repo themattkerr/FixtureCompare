@@ -5,6 +5,9 @@
 #include "constsants.h"
 #endif // Constants
 
+#ifndef QDIALOG_H
+#include <qdialog.h>
+#endif
 
 class FixtureData
 {
@@ -14,7 +17,7 @@ public:
 
     ~FixtureData();
 
-    void enterFixtureName(std::string FixtureName);
+    void enterFixtureName(QString FixtureName);
     void enterCandela(double dCandela);
     void enterLumens (double dLumens);
     void enterDistanceMeters(double dDistanceMeters);
@@ -26,16 +29,16 @@ public:
     void enterFieldSizeFeet(double dFieldDiameterFeet);
 
 
-    std::string getFixtureName();
-    std::string getCandela();
-    std::string getLumens();
-    std::string getDistanceMeters();
-    std::string getDistanceFeet();
-    std::string getLux();
-    std::string getdFootcandles();
-    std::string getFieldAngle();
-    std::string getFieldSizeMeters();
-    std::string getFieldSizeFeet();
+    QString getFixtureName();
+    QString getCandela();
+    QString getLumens();
+    QString getDistanceMeters();
+    QString getDistanceFeet();
+    QString getLux();
+    QString getdFootcandles();
+    QString getFieldAngle();
+    QString getFieldSizeMeters();
+    QString getFieldSizeFeet();
 
     double getValueCandela();
     double getValueLumens();
@@ -57,7 +60,7 @@ private:
     bool	m_bMeasurementSystem;
 
     // Fixture Data
-    std::string m_FixtureName;
+    QString m_FixtureName;
     double	m_dCandela,
             m_dLumens,
             m_dDistanceMeters,

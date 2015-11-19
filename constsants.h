@@ -10,7 +10,7 @@
 #define MAX_NUMBER_OF_FIXTURES 120
 #define NUMOFDECIMALS 2
 #define NUMOFDECIMALSLIGHTLEVELS 0
-#define UNKNOWN "???"
+#define UNKNOWN "---"
 
 #endif // CONSTSANTS_H
 

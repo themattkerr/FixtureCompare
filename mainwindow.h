@@ -19,6 +19,13 @@ public:
     AllData cData;
     ~MainWindow();
 
+private slots:
+    void on_tableWidget_cellClicked(int row, int column);
+
+    void on_addNewFixtureButton_clicked();
+
+    void on_createCSVButton_clicked();
+
 private:
     Ui::MainWindow *ui;
     void SetupFixtureTable();

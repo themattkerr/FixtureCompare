@@ -7,6 +7,7 @@
 #include "fixtruecalculations.h"
 #include <cassert>
 #include <sstream>
+#include <QDialog>
 
 //public functions -----------------------------------------------------------------------------------------------------------------
 
@@ -19,7 +20,7 @@
 
     FixtureData::~FixtureData(){}
 
-    void FixtureData::enterFixtureName(std::string FixtureName)	{m_FixtureName = FixtureName;}
+    void FixtureData::enterFixtureName(QString FixtureName)	{m_FixtureName = FixtureName;}
     void FixtureData::enterCandela(double dCandela)
     {
         assert (dCandela >= 0);
@@ -86,61 +87,61 @@
         calculateFieldAngle();
     }
 
-    std::string FixtureData::getFixtureName(){return  m_FixtureName;}
+    QString FixtureData::getFixtureName(){return  m_FixtureName;}
 
-    std::string FixtureData::getCandela()
+    QString FixtureData::getCandela()
     {
         if(m_dCandela <= 0)
             return UNKNOWN;
-        return PlaceCommas(m_dCandela,NUMOFDECIMALSLIGHTLEVELS);}
-    std::string FixtureData::getLumens()
+        return QString::number(m_dCandela,'g',10);}
+    QString FixtureData::getLumens()
     {
         if(m_dLumens <= 0)
             return UNKNOWN;
-        return PlaceCommas (m_dLumens, NUMOFDECIMALS);
+        return QString::number(m_dLumens,'g',10);
     }
-    std::string FixtureData::getDistanceMeters()
+    QString FixtureData::getDistanceMeters()
     {
         if (m_dDistanceMeters <= .001)
             return UNKNOWN;
-        return PlaceCommas (m_dDistanceMeters, NUMOFDECIMALS);
+        return QString::number(m_dDistanceMeters, 'G', 10);
     }
-    std::string FixtureData::getDistanceFeet()
+    QString FixtureData::getDistanceFeet()
     {
         if(m_dDistanceFeet <= .00328)
             return UNKNOWN;
-        return PlaceCommas (m_dDistanceFeet, NUMOFDECIMALS);
+        return QString::number(m_dDistanceFeet,'g', 10);
     }
-    std::string FixtureData::getLux()
+    QString FixtureData::getLux()
     {
         if (m_dLux <= 0 || m_dLux > 10000000)
             return UNKNOWN;
-        return PlaceCommas(m_dLux,NUMOFDECIMALSLIGHTLEVELS) ;
+        return QString::number(m_dLux,'g', 10) ;
     }
-    std::string FixtureData::getdFootcandles()
+    QString FixtureData::getdFootcandles()
     {
         if (m_dFc <= 0 || m_dFc  > 10000000)
             return UNKNOWN;
-        return PlaceCommas(m_dFc, NUMOFDECIMALSLIGHTLEVELS) ;
+        return QString::number(m_dFc,'g',10) ;
     }
-    std::string FixtureData::getFieldAngle()
+    QString FixtureData::getFieldAngle()
     {
         if (m_dFieldAngle <= 0 )
 
             return UNKNOWN;
-        return PlaceCommas(m_dFieldAngle, NUMOFDECIMALS);
+        return QString::number(m_dFieldAngle,'g',10);
     }
-    std::string FixtureData::getFieldSizeMeters()
+    QString FixtureData::getFieldSizeMeters()
     {
         if (m_dFieldDiameterMeters <= 0)
             return UNKNOWN;
-        return PlaceCommas(m_dFieldDiameterMeters, NUMOFDECIMALS);
+        return QString::number(m_dFieldDiameterMeters,'g',10);
     }
-    std::string FixtureData::getFieldSizeFeet()
+    QString FixtureData::getFieldSizeFeet()
     {
         if (m_dFieldDiameterFeet <= 0)
             return UNKNOWN;
-        return PlaceCommas(m_dFieldDiameterFeet, NUMOFDECIMALS);
+        return QString::number(m_dFieldDiameterFeet,'g',10);
     }
 
     double FixtureData::getValueCandela()
@@ -228,7 +229,7 @@
     }
     std::ostream& operator << (std::ostream &out, FixtureData &cSource)
     {
-
+/*
         out	<< cSource.m_FixtureName			<<","
             << cSource.m_dLumens                <<","
             << cSource.m_dCandela				<<","
@@ -241,7 +242,7 @@
             << cSource.m_dFieldDiameterFeet		<<","
 
             << std::endl;
-
+*/
         return out;
     }
 

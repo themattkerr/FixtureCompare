@@ -17,11 +17,8 @@ startUpDialog::~startUpDialog()
 
 void startUpDialog::on_buttonBox_accepted()
 {
-    bool ok;
-    QString strNumOfFixtures = ui->spinBox->text();
-    int x = strNumOfFixtures.toInt(&ok,10);
-     m_cData->nNumberOfFixtures = x;
-     close();
+    m_cData->nNumberOfFixtures = ui->spinBox->value();
+    close();
 }
 
 void startUpDialog::on_buttonBox_rejected()
@@ -29,8 +26,4 @@ void startUpDialog::on_buttonBox_rejected()
     close();
 }
 
-void startUpDialog::on_spinBox_valueChanged(int arg1)
-{
 
-
-}
