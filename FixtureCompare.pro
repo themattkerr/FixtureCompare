@@ -14,19 +14,15 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    fixturecalculations.cpp \
     fixturedata.cpp \
     startupdialog.cpp \
-    fixtureeditdialog.cpp \
-    commonconversions.cpp
+    fixtureeditdialog.cpp
 
 HEADERS  += mainwindow.h \
-    fixtruecalculations.h \
     fixturedata.h \
     constsants.h \
     startupdialog.h \
-    fixtureeditdialog.h \
-    commonconversions.h
+    fixtureeditdialog.h
 
 FORMS    += mainwindow.ui \
     startupdialog.ui \

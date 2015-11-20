@@ -42,9 +42,8 @@ public:
 
     double getValueCandela();
     double getValueLumens();
-
     double getValueDistanceMeters();
-    double getValueDistanceFeet();
+    double getValueDistanceFeet();    
     double getValueLux();
     double getValueFootCandles();
     double getValueFieldAngle();
@@ -52,12 +51,9 @@ public:
     double getValueFieldSizeFeet();
 
     FixtureData &operator =(const FixtureData &cSource);
-    friend std::ostream& operator << (std::ostream &out, FixtureData &cSource);
-    std::string PlaceCommas(double dInput, unsigned int nNumOfDecPlaces = 0);
+    //std::string PlaceCommas(double dInput, unsigned int nNumOfDecPlaces = 0);
 
 private:
-
-    bool	m_bMeasurementSystem;
 
     // Fixture Data
     QString m_FixtureName;
@@ -93,7 +89,6 @@ private:
 
 };
 
-std::ostream& operator << (std::ostream &out, FixtureData &cSource);
 
 class AllData
 {
@@ -111,13 +106,12 @@ public:
         }
     ~AllData(){}
 
-    friend std::ostream &operator << (std::ostream &out, AllData &cSource);
 
     //remove fixture
     // sortfixtures by candela
 };
 
-std::ostream &operator << (std::ostream &out, AllData &cSource);
+
 
 #endif // FIXTUREDATA
 

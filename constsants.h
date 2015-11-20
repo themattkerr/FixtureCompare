@@ -7,7 +7,9 @@
 #define LuxToFootcandleRatio 0.09290304
 //#define EmperialToMetricCoefficient 10.7631
 #define FeetPerMeter 3.28
-#define MAX_NUMBER_OF_FIXTURES 120
+
+
+#define MAX_NUMBER_OF_FIXTURES 10
 #define NUMOFDECIMALS 2
 #define NUMOFDECIMALSLIGHTLEVELS 0
 #define UNKNOWN "---"

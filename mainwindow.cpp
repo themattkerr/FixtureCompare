@@ -3,7 +3,6 @@
 #include "ui_mainwindow.h"
 #include "startupdialog.h"
 #include "fixturedata.h"
-#include "fixtruecalculations.h"
 #include "fixtureeditdialog.h"
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -69,5 +68,5 @@ void MainWindow::on_addNewFixtureButton_clicked()
 
 void MainWindow::on_createCSVButton_clicked()
 {
-    SaveToFile(cData);
+    //SaveToFile(cData);
 }

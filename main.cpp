@@ -1,18 +1,7 @@
 #include "mainwindow.h"
 #include <QApplication>
 
-
-
-#include <iostream>
-#include <cmath>
-#include <string>
-#include "fixtruecalculations.h"
 #include "FixtureData.h"
-#include <fstream>
-
-
-
-
 
 
 int main(int argc, char *argv[])
