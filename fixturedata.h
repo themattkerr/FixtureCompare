@@ -30,8 +30,6 @@ public:
 
 
     QString getFixtureName();
-    QString getCandela();
-    QString getLumens();
 
     double getValueCandela();
     double getValueLumens();

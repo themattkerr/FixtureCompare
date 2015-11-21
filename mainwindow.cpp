@@ -4,6 +4,7 @@
 #include "startupdialog.h"
 #include "fixturedata.h"
 #include "fixtureeditdialog.h"
+#include "editallfixtures.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -43,8 +44,8 @@ void MainWindow::SetupFixtureTable()
     {
         int nColumn = 0;
         ui->tableWidget->setItem(cData.nCurrentFixture-1, nColumn, new QTableWidgetItem((cData.Fixture[cData.nCurrentFixture].getFixtureName())));
-        ui->tableWidget->setItem(cData.nCurrentFixture-1, ++nColumn, new QTableWidgetItem((cData.Fixture[cData.nCurrentFixture].getCandela())));
-        ui->tableWidget->setItem(cData.nCurrentFixture-1, ++nColumn, new QTableWidgetItem((cData.Fixture[cData.nCurrentFixture].getLumens())));
+        ui->tableWidget->setItem(cData.nCurrentFixture-1, ++nColumn, new QTableWidgetItem(QLocale(QLocale::English).toString(cData.Fixture[cData.nCurrentFixture].getValueCandela())));
+        ui->tableWidget->setItem(cData.nCurrentFixture-1, ++nColumn, new QTableWidgetItem(QLocale(QLocale::English).toString(cData.Fixture[cData.nCurrentFixture].getValueLumens())));
 
     }
 }
@@ -69,4 +70,11 @@ void MainWindow::on_addNewFixtureButton_clicked()
 void MainWindow::on_createCSVButton_clicked()
 {
     //SaveToFile(cData);
+}
+
+void MainWindow::on_editAllButton_clicked()
+{
+    editAllFixtures *editAll = new editAllFixtures (this, &cData);
+    editAll->exec();
+    SetupFixtureTable();
 }

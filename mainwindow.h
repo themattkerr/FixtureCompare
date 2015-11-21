@@ -26,6 +26,8 @@ private slots:
 
     void on_createCSVButton_clicked();
 
+    void on_editAllButton_clicked();
+
 private:
     Ui::MainWindow *ui;
     void SetupFixtureTable();

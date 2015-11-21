@@ -72,38 +72,26 @@
     }
     void FixtureData::enterFieldAngle(double dFieldAngle)
     {
+        assert (dFieldAngle >= 0);
         m_dFieldAngle = dFieldAngle;
         calculateFieldSize();
     }
     void FixtureData::enterFieldSizeMeters(double dFieldDiameterMeters)
     {
-        assert (dFieldDiameterMeters > 0);
+        assert (dFieldDiameterMeters >= 0);
         m_dFieldDiameterMeters = dFieldDiameterMeters;
         convertFieldDiameterMetersToFeet();
         calculateFieldAngle();
     }
     void FixtureData::enterFieldSizeFeet(double dFieldDiameterFeet)
     {
-        assert (dFieldDiameterFeet > 0);
+        assert (dFieldDiameterFeet >= 0);
         m_dFieldDiameterFeet = dFieldDiameterFeet;
         convertFieldDiameterFeetToMeters();
         calculateFieldAngle();
     }
 
     QString FixtureData::getFixtureName(){return  m_FixtureName;}
-
-    QString FixtureData::getCandela()
-    {
-        if(isNotValid(m_dCandela)) // <<====================================<<<<<
-            return UNKNOWN;
-        return QString::number(m_dCandela,'g',0);
-    }
-    QString FixtureData::getLumens()
-    {
-        if(isNotValid (m_dLumens))
-            return UNKNOWN;
-        return QString::number(m_dLumens,'g',0);
-    }
 
 
     double FixtureData::getValueCandela()
@@ -169,7 +157,7 @@
 
    bool FixtureData::isNotValid(double dNumToTest)
     {
-        if (dNumToTest > 1000000|| dNumToTest <= 0)
+        if (dNumToTest > 10000000|| dNumToTest <= 0)
             return true;
         return false;
     }

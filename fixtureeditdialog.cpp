@@ -39,8 +39,9 @@ void FixtureEditDialog::setEditFieldsToCurrentState()
     ui->FixtureNumberDisplay->setText(QString::number(m_cData->nCurrentFixture,10));
 
     ui->FixtureName->setText((m_cData->Fixture[EDITING].getFixtureName()));
-    ui->Lumens->setText(QString::number(m_cData->Fixture[EDITING].getValueLumens(),'g',10));
-    ui->CandelaBox->setText(QString::number(m_cData->Fixture[EDITING].getValueCandela(),'g',10));
+    ui->Lumens->setText(QLocale(QLocale::English).toString((m_cData->Fixture[EDITING].getValueLumens())));
+
+    ui->CandelaBox->setText(QLocale(QLocale::English).toString(m_cData->Fixture[EDITING].getValueCandela()));
 
     ui->DistMetersSpinBox->setValue((m_cData->Fixture[EDITING].getValueDistanceMeters()));
     ui->DistFeetSpinBox_2->setValue(( m_cData->Fixture[EDITING].getValueDistanceFeet()));
@@ -60,23 +61,21 @@ void FixtureEditDialog::on_FixtureName_editingFinished()
 }
 void FixtureEditDialog::on_Lumens_editingFinished()
 {
-    bool *ok;
+    bool ok;
     double dLumenTemp = 0;
     QString qstrTemp = ui->Lumens->text();
-    dLumenTemp = qstrTemp.toDouble(ok);
-    //if(*ok)
+    dLumenTemp = qstrTemp.toDouble(&ok);
+    if(ok)
         m_cData->Fixture[EDITING].enterLumens(dLumenTemp);
-    //else
-    //{ ui->Lumens->setText("error with lumens");}
-
     setEditFieldsToCurrentState();
 }
 void FixtureEditDialog::on_CandelaBox_editingFinished()
 {
-    bool *ok;
+    bool ok;
     QString qstrCandelaTemp = ui->CandelaBox->text();
-    double dCandlaTemp = qstrCandelaTemp.toDouble(ok);
-    m_cData->Fixture[EDITING].enterCandela(dCandlaTemp);
+    double dCandlaTemp = qstrCandelaTemp.toDouble(&ok);
+    if (ok)
+        m_cData->Fixture[EDITING].enterCandela(dCandlaTemp);
     setEditFieldsToCurrentState();
 }
 
@@ -88,7 +87,6 @@ void FixtureEditDialog::on_DistMetersSpinBox_editingFinished()
     setEditFieldsToCurrentState();
     }
     else { ui->DistMetersSpinBox->setValue(m_cData->Fixture[EDITING].getValueDistanceMeters());}
-
 }
 void FixtureEditDialog::on_DistFeetSpinBox_2_editingFinished()
 {

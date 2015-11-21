@@ -6,12 +6,12 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>297</width>
-    <height>174</height>
+    <width>254</width>
+    <height>176</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Fixture Compare</string>
   </property>
   <widget class="QSpinBox" name="spinBox">
    <property name="geometry">
@@ -31,7 +31,7 @@
     <rect>
      <x>50</x>
      <y>100</y>
-     <width>161</width>
+     <width>151</width>
      <height>31</height>
     </rect>
    </property>
@@ -81,7 +81,7 @@
     <rect>
      <x>50</x>
      <y>140</y>
-     <width>156</width>
+     <width>151</width>
      <height>23</height>
     </rect>
    </property>
