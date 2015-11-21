@@ -32,13 +32,6 @@ public:
     QString getFixtureName();
     QString getCandela();
     QString getLumens();
-    QString getDistanceMeters();
-    QString getDistanceFeet();
-    QString getLux();
-    QString getdFootcandles();
-    QString getFieldAngle();
-    QString getFieldSizeMeters();
-    QString getFieldSizeFeet();
 
     double getValueCandela();
     double getValueLumens();

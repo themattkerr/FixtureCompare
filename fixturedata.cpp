@@ -14,9 +14,9 @@
 
         m_dCandela = 0,
         m_dLumens = 0,
-        m_dDistanceMeters = 1,
+        m_dDistanceMeters = 10,
         m_dLux = 0,
-        m_dDistanceFeet = 3.28,
+        m_dDistanceFeet = 32.8,
         m_dFc = 0,
         m_dFieldAngle = 0,
         m_dFieldDiameterMeters = 0,
@@ -96,55 +96,13 @@
     {
         if(isNotValid(m_dCandela)) // <<====================================<<<<<
             return UNKNOWN;
-        return QString::number(m_dCandela,'g',10);
+        return QString::number(m_dCandela,'g',0);
     }
     QString FixtureData::getLumens()
     {
         if(isNotValid (m_dLumens))
             return UNKNOWN;
-        return QString::number(m_dLumens,'g',10);
-    }
-    QString FixtureData::getDistanceMeters()
-    {
-        if (isNotValid (m_dDistanceMeters))
-            return UNKNOWN;
-        return QString::number(m_dDistanceMeters, 'G', 10);
-    }
-    QString FixtureData::getDistanceFeet()
-    {
-        if(isNotValid (m_dDistanceFeet))
-            return UNKNOWN;
-        return QString::number(m_dDistanceFeet,'g', 10);
-    }
-    QString FixtureData::getLux()
-    {
-        if (isNotValid (m_dLux))
-            return UNKNOWN;
-        return QString::number(m_dLux,'g', 10) ;
-    }
-    QString FixtureData::getdFootcandles()
-    {
-        if (isNotValid( m_dFc))
-            return UNKNOWN;
-        return QString::number(m_dFc,'g',10) ;
-    }
-    QString FixtureData::getFieldAngle()
-    {
-        if (isNotValid( m_dFieldAngle ))
-            return UNKNOWN;
-        return QString::number(m_dFieldAngle,'g',10);
-    }
-    QString FixtureData::getFieldSizeMeters()
-    {
-        if (isNotValid( m_dFieldDiameterMeters))
-            return UNKNOWN;
-        return QString::number(m_dFieldDiameterMeters,'g',10);
-    }
-    QString FixtureData::getFieldSizeFeet()
-    {
-        if (isNotValid( m_dFieldDiameterFeet))
-            return UNKNOWN;
-        return QString::number(m_dFieldDiameterFeet,'g',10);
+        return QString::number(m_dLumens,'g',0);
     }
 
 

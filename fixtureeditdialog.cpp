@@ -33,6 +33,7 @@ FixtureEditDialog::~FixtureEditDialog()
     delete ui;
 }
 
+
 void FixtureEditDialog::setEditFieldsToCurrentState()
 {
     ui->FixtureNumberDisplay->setText(QString::number(m_cData->nCurrentFixture,10));

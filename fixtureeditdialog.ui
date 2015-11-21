@@ -187,7 +187,7 @@
      </rect>
     </property>
     <property name="maximum">
-     <double>500000.000000000000000</double>
+     <double>5000000.000000000000000</double>
     </property>
    </widget>
    <widget class="QDoubleSpinBox" name="FootCandleSpinBox">
@@ -200,7 +200,7 @@
      </rect>
     </property>
     <property name="maximum">
-     <double>500000.000000000000000</double>
+     <double>5000000.000000000000000</double>
     </property>
    </widget>
    <widget class="QLabel" name="label_2">
