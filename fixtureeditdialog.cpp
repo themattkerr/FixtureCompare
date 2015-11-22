@@ -3,6 +3,7 @@
 #include "QKeyEvent"
 #include "fixturedata.h"
 #include "mainwindow.h"
+#include "confirmfixtureremovedialog.h"
 #include "cassert"
 
 
@@ -132,3 +133,10 @@ void FixtureEditDialog::on_NavigationButtons_accepted()
 }
 
 
+
+void FixtureEditDialog::on_RemoveFixture_clicked()
+{
+    ConfirmFixtureRemoveDialog *Confirm = new ConfirmFixtureRemoveDialog(this, m_cData);
+    Confirm->exec();
+    close();
+}

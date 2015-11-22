@@ -17,6 +17,8 @@
 
     FixtureData::FixtureData()
     {
+        resetValues();
+ /*
         m_FixtureName = "New Fixture";
         m_dLumens = 0,
         m_dCandela = 0,
@@ -28,6 +30,7 @@
         m_dFieldAngle = 0,
         m_dFieldDiameterMeters = 0,
         m_dFieldDiameterFeet = 0;
+        */
     }
 
     FixtureData::~FixtureData(){}
@@ -162,6 +165,22 @@
             return 0;
         return m_dFieldDiameterFeet;}
 
+    void FixtureData::resetValues()
+    {
+        m_FixtureName = "New Fixture";
+        m_dLumens = 0,
+        m_dCandela = 0,
+
+        m_dDistanceMeters = 10,
+        m_dDistanceFeet = 32.8,
+        m_dLux = 0,
+        m_dFc = 0,
+        m_dFieldAngle = 0,
+        m_dFieldDiameterMeters = 0,
+        m_dFieldDiameterFeet = 0;
+    }
+
+
     bool FixtureData::isNotValid(double dNumToTest)
     {
         if (dNumToTest > 10000000|| dNumToTest <= 0)
@@ -204,6 +223,28 @@
     void FixtureData::convertFieldDiameterFeetToMeters() {m_dFieldDiameterMeters = m_dFieldDiameterFeet / FeetPerMeter;}
     void FixtureData::convertFieldDiameterMetersToFeet() {m_dFieldDiameterFeet = m_dFieldDiameterMeters * FeetPerMeter;}
 
+
+    // AllData Functions =============================================================================================================
+
+    void AllData::removeFixture(unsigned int nFixtureToRemove)
+    {
+        assert (nFixtureToRemove > 0 && nFixtureToRemove <= nNumberOfFixtures);
+        if(nFixtureToRemove == nNumberOfFixtures)
+        {
+            Fixture[nFixtureToRemove].resetValues();
+            nNumberOfFixtures--;
+            return;
+        }
+
+        for (int nAfter = nFixtureToRemove; nAfter < nNumberOfFixtures; nAfter++)
+        {
+            Fixture[nAfter] = Fixture[nAfter + 1];
+            Fixture[nNumberOfFixtures].resetValues();
+            nNumberOfFixtures--;
+            return;
+        }
+    }
+
     bool AllData::createCSV()
     {
 
@@ -213,7 +254,7 @@
         {
             QTextStream stream (&file);
             stream
-                << "Number of fixtures = " << nNumberOfFixtures << endl;
+                << "Number of fixtures = ," << nNumberOfFixtures << endl;
             stream
                 << "Fixture Name ,Lumens ,Candela,Distance in meters,Distance in Feet,Lux,Footcandles,Field Angle,Field Diameter In Meters,Field Diameter In Feet" << endl;
 

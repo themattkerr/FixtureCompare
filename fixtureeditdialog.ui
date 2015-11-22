@@ -823,6 +823,19 @@
     </property>
    </widget>
   </widget>
+  <widget class="QPushButton" name="RemoveFixture">
+   <property name="geometry">
+    <rect>
+     <x>180</x>
+     <y>140</y>
+     <width>91</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Remove Fixture</string>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections>

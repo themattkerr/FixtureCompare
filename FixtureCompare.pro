@@ -18,7 +18,8 @@ SOURCES += main.cpp\
     startupdialog.cpp \
     fixtureeditdialog.cpp \
     editallfixtures.cpp \
-    csvdialog.cpp
+    csvdialog.cpp \
+    confirmfixtureremovedialog.cpp
 
 HEADERS  += mainwindow.h \
     fixturedata.h \
@@ -26,10 +27,12 @@ HEADERS  += mainwindow.h \
     startupdialog.h \
     fixtureeditdialog.h \
     editallfixtures.h \
-    csvdialog.h
+    csvdialog.h \
+    confirmfixtureremovedialog.h
 
 FORMS    += mainwindow.ui \
     startupdialog.ui \
     fixtureeditdialog.ui \
     editallfixtures.ui \
-    csvdialog.ui
+    csvdialog.ui \
+    confirmfixtureremovedialog.ui

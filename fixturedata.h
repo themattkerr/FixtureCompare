@@ -41,6 +41,8 @@ public:
     double getValueFieldSizeMeters();
     double getValueFieldSizeFeet();
 
+    void resetValues();
+
     FixtureData &operator =  (const FixtureData &cSource);
 
 private:
@@ -96,10 +98,9 @@ public:
             nCurrentFixture = 1;
         }
     ~AllData(){}
-
+    void removeFixture(unsigned int nFixtureToRemove);
     bool createCSV();
 
-    //remove fixture
     // sortfixtures by candela
 };
 

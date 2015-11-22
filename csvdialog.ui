@@ -6,51 +6,51 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>242</width>
-    <height>116</height>
+    <width>190</width>
+    <height>102</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>CSV file</string>
   </property>
-  <widget class="QLabel" name="label">
+  <widget class="QWidget" name="verticalLayoutWidget">
    <property name="geometry">
     <rect>
-     <x>50</x>
-     <y>20</y>
-     <width>141</width>
-     <height>20</height>
+     <x>10</x>
+     <y>10</y>
+     <width>171</width>
+     <height>81</height>
     </rect>
    </property>
-   <property name="text">
-    <string>FixtureCompare.CSV</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_2">
-   <property name="geometry">
-    <rect>
-     <x>50</x>
-     <y>50</y>
-     <width>151</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>file has been created! </string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="CloseCSVdialog">
-   <property name="geometry">
-    <rect>
-     <x>70</x>
-     <y>80</y>
-     <width>75</width>
-     <height>23</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>OK</string>
-   </property>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QLabel" name="label">
+      <property name="text">
+       <string>FixtureCompare.CSV</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="label_2">
+      <property name="text">
+       <string>File has been created! </string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="CloseCSVdialog">
+      <property name="text">
+       <string>OK</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
   </widget>
  </widget>
  <resources/>

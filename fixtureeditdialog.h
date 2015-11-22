@@ -60,6 +60,8 @@ private slots:
 
     void on_FieldAngleSpinBox_editingFinished();
 
+    void on_RemoveFixture_clicked();
+
 private:
     Ui::FixtureEditDialog *ui;
     void setEditFieldsToCurrentState();
