@@ -1,9 +1,16 @@
 
-
+#include <iostream>
+//#include <iomanip>
+//#include <fstream>
+//#include <sstream>
 #include <cmath>
+#include <cassert>
 #include "constsants.h"
 #include "fixtureData.h"
-#include <cassert>
+
+
+#include <QFile>
+#include <QTextStream>
 #include <QDialog>
 
 //public functions -----------------------------------------------------------------------------------------------------------------
@@ -11,12 +18,12 @@
     FixtureData::FixtureData()
     {
         m_FixtureName = "New Fixture";
-
-        m_dCandela = 0,
         m_dLumens = 0,
+        m_dCandela = 0,
+
         m_dDistanceMeters = 10,
-        m_dLux = 0,
         m_dDistanceFeet = 32.8,
+        m_dLux = 0,
         m_dFc = 0,
         m_dFieldAngle = 0,
         m_dFieldDiameterMeters = 0,
@@ -155,7 +162,7 @@
             return 0;
         return m_dFieldDiameterFeet;}
 
-   bool FixtureData::isNotValid(double dNumToTest)
+    bool FixtureData::isNotValid(double dNumToTest)
     {
         if (dNumToTest > 10000000|| dNumToTest <= 0)
             return true;
@@ -165,11 +172,11 @@
     FixtureData& FixtureData::operator = (const FixtureData &cSource)
     {
         m_FixtureName = cSource.m_FixtureName;
-        m_dCandela = cSource.m_dCandela;
         m_dLumens = cSource.m_dLumens;
+        m_dCandela = cSource.m_dCandela;
         m_dDistanceMeters = cSource.m_dDistanceMeters;
-        m_dLux = cSource.m_dLux;
         m_dDistanceFeet = cSource.m_dDistanceFeet;
+        m_dLux = cSource.m_dLux;
         m_dFc = cSource.m_dFc;
         m_dFieldAngle = cSource.m_dFieldAngle;
         m_dFieldDiameterMeters = cSource.m_dFieldDiameterMeters;
@@ -177,6 +184,7 @@
 
         return *this;
     }
+
 
 // private functions ----------------------------------------------------------------------------------------------------------------
 
@@ -196,5 +204,41 @@
     void FixtureData::convertFieldDiameterFeetToMeters() {m_dFieldDiameterMeters = m_dFieldDiameterFeet / FeetPerMeter;}
     void FixtureData::convertFieldDiameterMetersToFeet() {m_dFieldDiameterFeet = m_dFieldDiameterMeters * FeetPerMeter;}
 
+    bool AllData::createCSV()
+    {
+
+        QString filename = "FixtureCompare.csv";
+        QFile file (filename);
+        if (file.open(QIODevice::ReadWrite | QIODevice::Truncate))
+        {
+            QTextStream stream (&file);
+            stream
+                << "Number of fixtures = " << nNumberOfFixtures << endl;
+            stream
+                << "Fixture Name ,Lumens ,Candela,Distance in meters,Distance in Feet,Lux,Footcandles,Field Angle,Field Diameter In Meters,Field Diameter In Feet" << endl;
+
+                for (int iii =1; iii <= nNumberOfFixtures; iii++)
+                {
+            stream
+                << Fixture [iii].getFixtureName()			<<","
+                << Fixture [iii].getValueLumens()           <<","
+                << Fixture [iii].getValueCandela()			<<","
+                << Fixture [iii].getValueDistanceMeters()	<<","
+                << Fixture [iii].getValueDistanceFeet()		<<","
+                << Fixture [iii].getValueLux()              <<","
+                << Fixture [iii].getValueFootCandles()		<<","
+                << Fixture [iii].getValueFieldAngle()		<<","
+                << Fixture [iii].getValueFieldSizeMeters()	<<","
+                << Fixture [iii].getValueFieldSizeFeet()	<<","
+
+                << endl;
+                }
+            stream.flush();
+        }
+        else {return false;}
+
+
+        return true;
+    }
 
 

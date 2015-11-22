@@ -42,7 +42,7 @@
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>60</x>
+     <x>40</x>
      <y>10</y>
      <width>171</width>
      <height>21</height>
@@ -51,11 +51,14 @@
    <property name="text">
     <string>Welcome to Fixture Compare!</string>
    </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
   </widget>
   <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
-     <x>20</x>
+     <x>10</x>
      <y>30</y>
      <width>231</width>
      <height>20</height>
@@ -63,6 +66,9 @@
    </property>
    <property name="text">
     <string>How many fixtures would you like to start with?</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
    </property>
   </widget>
   <widget class="QWidget" name="horizontalLayoutWidget">

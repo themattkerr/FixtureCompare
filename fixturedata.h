@@ -41,15 +41,14 @@ public:
     double getValueFieldSizeMeters();
     double getValueFieldSizeFeet();
 
-    FixtureData &operator =(const FixtureData &cSource);
-    //std::string PlaceCommas(double dInput, unsigned int nNumOfDecPlaces = 0);
+    FixtureData &operator =  (const FixtureData &cSource);
 
 private:
 
     // Fixture Data
     QString m_FixtureName;
-    double	m_dCandela,
-            m_dLumens,
+    double	m_dLumens,
+            m_dCandela,
             m_dDistanceMeters,
             m_dDistanceFeet,
             m_dLux,
@@ -57,7 +56,9 @@ private:
             m_dFieldAngle,
             m_dFieldDiameterMeters,
             m_dFieldDiameterFeet;
+
     bool isNotValid(double dNumToTest);
+
     /*
     All calculations are done in Metric.
     Anything entered in Emperial will be converted first.
@@ -76,9 +77,8 @@ private:
     void convertFieldDiameterFeetToMeters();
     void convertFieldDiameterMetersToFeet();
 
-
-
 };
+
 
 
 class AllData
@@ -87,7 +87,7 @@ public:
     bool bInitialized;
     unsigned int nNumberOfFixtures;
     unsigned int nCurrentFixture;
-    FixtureData Fixture[MAX_NUMBER_OF_FIXTURES];
+    FixtureData Fixture[MAX_NUMBER_OF_FIXTURES+1];
 
     AllData()
         {
@@ -97,6 +97,7 @@ public:
         }
     ~AllData(){}
 
+    bool createCSV();
 
     //remove fixture
     // sortfixtures by candela

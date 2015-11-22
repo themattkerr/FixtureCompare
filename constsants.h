@@ -9,10 +9,9 @@
 #define FeetPerMeter 3.28
 
 
-#define MAX_NUMBER_OF_FIXTURES 10
+#define MAX_NUMBER_OF_FIXTURES 100
 #define NUMOFDECIMALS 2
 #define NUMOFDECIMALSLIGHTLEVELS 0
 #define UNKNOWN "---"
 
 #endif // CONSTSANTS_H
-

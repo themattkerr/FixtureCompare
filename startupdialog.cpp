@@ -17,8 +17,19 @@ startUpDialog::~startUpDialog()
 
 void startUpDialog::on_buttonBox_accepted()
 {
-    m_cData->nNumberOfFixtures = ui->spinBox->value();
-    close();
+    int nNumOfFix=0;
+    nNumOfFix = ui->spinBox->value();
+    if(nNumOfFix <= MAX_NUMBER_OF_FIXTURES)
+    {
+        m_cData->nNumberOfFixtures = nNumOfFix;
+        close();
+    }
+    else
+    {
+        ui->spinBox->setValue(1);
+        ui->label->setText("ERROR!  The maximum is");
+        ui->label_2->setText(QString::number(MAX_NUMBER_OF_FIXTURES,10));
+    }
 }
 
 void startUpDialog::on_buttonBox_rejected()

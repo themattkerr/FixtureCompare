@@ -99,7 +99,7 @@ void editAllFixtures::on_buttonBox_accepted()
             switch (m_nSelectedToEdit)
             {
             case LUMENS:                    {m_cData->Fixture[iii].enterLumens(m_nEditValue); break;}
-            case CANDELA:                   {m_cData->Fixture[iii].enterLumens(m_nEditValue); break;}
+            case CANDELA:                   {m_cData->Fixture[iii].enterCandela(m_nEditValue); break;}
             case DISTANCE_IN_METERS:        {m_cData->Fixture[iii].enterDistanceMeters(m_nEditValue); break;}
             case DISTANCE_IN_FEET:          {m_cData->Fixture[iii].enterDistanceFeet(m_nEditValue); break;}
             case LUX:                       {m_cData->Fixture[iii].enterLux(m_nEditValue); break;}

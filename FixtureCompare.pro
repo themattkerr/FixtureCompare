@@ -17,16 +17,19 @@ SOURCES += main.cpp\
     fixturedata.cpp \
     startupdialog.cpp \
     fixtureeditdialog.cpp \
-    editallfixtures.cpp
+    editallfixtures.cpp \
+    csvdialog.cpp
 
 HEADERS  += mainwindow.h \
     fixturedata.h \
     constsants.h \
     startupdialog.h \
     fixtureeditdialog.h \
-    editallfixtures.h
+    editallfixtures.h \
+    csvdialog.h
 
 FORMS    += mainwindow.ui \
     startupdialog.ui \
     fixtureeditdialog.ui \
-    editallfixtures.ui
+    editallfixtures.ui \
+    csvdialog.ui
