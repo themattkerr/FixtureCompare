@@ -50,8 +50,8 @@ void FixtureEditDialog::setEditFieldsToCurrentState()
     ui->LuxSpinBox->setValue((m_cData->Fixture[EDITING].getValueLux()));
     ui->FootCandleSpinBox->setValue((m_cData->Fixture[EDITING].getValueFootCandles()));
 
-    ui->BeamSizeMetersSpinBox_2->setValue((m_cData->Fixture[EDITING].getValueFieldSizeMeters()));
-    ui->BeamSizeFeetSpinBox_3->setValue((m_cData->Fixture[EDITING].getValueFieldSizeFeet()));
+    ui->BeamSizeMetersSpinBox->setValue((m_cData->Fixture[EDITING].getValueFieldSizeMeters()));
+    ui->BeamSizeFeetSpinBox->setValue((m_cData->Fixture[EDITING].getValueFieldSizeFeet()));
     ui->FieldAngleSpinBox->setValue((m_cData->Fixture[EDITING].getValueFieldAngle()));
 }
 
@@ -111,12 +111,12 @@ void FixtureEditDialog::on_FootCandleSpinBox_editingFinished()
 
 void FixtureEditDialog::on_BeamSizeMetersSpinBox_2_editingFinished()
 {
-    m_cData->Fixture[EDITING].enterFieldSizeMeters(ui->BeamSizeMetersSpinBox_2->value());
+    m_cData->Fixture[EDITING].enterFieldSizeMeters(ui->BeamSizeMetersSpinBox->value());
     setEditFieldsToCurrentState();
 }
 void FixtureEditDialog::on_BeamSizeFeetSpinBox_3_editingFinished()
 {
-    m_cData->Fixture[EDITING].enterFieldSizeFeet(ui->BeamSizeFeetSpinBox_3->value());
+    m_cData->Fixture[EDITING].enterFieldSizeFeet(ui->BeamSizeFeetSpinBox->value());
     setEditFieldsToCurrentState();
 }
 void FixtureEditDialog::on_FieldAngleSpinBox_editingFinished()

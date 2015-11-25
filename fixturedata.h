@@ -99,8 +99,9 @@ public:
         }
     ~AllData(){}
     void removeFixture(unsigned int nFixtureToRemove);
-    bool createCSV();
-
+    bool createCSV(QString &fileName);
+    bool saveAsFxt (QString &fileName);
+    bool readFxt (QString &fileName );
     // sortfixtures by candela
 };
 

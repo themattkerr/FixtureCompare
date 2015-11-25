@@ -12,6 +12,7 @@
 #include <QFile>
 #include <QTextStream>
 #include <QDialog>
+#include <QFileDialog>
 
 //public functions -----------------------------------------------------------------------------------------------------------------
 
@@ -245,16 +246,15 @@
         }
     }
 
-    bool AllData::createCSV()
+    bool AllData::createCSV(QString &fileName)
     {
 
-        QString filename = "FixtureCompare.csv";
-        QFile file (filename);
+        QFile file (fileName);
         if (file.open(QIODevice::ReadWrite | QIODevice::Truncate))
         {
             QTextStream stream (&file);
-            stream
-                << "Number of fixtures = ," << nNumberOfFixtures << endl;
+
+            stream   << "Number of fixtures = ," << nNumberOfFixtures << endl;
             stream
                 << "Fixture Name ,Lumens ,Candela,Distance in meters,Distance in Feet,Lux,Footcandles,Field Angle,Field Diameter In Meters,Field Diameter In Feet" << endl;
 
@@ -282,4 +282,74 @@
         return true;
     }
 
+    bool AllData::saveAsFxt (QString &fileName )
+    {
+        QFile file (fileName);
+        if (file.open(QIODevice::ReadWrite | QIODevice::Truncate))
+        {
+            QTextStream stream (&file);
+            stream
+                << nNumberOfFixtures << " " << endl;
 
+                for (int iii =1; iii <= nNumberOfFixtures; iii++)
+                {
+            stream
+                << Fixture [iii].getFixtureName()			<<" End_Of_Fixture_Name "
+                << Fixture [iii].getValueLumens()           <<" "
+                << Fixture [iii].getValueCandela()			<<" "
+                << Fixture [iii].getValueDistanceMeters()	<<" "
+                << Fixture [iii].getValueDistanceFeet()		<<" "
+                << Fixture [iii].getValueLux()              <<" "
+                << Fixture [iii].getValueFootCandles()		<<" "
+                << Fixture [iii].getValueFieldAngle()		<<" "
+                << Fixture [iii].getValueFieldSizeMeters()	<<" "
+                << Fixture [iii].getValueFieldSizeFeet()	<<" "
+
+                << endl;
+                }
+            stream.flush();
+        }
+        else {return false;}
+
+
+        return true;
+    }
+
+
+    bool AllData::readFxt (QString &fileName )
+    {
+        /*
+        QFile file (fileName);
+        if (file.open(QIODevice::ReadWrite | QIODevice::Truncate))
+        {
+            QTextStream in (&file);
+
+            while(!(in.atEnd()))
+            {
+
+             stream >> nNumberOfFixtures <<;
+
+                for (int iii =1; iii <= nNumberOfFixtures; iii++)
+                {
+            stream
+                >> Fixture [iii].enterFixtureName();			<<" End_Of_Fixture_Name "
+                << Fixture [iii].getValueLumens()           <<" "
+                << Fixture [iii].getValueCandela()			<<" "
+                << Fixture [iii].getValueDistanceMeters()	<<" "
+                << Fixture [iii].getValueDistanceFeet()		<<" "
+                << Fixture [iii].getValueLux()              <<" "
+                << Fixture [iii].getValueFootCandles()		<<" "
+                << Fixture [iii].getValueFieldAngle()		<<" "
+                << Fixture [iii].getValueFieldSizeMeters()	<<" "
+                << Fixture [iii].getValueFieldSizeFeet()	<<" "
+
+                << endl;
+                }
+            stream.flush();
+        }
+        }
+        else {return false;}
+*/
+
+        return true;
+    }

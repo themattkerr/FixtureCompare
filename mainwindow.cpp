@@ -6,6 +6,8 @@
 #include "fixtureeditdialog.h"
 #include "editallfixtures.h"
 #include "csvdialog.h"
+#include <QFile>
+#include <QFileDialog>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -59,7 +61,13 @@ void MainWindow::on_tableWidget_cellClicked(int row, int column)
     AddEdit->exec();
     SetupFixtureTable();
 }
-
+//======= Button Functions =====================================
+void MainWindow::on_editAllButton_clicked()
+{
+    editAllFixtures *editAll = new editAllFixtures (this, &cData);
+    editAll->exec();
+    SetupFixtureTable();
+}
 void MainWindow::on_addNewFixtureButton_clicked()
 {
     cData.nNumberOfFixtures++;
@@ -68,18 +76,22 @@ void MainWindow::on_addNewFixtureButton_clicked()
     AddEdit->exec();
     SetupFixtureTable();
 }
+void MainWindow::on_saveFileButton_clicked()
+{
+    bool ok;
+    QString filename =  QFileDialog::getSaveFileName(this, tr("Save as FixtureFile"),  "" ,tr("FixtureFile (*.fxt)"));
+    ok = cData.saveAsFxt(filename);
 
+}
 void MainWindow::on_createCSVButton_clicked()
 {
     bool ok;
-    ok = cData.createCSV();
+    QString fileName = QFileDialog::getSaveFileName(this, tr("save File"),  "" , tr("Comma Separated Values(*.csv)"));
+    ok = cData.createCSV(fileName);
     CSVDialog *CSV = new CSVDialog (this, &ok);
     CSV->exec();
 }
 
-void MainWindow::on_editAllButton_clicked()
-{
-    editAllFixtures *editAll = new editAllFixtures (this, &cData);
-    editAll->exec();
-    SetupFixtureTable();
-}
+
+
+

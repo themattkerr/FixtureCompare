@@ -28,6 +28,8 @@ private slots:
 
     void on_editAllButton_clicked();
 
+    void on_saveFileButton_clicked();
+
 private:
     Ui::MainWindow *ui;
     void SetupFixtureTable();

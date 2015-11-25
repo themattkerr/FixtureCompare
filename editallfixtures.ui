@@ -10,6 +10,9 @@
     <height>348</height>
    </rect>
   </property>
+  <property name="contextMenuPolicy">
+   <enum>Qt::DefaultContextMenu</enum>
+  </property>
   <property name="windowTitle">
    <string>Edit All Fixtures</string>
   </property>
@@ -219,6 +222,18 @@
    </widget>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>Lumens</tabstop>
+  <tabstop>Candela</tabstop>
+  <tabstop>FieldAngle</tabstop>
+  <tabstop>DistInMeters</tabstop>
+  <tabstop>DistInFeet</tabstop>
+  <tabstop>Lux</tabstop>
+  <tabstop>Footcandles</tabstop>
+  <tabstop>FieldDiameterMeters</tabstop>
+  <tabstop>FieldDiameterFeet</tabstop>
+  <tabstop>EnterInfo</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

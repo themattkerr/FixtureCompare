@@ -15,3 +15,5 @@
 #define UNKNOWN "---"
 
 #endif // CONSTSANTS_H
+
+//QFileDialog::getSaveFileName(options..)

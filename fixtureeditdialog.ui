@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>300</width>
-    <height>466</height>
+    <width>303</width>
+    <height>469</height>
    </rect>
   </property>
   <property name="focusPolicy">
@@ -22,10 +22,10 @@
   <widget class="QDialogButtonBox" name="NavigationButtons">
    <property name="geometry">
     <rect>
-     <x>0</x>
+     <x>10</x>
      <y>430</y>
      <width>281</width>
-     <height>32</height>
+     <height>31</height>
     </rect>
    </property>
    <property name="orientation">
@@ -35,7 +35,7 @@
     <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
    </property>
   </widget>
-  <widget class="QFrame" name="frame">
+  <widget class="QFrame" name="LightLevels">
    <property name="geometry">
     <rect>
      <x>10</x>
@@ -50,7 +50,7 @@
    <property name="frameShadow">
     <enum>QFrame::Raised</enum>
    </property>
-   <widget class="QLabel" name="label">
+   <widget class="QLabel" name="FixtureLabel">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -76,7 +76,7 @@
      <string>#</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_3">
+   <widget class="QLabel" name="FixtureNameLabel">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -149,7 +149,7 @@
     </property>
    </widget>
   </widget>
-  <widget class="QFrame" name="frame_2">
+  <widget class="QFrame" name="Illuminance">
    <property name="geometry">
     <rect>
      <x>10</x>
@@ -203,7 +203,7 @@
      <double>5000000.000000000000000</double>
     </property>
    </widget>
-   <widget class="QLabel" name="label_2">
+   <widget class="QLabel" name="FootcandleLabel">
     <property name="geometry">
      <rect>
       <x>110</x>
@@ -230,7 +230,7 @@
     </property>
    </widget>
   </widget>
-  <widget class="QFrame" name="frame_3">
+  <widget class="QFrame" name="Distance">
    <property name="geometry">
     <rect>
      <x>10</x>
@@ -310,379 +310,6 @@
      <string>Distance:</string>
     </property>
    </widget>
-   <widget class="QFrame" name="frame_6">
-    <property name="geometry">
-     <rect>
-      <x>100</x>
-      <y>250</y>
-      <width>201</width>
-      <height>81</height>
-     </rect>
-    </property>
-    <property name="frameShape">
-     <enum>QFrame::StyledPanel</enum>
-    </property>
-    <property name="frameShadow">
-     <enum>QFrame::Raised</enum>
-    </property>
-    <widget class="QLabel" name="DistFeetLabel_2">
-     <property name="geometry">
-      <rect>
-       <x>110</x>
-       <y>20</y>
-       <width>61</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Feet</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="DistMetersLabel_2">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>20</y>
-       <width>91</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Meters</string>
-     </property>
-    </widget>
-    <widget class="QDoubleSpinBox" name="DistFeetSpinBox_3">
-     <property name="geometry">
-      <rect>
-       <x>110</x>
-       <y>40</y>
-       <width>71</width>
-       <height>22</height>
-      </rect>
-     </property>
-     <property name="maximum">
-      <double>5000.000000000000000</double>
-     </property>
-    </widget>
-    <widget class="QDoubleSpinBox" name="DistMetersSpinBox_2">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>40</y>
-       <width>71</width>
-       <height>22</height>
-      </rect>
-     </property>
-     <property name="maximum">
-      <double>5000.000000000000000</double>
-     </property>
-    </widget>
-    <widget class="QLabel" name="DistLabel_2">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>0</y>
-       <width>47</width>
-       <height>13</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Distance:</string>
-     </property>
-    </widget>
-   </widget>
-   <widget class="QFrame" name="frame_7">
-    <property name="geometry">
-     <rect>
-      <x>100</x>
-      <y>330</y>
-      <width>201</width>
-      <height>81</height>
-     </rect>
-    </property>
-    <property name="frameShape">
-     <enum>QFrame::StyledPanel</enum>
-    </property>
-    <property name="frameShadow">
-     <enum>QFrame::Raised</enum>
-    </property>
-    <widget class="QLabel" name="LuxLabel_2">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>20</y>
-       <width>71</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Lux</string>
-     </property>
-    </widget>
-    <widget class="QDoubleSpinBox" name="LuxSpinBox_2">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>40</y>
-       <width>71</width>
-       <height>22</height>
-      </rect>
-     </property>
-     <property name="maximum">
-      <double>5000000.000000000000000</double>
-     </property>
-    </widget>
-    <widget class="QDoubleSpinBox" name="FootCandleSpinBox_2">
-     <property name="geometry">
-      <rect>
-       <x>110</x>
-       <y>40</y>
-       <width>71</width>
-       <height>22</height>
-      </rect>
-     </property>
-     <property name="maximum">
-      <double>5000000.000000000000000</double>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_4">
-     <property name="geometry">
-      <rect>
-       <x>110</x>
-       <y>20</y>
-       <width>71</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Foot Candles</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="IlluminaceLabel_2">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>0</y>
-       <width>61</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Illuminance:</string>
-     </property>
-    </widget>
-   </widget>
-   <widget class="QFrame" name="frame_8">
-    <property name="geometry">
-     <rect>
-      <x>100</x>
-      <y>410</y>
-      <width>161</width>
-      <height>81</height>
-     </rect>
-    </property>
-    <property name="frameShape">
-     <enum>QFrame::StyledPanel</enum>
-    </property>
-    <property name="frameShadow">
-     <enum>QFrame::Raised</enum>
-    </property>
-    <widget class="QLabel" name="FieldSizeLabel_2">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>0</y>
-       <width>111</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Field diameter:</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="FieldSizeFeetLabel_2">
-     <property name="geometry">
-      <rect>
-       <x>90</x>
-       <y>20</y>
-       <width>91</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Feet</string>
-     </property>
-    </widget>
-    <widget class="QDoubleSpinBox" name="BeamSizeFeetSpinBox_4">
-     <property name="geometry">
-      <rect>
-       <x>90</x>
-       <y>40</y>
-       <width>62</width>
-       <height>22</height>
-      </rect>
-     </property>
-     <property name="maximum">
-      <double>99999.990000000005239</double>
-     </property>
-    </widget>
-    <widget class="QLabel" name="FieldSizeMetersLabel_2">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>20</y>
-       <width>91</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Meters</string>
-     </property>
-    </widget>
-    <widget class="QDoubleSpinBox" name="BeamSizeMetersSpinBox_3">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>40</y>
-       <width>62</width>
-       <height>22</height>
-      </rect>
-     </property>
-     <property name="maximum">
-      <double>9999.989999999999782</double>
-     </property>
-    </widget>
-   </widget>
-   <widget class="QFrame" name="frame_9">
-    <property name="geometry">
-     <rect>
-      <x>259</x>
-      <y>430</y>
-      <width>121</width>
-      <height>61</height>
-     </rect>
-    </property>
-    <property name="frameShape">
-     <enum>QFrame::StyledPanel</enum>
-    </property>
-    <property name="frameShadow">
-     <enum>QFrame::Raised</enum>
-    </property>
-    <widget class="QLabel" name="FieldAngleLabel_2">
-     <property name="geometry">
-      <rect>
-       <x>20</x>
-       <y>0</y>
-       <width>111</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Field angle (Degrees)</string>
-     </property>
-    </widget>
-    <widget class="QDoubleSpinBox" name="FieldAngleSpinBox_2">
-     <property name="geometry">
-      <rect>
-       <x>20</x>
-       <y>20</y>
-       <width>71</width>
-       <height>22</height>
-      </rect>
-     </property>
-     <property name="maximum">
-      <double>1000.000000000000000</double>
-     </property>
-    </widget>
-   </widget>
-   <widget class="QFrame" name="frame_10">
-    <property name="geometry">
-     <rect>
-      <x>100</x>
-      <y>60</y>
-      <width>181</width>
-      <height>181</height>
-     </rect>
-    </property>
-    <property name="frameShape">
-     <enum>QFrame::StyledPanel</enum>
-    </property>
-    <property name="frameShadow">
-     <enum>QFrame::Raised</enum>
-    </property>
-    <widget class="QLabel" name="label_6">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>40</y>
-       <width>91</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Fixture Name:</string>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="FixtureName_2">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>60</y>
-       <width>113</width>
-       <height>20</height>
-      </rect>
-     </property>
-    </widget>
-    <widget class="QLabel" name="LumenLabel_2">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>90</y>
-       <width>91</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Lumens</string>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="Lumens_2">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>110</y>
-       <width>113</width>
-       <height>20</height>
-      </rect>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="CandelaBox_2">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>160</y>
-       <width>113</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-    </widget>
-    <widget class="QLabel" name="CandelaLabel_2">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>140</y>
-       <width>91</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Candela</string>
-     </property>
-    </widget>
-   </widget>
    <widget class="QDialogButtonBox" name="NavigationButtons_2">
     <property name="geometry">
      <rect>
@@ -700,7 +327,7 @@
     </property>
    </widget>
   </widget>
-  <widget class="QFrame" name="frame_4">
+  <widget class="QFrame" name="Diameter">
    <property name="geometry">
     <rect>
      <x>10</x>
@@ -741,7 +368,7 @@
      <string>Feet</string>
     </property>
    </widget>
-   <widget class="QDoubleSpinBox" name="BeamSizeFeetSpinBox_3">
+   <widget class="QDoubleSpinBox" name="BeamSizeFeetSpinBox">
     <property name="geometry">
      <rect>
       <x>90</x>
@@ -767,7 +394,7 @@
      <string>Meters</string>
     </property>
    </widget>
-   <widget class="QDoubleSpinBox" name="BeamSizeMetersSpinBox_2">
+   <widget class="QDoubleSpinBox" name="BeamSizeMetersSpinBox">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -781,7 +408,7 @@
     </property>
    </widget>
   </widget>
-  <widget class="QFrame" name="frame_5">
+  <widget class="QFrame" name="FieldAngle">
    <property name="geometry">
     <rect>
      <x>169</x>
@@ -836,7 +463,28 @@
     <string>Remove Fixture</string>
    </property>
   </widget>
+  <zorder>NavigationButtons</zorder>
+  <zorder>LightLevels</zorder>
+  <zorder>Illuminance</zorder>
+  <zorder>Distance</zorder>
+  <zorder>Diameter</zorder>
+  <zorder>FieldAngle</zorder>
+  <zorder>RemoveFixture</zorder>
+  <zorder>FootcandleLabel</zorder>
  </widget>
+ <tabstops>
+  <tabstop>FixtureName</tabstop>
+  <tabstop>Lumens</tabstop>
+  <tabstop>CandelaBox</tabstop>
+  <tabstop>DistMetersSpinBox</tabstop>
+  <tabstop>DistFeetSpinBox_2</tabstop>
+  <tabstop>LuxSpinBox</tabstop>
+  <tabstop>FootCandleSpinBox</tabstop>
+  <tabstop>BeamSizeMetersSpinBox</tabstop>
+  <tabstop>BeamSizeFeetSpinBox</tabstop>
+  <tabstop>FieldAngleSpinBox</tabstop>
+  <tabstop>RemoveFixture</tabstop>
+ </tabstops>
  <resources/>
  <connections>
   <connection>
