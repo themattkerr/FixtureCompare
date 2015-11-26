@@ -30,6 +30,16 @@ private slots:
 
     void on_saveFileButton_clicked();
 
+
+
+
+
+
+
+    void on_SortCandela_clicked(bool checked);
+
+    void on_SortLumens_clicked(bool checked);
+
 private:
     Ui::MainWindow *ui;
     void SetupFixtureTable();

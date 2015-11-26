@@ -94,7 +94,7 @@ void editAllFixtures::on_buttonBox_accepted()
 
     if (ok)
     {
-        for (int iii = 1; iii <= m_cData->nNumberOfFixtures; iii++)
+        for (unsigned int iii = 1; iii <= m_cData->nNumberOfFixtures; iii++)
         {
             switch (m_nSelectedToEdit)
             {

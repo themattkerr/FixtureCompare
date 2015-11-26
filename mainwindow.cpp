@@ -91,7 +91,18 @@ void MainWindow::on_createCSVButton_clicked()
     CSVDialog *CSV = new CSVDialog (this, &ok);
     CSV->exec();
 }
-
-
+void MainWindow::on_SortCandela_clicked(bool checked)
+{
+    cData.sortDecendingCandela();
+    SetupFixtureTable();
+}
+void MainWindow::on_SortLumens_clicked(bool checked)
+{
+    if (!checked)
+        cData.sortDecendingLumens();
+    else
+        cData.sortAscendingLumens();
+    SetupFixtureTable();
+}
 
 

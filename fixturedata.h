@@ -103,7 +103,10 @@ public:
     bool createCSV(QString &fileName);
     bool saveAsFxt (QString &fileName);
     bool readFxt (QString &fileName );
-    // sortfixtures by candela
+    void sortDecendingCandela ();
+    void sortDecendingLumens();
+    void sortAscendingLumens();
+
 };
 
 

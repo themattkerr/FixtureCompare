@@ -180,6 +180,7 @@
         m_dFieldDiameterMeters = 0,
         m_dFieldDiameterFeet = 0;
     }
+    /*
     bool FixtureData::loadFixtureData (QDataStream &fileData)
     {
         fileData >> m_FixtureName;
@@ -193,7 +194,7 @@
         fileData >> m_dFieldDiameterMeters;
         fileData >> m_dFieldDiameterFeet;
     }
-
+*/
     bool FixtureData::isNotValid(double dNumToTest)
     {
         if (dNumToTest > 10000000|| dNumToTest <= 0)
@@ -249,7 +250,7 @@
             return;
         }
 
-        for (int nAfter = nFixtureToRemove; nAfter < nNumberOfFixtures; nAfter++)
+        for (unsigned int nAfter = nFixtureToRemove; nAfter < nNumberOfFixtures; nAfter++)
         {
             Fixture[nAfter] = Fixture[nAfter + 1];
             Fixture[nNumberOfFixtures].resetValues();
@@ -270,7 +271,7 @@
             stream
                 << "Fixture Name ,Lumens ,Candela,Distance in meters,Distance in Feet,Lux,Footcandles,Field Angle,Field Diameter In Meters,Field Diameter In Feet" << endl;
 
-                for (int iii =1; iii <= nNumberOfFixtures; iii++)
+                for (unsigned int iii =1; iii <= nNumberOfFixtures; iii++)
                 {
             stream
                 << Fixture [iii].getFixtureName()			<<","
@@ -307,7 +308,7 @@
 
             stream << nNumberOfFixtures;
 
-                for (int iii =1; iii <= nNumberOfFixtures; iii++)
+                for (unsigned int iii =1; iii <= nNumberOfFixtures; iii++)
                 {
 
                 stream << QString (Fixture [iii].getFixtureName());
@@ -324,6 +325,7 @@
                 }
             //stream.flush();
         }
+        return true;
 }
 
 
@@ -343,7 +345,7 @@
            stream >> nNumberOfFixtures;
 
 
-           for (int i = 1; i <= nNumberOfFixtures; i++)
+           for (unsigned int i = 1; i <= nNumberOfFixtures; i++)
            {
 
                 QString qstrFixtName;
@@ -363,7 +365,50 @@
                 Fixture[i].enterFieldSizeMeters(dSizeMeter);
                 Fixture[i].enterFieldSizeFeet(dSizeFeet);
             }
+           return true;
     }
 
+    void AllData::sortDecendingCandela()
+    {
+        for (unsigned int nStartIndex = 1; nStartIndex <= nNumberOfFixtures; nStartIndex++)
+            for (unsigned int nTest = nStartIndex+1; nTest <= nNumberOfFixtures; nTest++)
+            {
+                if (Fixture[nStartIndex].getValueCandela() < Fixture[nTest].getValueCandela())
+                {
+                    Fixture[0] = Fixture[nStartIndex];
+                    Fixture[nStartIndex] = Fixture[nTest];
+                    Fixture[nTest] = Fixture[0];
+                    Fixture[0].resetValues();
+                }
+            }
+       }
 
+    void AllData::sortDecendingLumens()
+    {
+        for (unsigned int nStartIndex = 1; nStartIndex <= nNumberOfFixtures; nStartIndex++)
+            for (unsigned int nTest = nStartIndex+1; nTest <= nNumberOfFixtures; nTest++)
+            {
+                if (Fixture[nStartIndex].getValueLumens() < Fixture[nTest].getValueLumens())
+                {
+                    Fixture[0] = Fixture[nStartIndex];
+                    Fixture[nStartIndex] = Fixture[nTest];
+                    Fixture[nTest] = Fixture[0];
+                    Fixture[0].resetValues();
+                }
+            }
+    }
 
+    void AllData::sortAscendingLumens()
+    {
+        for (unsigned int nStartIndex = 1; nStartIndex <= nNumberOfFixtures; nStartIndex++)
+            for (unsigned int nTest = nStartIndex+1; nTest <= nNumberOfFixtures; nTest++)
+            {
+                if (Fixture[nStartIndex].getValueLumens() > Fixture[nTest].getValueLumens())
+                {
+                    Fixture[0] = Fixture[nStartIndex];
+                    Fixture[nStartIndex] = Fixture[nTest];
+                    Fixture[nTest] = Fixture[0];
+                    Fixture[0].resetValues();
+                }
+            }
+    }
