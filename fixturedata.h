@@ -42,6 +42,7 @@ public:
     double getValueFieldSizeFeet();
 
     void resetValues();
+    bool loadFixtureData (QDataStream &fileData);
 
     FixtureData &operator =  (const FixtureData &cSource);
 

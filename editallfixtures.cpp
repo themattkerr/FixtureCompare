@@ -73,7 +73,7 @@ void editAllFixtures::on_FieldDiameterMeters_clicked()
 {
     m_nSelectedToEdit = FIELD_DIAMETER_IN_METERS;
     ui->EnterInfoGroupBox->show();
-    ui->EnterInfoGroupBox->setTitle("Enter field diameter:");
+    ui->EnterInfoGroupBox->setTitle("Enter field diameter in meters:");
 }
 void editAllFixtures::on_FieldDiameterFeet_clicked()
 {

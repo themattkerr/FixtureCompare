@@ -1,6 +1,9 @@
 #include "startupdialog.h"
 #include "ui_startupdialog.h"
 #include "fixturedata.h"
+#include <QDialog>
+#include <QFileDialog>
+
 
 startUpDialog::startUpDialog(QWidget *parent, AllData *cData) :
     QDialog(parent),
@@ -38,3 +41,11 @@ void startUpDialog::on_buttonBox_rejected()
 }
 
 
+
+void startUpDialog::on_pushButton_clicked()
+{
+    QString fileName = QFileDialog::getOpenFileName(this, tr("Select a file"), "C:/", tr("FixtureCompare File (*.fxt)") );
+
+    m_cData->readFxt(fileName);
+    close();
+}

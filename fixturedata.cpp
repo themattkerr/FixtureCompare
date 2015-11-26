@@ -180,7 +180,19 @@
         m_dFieldDiameterMeters = 0,
         m_dFieldDiameterFeet = 0;
     }
-
+    bool FixtureData::loadFixtureData (QDataStream &fileData)
+    {
+        fileData >> m_FixtureName;
+        fileData >> m_dLumens;
+        fileData >> m_dCandela;
+        fileData >> m_dDistanceMeters;
+        fileData >> m_dDistanceFeet;
+        fileData >> m_dLux;
+        fileData >> m_dFc;
+        fileData >> m_dFieldAngle;
+        fileData >> m_dFieldDiameterMeters;
+        fileData >> m_dFieldDiameterFeet;
+    }
 
     bool FixtureData::isNotValid(double dNumToTest)
     {
@@ -287,69 +299,71 @@
         QFile file (fileName);
         if (file.open(QIODevice::ReadWrite | QIODevice::Truncate))
         {
-            QTextStream stream (&file);
-            stream
-                << nNumberOfFixtures << " " << endl;
+            QDataStream stream (&file);
+
+
+
+
+
+            stream << nNumberOfFixtures;
 
                 for (int iii =1; iii <= nNumberOfFixtures; iii++)
                 {
-            stream
-                << Fixture [iii].getFixtureName()			<<" End_Of_Fixture_Name "
-                << Fixture [iii].getValueLumens()           <<" "
-                << Fixture [iii].getValueCandela()			<<" "
-                << Fixture [iii].getValueDistanceMeters()	<<" "
-                << Fixture [iii].getValueDistanceFeet()		<<" "
-                << Fixture [iii].getValueLux()              <<" "
-                << Fixture [iii].getValueFootCandles()		<<" "
-                << Fixture [iii].getValueFieldAngle()		<<" "
-                << Fixture [iii].getValueFieldSizeMeters()	<<" "
-                << Fixture [iii].getValueFieldSizeFeet()	<<" "
 
-                << endl;
+                stream << QString (Fixture [iii].getFixtureName());
+                stream << (double) Fixture [iii].getValueLumens();
+                stream << (double) Fixture [iii].getValueCandela();
+                stream << (double) Fixture [iii].getValueDistanceMeters();
+                stream << (double) Fixture [iii].getValueDistanceFeet();
+                stream << (double) Fixture [iii].getValueLux();
+                stream << (double) Fixture [iii].getValueFootCandles();
+                stream << (double) Fixture [iii].getValueFieldAngle();
+                stream << (double) Fixture [iii].getValueFieldSizeMeters();
+                stream << (double) Fixture [iii].getValueFieldSizeFeet();
+
                 }
-            stream.flush();
+            //stream.flush();
         }
-        else {return false;}
+}
 
 
-        return true;
-    }
 
 
     bool AllData::readFxt (QString &fileName )
     {
-        /*
+
         QFile file (fileName);
-        if (file.open(QIODevice::ReadWrite | QIODevice::Truncate))
-        {
-            QTextStream in (&file);
+        file.open(QIODevice::ReadOnly);
 
-            while(!(in.atEnd()))
-            {
 
-             stream >> nNumberOfFixtures <<;
+            QDataStream stream (&file);
 
-                for (int iii =1; iii <= nNumberOfFixtures; iii++)
-                {
-            stream
-                >> Fixture [iii].enterFixtureName();			<<" End_Of_Fixture_Name "
-                << Fixture [iii].getValueLumens()           <<" "
-                << Fixture [iii].getValueCandela()			<<" "
-                << Fixture [iii].getValueDistanceMeters()	<<" "
-                << Fixture [iii].getValueDistanceFeet()		<<" "
-                << Fixture [iii].getValueLux()              <<" "
-                << Fixture [iii].getValueFootCandles()		<<" "
-                << Fixture [iii].getValueFieldAngle()		<<" "
-                << Fixture [iii].getValueFieldSizeMeters()	<<" "
-                << Fixture [iii].getValueFieldSizeFeet()	<<" "
+            //while(!(stream.atEnd()))
+            //{
+           stream >> nNumberOfFixtures;
 
-                << endl;
-                }
-            stream.flush();
-        }
-        }
-        else {return false;}
-*/
 
-        return true;
+           for (int i = 1; i <= nNumberOfFixtures; i++)
+           {
+
+                QString qstrFixtName;
+                double dLumens,dCandela,dDistMeter,dDistFeet,dLux,dFc,dFAngle,dSizeMeter,dSizeFeet;
+
+                stream >> qstrFixtName;
+                stream >> dLumens >> dCandela >> dDistMeter >> dDistFeet >> dLux >> dFc >> dFAngle >> dSizeMeter >> dSizeFeet;
+
+                Fixture[i].enterFixtureName(qstrFixtName);
+                Fixture[i].enterLumens(dLumens);
+                Fixture[i].enterCandela(dCandela);
+                Fixture[i].enterDistanceMeters(dDistMeter);
+                Fixture[i].enterDistanceFeet(dDistFeet);
+                Fixture[i].enterLux(dLux);
+                Fixture[i].enterFootcandles(dFc);
+                Fixture[i].enterFieldAngle(dFAngle);
+                Fixture[i].enterFieldSizeMeters(dSizeMeter);
+                Fixture[i].enterFieldSizeFeet(dSizeFeet);
+            }
     }
+
+
+
