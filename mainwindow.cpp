@@ -6,6 +6,7 @@
 #include "fixtureeditdialog.h"
 #include "editallfixtures.h"
 #include "csvdialog.h"
+#include "saveandquitdialog.h"
 #include <QFile>
 #include <QFileDialog>
 
@@ -31,6 +32,12 @@ MainWindow::MainWindow(QWidget *parent) :
 
 MainWindow::~MainWindow()
 {
+
+    if (cData.bUnsavedInfo == true)
+    {
+        SaveAndQuitDialog *cSaveAndQuit = new SaveAndQuitDialog(this, &cData);
+        cSaveAndQuit->exec();
+    }
     delete ui;
 }
 
@@ -76,11 +83,18 @@ void MainWindow::on_addNewFixtureButton_clicked()
     AddEdit->exec();
     SetupFixtureTable();
 }
-void MainWindow::on_saveFileButton_clicked()
+void MainWindow::on_saveFileButton_clicked() //<=======================================================================================Look here
 {
     bool ok;
     QString filename =  QFileDialog::getSaveFileName(this, tr("Save as FixtureFile"),  "" ,tr("FixtureFile (*.fxt)"));
     ok = cData.saveAsFxt(filename);
+    if (ok)
+    {
+        cData.bUnsavedInfo = false;
+    }
+    CSVDialog *CSV = new CSVDialog (this, &ok);
+    CSV->exec();
+
 
 }
 void MainWindow::on_createCSVButton_clicked()

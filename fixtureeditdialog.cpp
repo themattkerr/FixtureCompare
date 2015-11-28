@@ -129,6 +129,7 @@ void FixtureEditDialog::on_FieldAngleSpinBox_editingFinished()
 void FixtureEditDialog::on_NavigationButtons_accepted()
 {
     m_cData->Fixture[m_cData->nCurrentFixture] = m_cData->Fixture[EDITING];
+    m_cData->bUnsavedInfo = true;
     close();
 }
 

@@ -90,6 +90,7 @@ void editAllFixtures::on_buttonBox_rejected()
 void editAllFixtures::on_buttonBox_accepted()
 {
     bool ok = 0;
+    m_cData->bUnsavedInfo = true;
     m_nEditValue = ui->EnterInfo->text().toDouble(&ok);
 
     if (ok)

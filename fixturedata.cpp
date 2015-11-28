@@ -180,21 +180,7 @@
         m_dFieldDiameterMeters = 0,
         m_dFieldDiameterFeet = 0;
     }
-    /*
-    bool FixtureData::loadFixtureData (QDataStream &fileData)
-    {
-        fileData >> m_FixtureName;
-        fileData >> m_dLumens;
-        fileData >> m_dCandela;
-        fileData >> m_dDistanceMeters;
-        fileData >> m_dDistanceFeet;
-        fileData >> m_dLux;
-        fileData >> m_dFc;
-        fileData >> m_dFieldAngle;
-        fileData >> m_dFieldDiameterMeters;
-        fileData >> m_dFieldDiameterFeet;
-    }
-*/
+
     bool FixtureData::isNotValid(double dNumToTest)
     {
         if (dNumToTest > 10000000|| dNumToTest <= 0)
@@ -323,13 +309,11 @@
                 stream << (double) Fixture [iii].getValueFieldSizeFeet();
 
                 }
-            //stream.flush();
+           return true;
         }
-        return true;
+       else
+            return false;
 }
-
-
-
 
     bool AllData::readFxt (QString &fileName )
     {

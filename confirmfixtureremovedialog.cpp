@@ -19,6 +19,7 @@ ConfirmFixtureRemoveDialog::~ConfirmFixtureRemoveDialog()
 
 void ConfirmFixtureRemoveDialog::on_buttonBox_accepted()
 {
+    m_cData->bUnsavedInfo = true;
     m_cData->removeFixture(m_cData->nCurrentFixture);
     close();
 }

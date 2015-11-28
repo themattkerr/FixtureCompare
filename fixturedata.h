@@ -88,6 +88,7 @@ class AllData
 {
 public:
     bool bInitialized;
+    bool bUnsavedInfo;
     unsigned int nNumberOfFixtures;
     unsigned int nCurrentFixture;
     FixtureData Fixture[MAX_NUMBER_OF_FIXTURES+1];
@@ -95,6 +96,7 @@ public:
     AllData()
         {
             bInitialized = 0;
+            bUnsavedInfo = false;
             nNumberOfFixtures = 0;
             nCurrentFixture = 1;
         }
