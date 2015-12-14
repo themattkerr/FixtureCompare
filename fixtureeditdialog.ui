@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>303</width>
-    <height>469</height>
+    <width>335</width>
+    <height>470</height>
    </rect>
   </property>
   <property name="focusPolicy">
@@ -16,31 +16,19 @@
   <property name="windowTitle">
    <string>Add/Edit Fixture</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="images.qrc">
+    <normaloff>:/New folder/ColorSource-PAR_72.jpg</normaloff>:/New folder/ColorSource-PAR_72.jpg</iconset>
+  </property>
   <property name="sizeGripEnabled">
    <bool>true</bool>
   </property>
-  <widget class="QDialogButtonBox" name="NavigationButtons">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>430</y>
-     <width>281</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="orientation">
-    <enum>Qt::Horizontal</enum>
-   </property>
-   <property name="standardButtons">
-    <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
-   </property>
-  </widget>
   <widget class="QFrame" name="LightLevels">
    <property name="geometry">
     <rect>
      <x>10</x>
      <y>0</y>
-     <width>151</width>
+     <width>281</width>
      <height>181</height>
     </rect>
    </property>
@@ -94,7 +82,7 @@
      <rect>
       <x>10</x>
       <y>60</y>
-      <width>113</width>
+      <width>261</width>
       <height>20</height>
      </rect>
     </property>
@@ -453,9 +441,9 @@
   <widget class="QPushButton" name="RemoveFixture">
    <property name="geometry">
     <rect>
-     <x>180</x>
-     <y>140</y>
-     <width>91</width>
+     <x>160</x>
+     <y>160</y>
+     <width>121</width>
      <height>23</height>
     </rect>
    </property>
@@ -463,14 +451,55 @@
     <string>Remove Fixture</string>
    </property>
   </widget>
-  <zorder>NavigationButtons</zorder>
-  <zorder>LightLevels</zorder>
-  <zorder>Illuminance</zorder>
-  <zorder>Distance</zorder>
-  <zorder>Diameter</zorder>
-  <zorder>FieldAngle</zorder>
-  <zorder>RemoveFixture</zorder>
-  <zorder>FootcandleLabel</zorder>
+  <widget class="QWidget" name="horizontalLayoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>430</y>
+     <width>326</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="Navigationbuttons">
+    <item>
+     <widget class="QPushButton" name="Last">
+      <property name="text">
+       <string>&lt;&lt; Last</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="Next">
+      <property name="text">
+       <string>Next &gt;&gt;</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <spacer name="horizontalSpacer">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>40</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item>
+     <widget class="QDialogButtonBox" name="NavigationButtons">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="standardButtons">
+       <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
  </widget>
  <tabstops>
   <tabstop>FixtureName</tabstop>
@@ -485,7 +514,9 @@
   <tabstop>FieldAngleSpinBox</tabstop>
   <tabstop>RemoveFixture</tabstop>
  </tabstops>
- <resources/>
+ <resources>
+  <include location="images.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>NavigationButtons</sender>

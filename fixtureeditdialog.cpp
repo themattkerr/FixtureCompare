@@ -5,6 +5,7 @@
 #include "mainwindow.h"
 #include "confirmfixtureremovedialog.h"
 #include "cassert"
+#include "mattcalculations.h"
 
 
 enum fixtureID
@@ -16,6 +17,7 @@ FixtureEditDialog::FixtureEditDialog(QWidget *parent, AllData *cData) :
     ui(new Ui::FixtureEditDialog)
 {
     m_cData = cData;
+    m_Parent = parent;
     ui->setupUi(this);
     m_cData->Fixture[EDITING] = m_cData->Fixture[cData->nCurrentFixture];
     setEditFieldsToCurrentState();
@@ -37,6 +39,16 @@ FixtureEditDialog::~FixtureEditDialog()
 
 void FixtureEditDialog::setEditFieldsToCurrentState()
 {
+    if(m_cData->nNumberOfFixtures < 2)
+    {
+        ui->Next->hide();
+        ui->Last->hide();
+    }
+    else {
+        ui->Next->show();
+        ui->Last->show();
+    }
+
     ui->FixtureNumberDisplay->setText(QString::number(m_cData->nCurrentFixture,10));
 
     ui->FixtureName->setText((m_cData->Fixture[EDITING].getFixtureName()));
@@ -55,6 +67,8 @@ void FixtureEditDialog::setEditFieldsToCurrentState()
     ui->FieldAngleSpinBox->setValue((m_cData->Fixture[EDITING].getValueFieldAngle()));
 }
 
+// Field entry -----------------------------------------------------------------------
+
 void FixtureEditDialog::on_FixtureName_editingFinished()
 {
     m_cData->Fixture[EDITING].enterFixtureName(ui->FixtureName->text());
@@ -67,7 +81,8 @@ void FixtureEditDialog::on_Lumens_editingFinished()
     QString qstrTemp = ui->Lumens->text();
     dLumenTemp = qstrTemp.toDouble(&ok);
     if(ok)
-        m_cData->Fixture[EDITING].enterLumens(dLumenTemp);
+        if(!doubleIsEqual( m_cData->Fixture[EDITING].getValueLumens(), dLumenTemp, NUMOFDECIMALS))
+            m_cData->Fixture[EDITING].enterLumens(dLumenTemp);
     setEditFieldsToCurrentState();
 }
 void FixtureEditDialog::on_CandelaBox_editingFinished()
@@ -76,7 +91,8 @@ void FixtureEditDialog::on_CandelaBox_editingFinished()
     QString qstrCandelaTemp = ui->CandelaBox->text();
     double dCandlaTemp = qstrCandelaTemp.toDouble(&ok);
     if (ok)
-        m_cData->Fixture[EDITING].enterCandela(dCandlaTemp);
+        if (!doubleIsEqual(m_cData->Fixture[EDITING].getValueCandela(), dCandlaTemp, NUMOFDECIMALS))
+            m_cData->Fixture[EDITING].enterCandela(dCandlaTemp);
     setEditFieldsToCurrentState();
 }
 
@@ -84,60 +100,109 @@ void FixtureEditDialog::on_DistMetersSpinBox_editingFinished()
 {
     if (ui->DistMetersSpinBox->value()>0)
     {
-    m_cData->Fixture[EDITING].enterDistanceMeters(ui->DistMetersSpinBox->value());
-    setEditFieldsToCurrentState();
+        if (!doubleIsEqual(m_cData->Fixture[EDITING].getValueDistanceMeters(), ui->DistMetersSpinBox->value(), NUMOFDECIMALS))
+            m_cData->Fixture[EDITING].enterDistanceMeters(ui->DistMetersSpinBox->value());
+        setEditFieldsToCurrentState();
     }
     else { ui->DistMetersSpinBox->setValue(m_cData->Fixture[EDITING].getValueDistanceMeters());}
 }
 void FixtureEditDialog::on_DistFeetSpinBox_2_editingFinished()
 {
-    if(ui->DistFeetSpinBox_2->value() >0)
+    if(ui->DistFeetSpinBox_2->value() > 0)
     {
-        m_cData->Fixture[EDITING].enterDistanceFeet(ui->DistFeetSpinBox_2->value());
+        if (!doubleIsEqual(m_cData->Fixture[EDITING].getValueDistanceFeet(), ui->DistFeetSpinBox_2->value(), NUMOFDECIMALS))
+            m_cData->Fixture[EDITING].enterDistanceFeet(ui->DistFeetSpinBox_2->value());
         setEditFieldsToCurrentState();
     }
     else { ui->DistFeetSpinBox_2->setValue(m_cData->Fixture[EDITING].getValueDistanceFeet() );}
 }
 void FixtureEditDialog::on_LuxSpinBox_editingFinished()
 {
-    m_cData->Fixture[EDITING].enterLux(ui->LuxSpinBox->value());
+    if (!doubleIsEqual(m_cData->Fixture[EDITING].getValueLux(), ui->LuxSpinBox->value(), NUMOFDECIMALS))
+        m_cData->Fixture[EDITING].enterLux(ui->LuxSpinBox->value());
     setEditFieldsToCurrentState();
 }
 void FixtureEditDialog::on_FootCandleSpinBox_editingFinished()
 {
-    m_cData->Fixture[EDITING].enterFootcandles(ui->FootCandleSpinBox->value() );
+    if (!(doubleIsEqual(m_cData->Fixture[EDITING].getValueFootCandles(), ui->FootCandleSpinBox->value(), NUMOFDECIMALS)))
+        m_cData->Fixture[EDITING].enterFootcandles(ui->FootCandleSpinBox->value() );
     setEditFieldsToCurrentState();
 }
 
-void FixtureEditDialog::on_BeamSizeMetersSpinBox_2_editingFinished()
+void FixtureEditDialog::on_BeamSizeMetersSpinBox_editingFinished()
 {
-    m_cData->Fixture[EDITING].enterFieldSizeMeters(ui->BeamSizeMetersSpinBox->value());
+    if (!doubleIsEqual(m_cData->Fixture[EDITING].getValueFieldSizeMeters(), ui->BeamSizeMetersSpinBox->value(),NUMOFDECIMALS))
+        m_cData->Fixture[EDITING].enterFieldSizeMeters(ui->BeamSizeMetersSpinBox->value());
     setEditFieldsToCurrentState();
 }
-void FixtureEditDialog::on_BeamSizeFeetSpinBox_3_editingFinished()
+void FixtureEditDialog::on_BeamSizeFeetSpinBox_editingFinished()
 {
-    m_cData->Fixture[EDITING].enterFieldSizeFeet(ui->BeamSizeFeetSpinBox->value());
+    if (!doubleIsEqual(m_cData->Fixture[EDITING].getValueFieldSizeFeet(), ui->BeamSizeFeetSpinBox->value(), NUMOFDECIMALS ))
+        m_cData->Fixture[EDITING].enterFieldSizeFeet(ui->BeamSizeFeetSpinBox->value());
     setEditFieldsToCurrentState();
 }
 void FixtureEditDialog::on_FieldAngleSpinBox_editingFinished()
 {
-    m_cData->Fixture[EDITING].enterFieldAngle(ui->FieldAngleSpinBox->value());
+    if (!doubleIsEqual(m_cData->Fixture[EDITING].getValueFieldAngle(), ui->FieldAngleSpinBox->value(), NUMOFDECIMALS))
+        m_cData->Fixture[EDITING].enterFieldAngle(ui->FieldAngleSpinBox->value());
     setEditFieldsToCurrentState();
 }
 
 
-void FixtureEditDialog::on_NavigationButtons_accepted()
-{
-    m_cData->Fixture[m_cData->nCurrentFixture] = m_cData->Fixture[EDITING];
-    m_cData->bUnsavedInfo = true;
-    close();
-}
-
-
+// Buttons ---------------------------------------------------------------------------
 
 void FixtureEditDialog::on_RemoveFixture_clicked()
 {
+    m_cData->bAddingNewFixture = false;
     ConfirmFixtureRemoveDialog *Confirm = new ConfirmFixtureRemoveDialog(this, m_cData);
     Confirm->exec();
     close();
 }
+
+void FixtureEditDialog::on_Last_clicked()
+{
+    m_cData->bAddingNewFixture = false;
+    m_cData->Fixture[m_cData->nCurrentFixture] = m_cData->Fixture[EDITING];
+
+    if (m_cData->nCurrentFixture == FIRST_FIXTURE)
+        m_cData->nCurrentFixture = m_cData->nNumberOfFixtures;
+    else
+        m_cData->nCurrentFixture--;
+    m_cData->Fixture[EDITING] = m_cData->Fixture[m_cData->nCurrentFixture];
+    setEditFieldsToCurrentState();
+    ((MainWindow*)parentWidget())->SetupFixtureTable();
+    m_cData->bUnsavedInfo = true;
+}
+
+void FixtureEditDialog::on_Next_clicked()
+{
+    m_cData->bAddingNewFixture = false;
+    m_cData->Fixture[m_cData->nCurrentFixture] = m_cData->Fixture[EDITING];
+    if (m_cData->nCurrentFixture == m_cData->nNumberOfFixtures)
+        m_cData->nCurrentFixture = FIRST_FIXTURE;
+    else
+        m_cData->nCurrentFixture++;
+    m_cData->Fixture[EDITING] = m_cData->Fixture[m_cData->nCurrentFixture];
+    setEditFieldsToCurrentState();
+    ((MainWindow*)parentWidget())->SetupFixtureTable();
+    m_cData->bUnsavedInfo = true;
+}
+
+void FixtureEditDialog::on_NavigationButtons_accepted()
+{
+    m_cData->bAddingNewFixture = false;
+    m_cData->Fixture[m_cData->nCurrentFixture] = m_cData->Fixture[EDITING];
+    m_cData->bUnsavedInfo = true;
+    close();
+}
+void FixtureEditDialog::on_NavigationButtons_rejected()
+{
+    if (m_cData->bAddingNewFixture)
+    {
+        m_cData->bAddingNewFixture = false;
+        m_cData->nCurrentFixture--;
+        m_cData->nNumberOfFixtures--;
+    }
+    close();
+}
+

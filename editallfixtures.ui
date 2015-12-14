@@ -16,6 +16,10 @@
   <property name="windowTitle">
    <string>Edit All Fixtures</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="images.qrc">
+    <normaloff>:/New folder/ColorSource-PAR_72.jpg</normaloff>:/New folder/ColorSource-PAR_72.jpg</iconset>
+  </property>
   <widget class="QDialogButtonBox" name="buttonBox">
    <property name="geometry">
     <rect>
@@ -234,6 +238,8 @@
   <tabstop>FieldDiameterFeet</tabstop>
   <tabstop>EnterInfo</tabstop>
  </tabstops>
- <resources/>
+ <resources>
+  <include location="images.qrc"/>
+ </resources>
  <connections/>
 </ui>

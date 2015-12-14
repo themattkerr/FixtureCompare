@@ -15,6 +15,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
     if (!(cData.bInitialized))
     {
         cData.bInitialized = true;
@@ -43,6 +44,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::SetupFixtureTable()
 {
+    ui->centralWidget->show();
     ui->tableWidget->setColumnCount(NUM_FIELDS_SHOWN_IN_MAIN_TABLE);
     QStringList qstrlFieldHeaders;
     qstrlFieldHeaders << "Fixture Name" << "Candela" << "Lumens";
@@ -50,16 +52,21 @@ void MainWindow::SetupFixtureTable()
 
     ui->tableWidget->setRowCount(cData.nNumberOfFixtures);
 
-    for (cData.nCurrentFixture=1; cData.nCurrentFixture <= cData.nNumberOfFixtures; cData.nCurrentFixture++)
+    for (int nFixture = 1; nFixture <= cData.nNumberOfFixtures; nFixture++)
     {
         int nColumn = 0;
-        ui->tableWidget->setItem(cData.nCurrentFixture-1, nColumn, new QTableWidgetItem((cData.Fixture[cData.nCurrentFixture].getFixtureName())));
-        ui->tableWidget->setItem(cData.nCurrentFixture-1, ++nColumn, new QTableWidgetItem(QLocale(QLocale::English).toString(cData.Fixture[cData.nCurrentFixture].getValueCandela())));
-        ui->tableWidget->setItem(cData.nCurrentFixture-1, ++nColumn, new QTableWidgetItem(QLocale(QLocale::English).toString(cData.Fixture[cData.nCurrentFixture].getValueLumens())));
+        ui->tableWidget->setItem(nFixture-1, nColumn, new QTableWidgetItem((cData.Fixture[nFixture].getFixtureName())));
+        ui->tableWidget->setItem(nFixture-1, ++nColumn, new QTableWidgetItem(QLocale(QLocale::English).toString(cData.Fixture[nFixture].getValueCandela())));
+        ui->tableWidget->setItem(nFixture-1, ++nColumn, new QTableWidgetItem(QLocale(QLocale::English).toString(cData.Fixture[nFixture].getValueLumens())));
     }
     if (cData.nNumberOfFixtures == MAX_NUMBER_OF_FIXTURES)
         ui->addNewFixtureButton->hide();
+
+    cData.bAddingNewFixture = false;
+    //checkNextOrLastClicked();
+    //adjustSize();
 }
+
 
 void MainWindow::on_tableWidget_cellClicked(int row, int column)
 {
@@ -77,13 +84,15 @@ void MainWindow::on_editAllButton_clicked()
 }
 void MainWindow::on_addNewFixtureButton_clicked()
 {
+    //ui->centralWidget->hide();
+    cData.bAddingNewFixture = true;
     cData.nNumberOfFixtures++;
     cData.nCurrentFixture = cData.nNumberOfFixtures;
     FixtureEditDialog *AddEdit = new FixtureEditDialog (this, &cData);
     AddEdit->exec();
     SetupFixtureTable();
 }
-void MainWindow::on_saveFileButton_clicked() //<=======================================================================================Look here
+void MainWindow::on_saveFileButton_clicked()
 {
     bool ok;
     QString filename =  QFileDialog::getSaveFileName(this, tr("Save as FixtureFile"),  "" ,tr("FixtureFile (*.fxt)"));
@@ -105,17 +114,14 @@ void MainWindow::on_createCSVButton_clicked()
     CSVDialog *CSV = new CSVDialog (this, &ok);
     CSV->exec();
 }
-void MainWindow::on_SortCandela_clicked(bool checked)
+void MainWindow::on_SortCandela_clicked()
 {
     cData.sortDecendingCandela();
     SetupFixtureTable();
 }
-void MainWindow::on_SortLumens_clicked(bool checked)
+void MainWindow::on_SortLumens_clicked()
 {
-    if (!checked)
-        cData.sortDecendingLumens();
-    else
-        cData.sortAscendingLumens();
+    cData.sortDecendingLumens();
     SetupFixtureTable();
 }
 

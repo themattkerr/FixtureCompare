@@ -9,6 +9,8 @@
 #include <qdialog.h>
 #endif
 
+
+
 class FixtureData
 {
 
@@ -87,8 +89,12 @@ private:
 class AllData
 {
 public:
+    QString qstrSoftwareVersion;
     bool bInitialized;
     bool bUnsavedInfo;
+    bool bAddingNewFixture;
+    //bool bNextClicked;
+    //bool bLastClicked;
     unsigned int nNumberOfFixtures;
     unsigned int nCurrentFixture;
     FixtureData Fixture[MAX_NUMBER_OF_FIXTURES+1];
@@ -97,6 +103,9 @@ public:
         {
             bInitialized = 0;
             bUnsavedInfo = false;
+            bAddingNewFixture = false;
+            //bNextClicked = false;
+            //bLastClicked = false;
             nNumberOfFixtures = 0;
             nCurrentFixture = 1;
         }

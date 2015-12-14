@@ -24,23 +24,11 @@ protected:
     virtual void keyPressEvent(QKeyEvent *event);
 
 private slots:
-    //void on_DistMetersSpinBox_valueChanged(double arg1);
+
 
     void on_CandelaBox_editingFinished();
 
-    //void on_LuxSpinBox_valueChanged(double arg1);
-
-    //void on_FootCandleSpinBox_valueChanged(double arg1);
-
-    //void on_BeamSizeMetersSpinBox_2_valueChanged(double arg1);
-
-    //void on_BeamSizeFeetSpinBox_3_valueChanged(double arg1);
-
-    //void on_FieldAngleSpinBox_valueChanged(double arg1);
-
     void on_Lumens_editingFinished();
-
-    //void on_DistFeetSpinBox_2_valueChanged(double arg1);
 
     void on_FixtureName_editingFinished();
 
@@ -54,19 +42,29 @@ private slots:
 
     void on_FootCandleSpinBox_editingFinished();
 
-    void on_BeamSizeMetersSpinBox_2_editingFinished();
+    void on_BeamSizeMetersSpinBox_editingFinished();
 
-    void on_BeamSizeFeetSpinBox_3_editingFinished();
+    void on_BeamSizeFeetSpinBox_editingFinished();
 
     void on_FieldAngleSpinBox_editingFinished();
 
     void on_RemoveFixture_clicked();
+
+    void on_Next_clicked();
+
+    void on_Last_clicked();
+
+    void on_NavigationButtons_rejected();
+
+
 
 private:
     Ui::FixtureEditDialog *ui;
     void setEditFieldsToCurrentState();
 
     AllData *m_cData;
+    QWidget *m_Parent;
+
 };
 
 #endif // FIXTUREEDITDIALOG_H

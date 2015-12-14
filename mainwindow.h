@@ -18,6 +18,7 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     AllData cData;
     ~MainWindow();
+    void SetupFixtureTable();
 
 private slots:
     void on_tableWidget_cellClicked(int row, int column);
@@ -30,19 +31,15 @@ private slots:
 
     void on_saveFileButton_clicked();
 
+    void on_SortCandela_clicked();
+
+    void on_SortLumens_clicked();
 
 
-
-
-
-
-    void on_SortCandela_clicked(bool checked);
-
-    void on_SortLumens_clicked(bool checked);
 
 private:
     Ui::MainWindow *ui;
-    void SetupFixtureTable();
+
 
 
 

@@ -289,9 +289,7 @@
             QDataStream stream (&file);
 
 
-
-
-
+            stream << QString (VERSION);
             stream << nNumberOfFixtures;
 
                 for (unsigned int iii =1; iii <= nNumberOfFixtures; iii++)
@@ -321,11 +319,12 @@
         QFile file (fileName);
         file.open(QIODevice::ReadOnly);
 
-
             QDataStream stream (&file);
 
-            //while(!(stream.atEnd()))
-            //{
+           stream >> qstrSoftwareVersion;
+
+           if(qstrSoftwareVersion == "1.0.0")
+           {
            stream >> nNumberOfFixtures;
 
 
@@ -350,6 +349,8 @@
                 Fixture[i].enterFieldSizeFeet(dSizeFeet);
             }
            return true;
+          }
+        return false;
     }
 
     void AllData::sortDecendingCandela()

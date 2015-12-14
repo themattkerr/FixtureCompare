@@ -20,7 +20,8 @@ SOURCES += main.cpp\
     editallfixtures.cpp \
     csvdialog.cpp \
     confirmfixtureremovedialog.cpp \
-    saveandquitdialog.cpp
+    saveandquitdialog.cpp \
+    mattcalculations.cpp
 
 HEADERS  += mainwindow.h \
     fixturedata.h \
@@ -30,7 +31,8 @@ HEADERS  += mainwindow.h \
     editallfixtures.h \
     csvdialog.h \
     confirmfixtureremovedialog.h \
-    saveandquitdialog.h
+    saveandquitdialog.h \
+    mattcalculations.h
 
 FORMS    += mainwindow.ui \
     startupdialog.ui \
@@ -39,3 +41,6 @@ FORMS    += mainwindow.ui \
     csvdialog.ui \
     confirmfixtureremovedialog.ui \
     saveandquitdialog.ui
+
+RESOURCES += \
+    images.qrc
