@@ -30,6 +30,16 @@ public:
     void enterFieldSizeMeters(double dFieldDiameterMeters);
     void enterFieldSizeFeet(double dFieldDiameterFeet);
 
+    void enterWattage(double dWattage);  // --- New 1.1.0
+    void enterEfficacy (double dEfficacy);
+    void enterBeamAngle(double dBeamAngle);
+    void enterBeamSizeMeters(double dBeamDiameterMeters);
+    void enterBeamSizeFeet (double dBeamDiameterFeet);
+    void enterColorTemp(QString qstrColorTemp);
+    void enterStreetPrice(double dStreetPrice);
+    void enterListPrice (double dListPrice);
+
+
 
     QString getFixtureName();
 
@@ -43,6 +53,16 @@ public:
     double getValueFieldSizeMeters();
     double getValueFieldSizeFeet();
 
+
+    double getValueWattage();  // --- 1.1.0
+    double getValueEfficacy();
+    double getValueBeamAngle();
+    double getValueBeamSizeMeters();
+    double getValueBeamSizeFeet ();
+    QString getColorTemp();
+    double getValueStreetPrice();
+    double getValueListPrice ();
+
     void resetValues();
     bool loadFixtureData (QDataStream &fileData);
 
@@ -51,7 +71,7 @@ public:
 private:
 
     // Fixture Data
-    QString m_FixtureName;
+    QString m_FixtureName, m_qstrColorTemp;
     double	m_dLumens,
             m_dCandela,
             m_dDistanceMeters,
@@ -60,9 +80,18 @@ private:
             m_dFc,
             m_dFieldAngle,
             m_dFieldDiameterMeters,
-            m_dFieldDiameterFeet;
+            m_dFieldDiameterFeet,
+
+            m_dWattage, //-- 1.1.0
+            m_dEfficacy,
+            m_dBeamAngle,
+            m_dBeamDiameterMeters,
+            m_dBeamDiameterFeet,
+            m_dStreetPrice,
+            m_dListPrice;
 
     bool isNotValid(double dNumToTest);
+    void angleCheck();
 
     /*
     All calculations are done in Metric.
@@ -75,6 +104,10 @@ private:
     void calculateFieldAngle();
     void calculateFieldSize();
 
+    void calculateEfficacy();
+    void calculateBeamSize();
+    void caluculateBeamAngle();
+
     void convertDistanceFeetToMeters();
     void convertDistanceMetersToFeet();
     void convertFootcandlesToLux();
@@ -82,6 +115,8 @@ private:
     void convertFieldDiameterFeetToMeters();
     void convertFieldDiameterMetersToFeet();
 
+    void convertBeamDiameterMetersToFeet();
+    void convertBeamDiameterFeetToMeters();
 };
 
 
@@ -89,27 +124,19 @@ private:
 class AllData
 {
 public:
+
+    AllData();
+    ~AllData();
+
     QString qstrSoftwareVersion;
     bool bInitialized;
     bool bUnsavedInfo;
     bool bAddingNewFixture;
-    //bool bNextClicked;
-    //bool bLastClicked;
     unsigned int nNumberOfFixtures;
     unsigned int nCurrentFixture;
     FixtureData Fixture[MAX_NUMBER_OF_FIXTURES+1];
 
-    AllData()
-        {
-            bInitialized = 0;
-            bUnsavedInfo = false;
-            bAddingNewFixture = false;
-            //bNextClicked = false;
-            //bLastClicked = false;
-            nNumberOfFixtures = 0;
-            nCurrentFixture = 1;
-        }
-    ~AllData(){}
+
     void removeFixture(unsigned int nFixtureToRemove);
     bool createCSV(QString &fileName);
     bool saveAsFxt (QString &fileName);

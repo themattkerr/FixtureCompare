@@ -52,7 +52,7 @@
     <item>
      <widget class="QTableWidget" name="tableWidget">
       <property name="sizePolicy">
-       <sizepolicy hsizetype="MinimumExpanding" vsizetype="Expanding">
+       <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
         <horstretch>29</horstretch>
         <verstretch>0</verstretch>
        </sizepolicy>
@@ -77,7 +77,7 @@
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
-       <spacer name="horizontalSpacer">
+       <spacer name="horizontalSpacer_2">
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
         </property>
@@ -91,6 +91,18 @@
       </item>
       <item>
        <widget class="QPushButton" name="SortCandela">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>200</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>255</width>
+          <height>0</height>
+         </size>
+        </property>
         <property name="text">
          <string>Sort Candela</string>
         </property>
@@ -98,13 +110,25 @@
       </item>
       <item>
        <widget class="QPushButton" name="SortLumens">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>50</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>255</width>
+          <height>0</height>
+         </size>
+        </property>
         <property name="text">
          <string>Sort Lumens</string>
         </property>
        </widget>
       </item>
       <item>
-       <spacer name="horizontalSpacer_2">
+       <spacer name="horizontalSpacer">
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
         </property>
@@ -120,6 +144,9 @@
     </item>
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <property name="sizeConstraint">
+       <enum>QLayout::SetDefaultConstraint</enum>
+      </property>
       <item>
        <spacer name="horizontalSpacer_3">
         <property name="orientation">
@@ -135,6 +162,18 @@
       </item>
       <item>
        <widget class="QPushButton" name="editAllButton">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>124</width>
+          <height>0</height>
+         </size>
+        </property>
         <property name="text">
          <string>Edit All</string>
         </property>
@@ -142,6 +181,12 @@
       </item>
       <item>
        <widget class="QPushButton" name="addNewFixtureButton">
+        <property name="minimumSize">
+         <size>
+          <width>124</width>
+          <height>0</height>
+         </size>
+        </property>
         <property name="text">
          <string>Add New</string>
         </property>
@@ -149,6 +194,12 @@
       </item>
       <item>
        <widget class="QPushButton" name="saveFileButton">
+        <property name="minimumSize">
+         <size>
+          <width>124</width>
+          <height>0</height>
+         </size>
+        </property>
         <property name="text">
          <string>Save As</string>
         </property>
@@ -156,6 +207,12 @@
       </item>
       <item>
        <widget class="QPushButton" name="createCSVButton">
+        <property name="minimumSize">
+         <size>
+          <width>124</width>
+          <height>0</height>
+         </size>
+        </property>
         <property name="text">
          <string>Create CSV</string>
         </property>

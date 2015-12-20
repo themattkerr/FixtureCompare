@@ -15,6 +15,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    bShowMoreEditFields = false;
+    nMinimumLength = 15;
+    nMultiplyingFactorForColumns = 7;
 
     if (!(cData.bInitialized))
     {
@@ -52,12 +55,20 @@ void MainWindow::SetupFixtureTable()
 
     ui->tableWidget->setRowCount(cData.nNumberOfFixtures);
 
+    int nLargestStringLength = nMinimumLength;
     for (int nFixture = 1; nFixture <= cData.nNumberOfFixtures; nFixture++)
     {
         int nColumn = 0;
+        nLargestStringLength = (nLargestStringLength > (cData.Fixture[nFixture].getFixtureName().size())) ? nLargestStringLength : (cData.Fixture[nFixture].getFixtureName().size() );
+
+        ui->tableWidget->setColumnWidth(nColumn,(nLargestStringLength * nMultiplyingFactorForColumns) );
+
+
         ui->tableWidget->setItem(nFixture-1, nColumn, new QTableWidgetItem((cData.Fixture[nFixture].getFixtureName())));
         ui->tableWidget->setItem(nFixture-1, ++nColumn, new QTableWidgetItem(QLocale(QLocale::English).toString(cData.Fixture[nFixture].getValueCandela())));
         ui->tableWidget->setItem(nFixture-1, ++nColumn, new QTableWidgetItem(QLocale(QLocale::English).toString(cData.Fixture[nFixture].getValueLumens())));
+
+
     }
     if (cData.nNumberOfFixtures == MAX_NUMBER_OF_FIXTURES)
         ui->addNewFixtureButton->hide();

@@ -1,8 +1,10 @@
 #include "startupdialog.h"
 #include "ui_startupdialog.h"
 #include "fixturedata.h"
+#include "constsants.h"
 #include <QDialog>
 #include <QFileDialog>
+
 
 
 startUpDialog::startUpDialog(QWidget *parent, AllData *cData) :
@@ -10,6 +12,7 @@ startUpDialog::startUpDialog(QWidget *parent, AllData *cData) :
     ui(new Ui::startUpDialog)
 {
     ui->setupUi(this);
+    setFixedSize(STARTUP_DIALOG_SIZE);
     m_cData = cData;
 }
 

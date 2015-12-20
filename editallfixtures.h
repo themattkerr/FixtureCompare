@@ -18,6 +18,15 @@ enum Selected {
     FIELDANGLE,
     FIELD_DIAMETER_IN_METERS,
     FIELD_DIAMETER_IN_FEET,
+
+    WATTAGE,
+    EFFICACY,
+    BEAM_ANGLE,
+    BEAM_DIAMETER_IN_METERS,
+    BEAM_DIAMETER_IN_FEET,
+    COLOR_TEMP,
+    STREET_PRICE,
+    LIST_PRICE,
 };
 
 namespace Ui {
@@ -54,6 +63,22 @@ private slots:
     void on_buttonBox_rejected();
 
     void on_buttonBox_accepted();
+
+    void on_beamDiameterMeters_clicked();
+
+    void on_beamDiameterFeet_clicked();
+
+    void on_beamAngleButton_clicked();
+
+    void on_wattageButton_clicked();
+
+    void on_efficacyButton_clicked();
+
+    void on_colorTempButton_clicked();
+
+    void on_streetPriceButton_clicked();
+
+    void on_listPriceButton_clicked();
 
 private:
     Ui::editAllFixtures *ui;

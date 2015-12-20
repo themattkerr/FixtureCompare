@@ -1,8 +1,5 @@
 
 #include <iostream>
-//#include <iomanip>
-//#include <fstream>
-//#include <sstream>
 #include <cmath>
 #include <cassert>
 #include "constsants.h"
@@ -19,19 +16,7 @@
     FixtureData::FixtureData()
     {
         resetValues();
- /*
-        m_FixtureName = "New Fixture";
-        m_dLumens = 0,
-        m_dCandela = 0,
 
-        m_dDistanceMeters = 10,
-        m_dDistanceFeet = 32.8,
-        m_dLux = 0,
-        m_dFc = 0,
-        m_dFieldAngle = 0,
-        m_dFieldDiameterMeters = 0,
-        m_dFieldDiameterFeet = 0;
-        */
     }
 
     FixtureData::~FixtureData(){}
@@ -48,6 +33,7 @@
     {
         assert (dLumens >= 0);
         m_dLumens = dLumens;
+        calculateEfficacy();
     }
     void FixtureData::enterDistanceMeters(double dDistanceMeters)
     {
@@ -86,6 +72,7 @@
         assert (dFieldAngle >= 0);
         m_dFieldAngle = dFieldAngle;
         calculateFieldSize();
+        angleCheck();
     }
     void FixtureData::enterFieldSizeMeters(double dFieldDiameterMeters)
     {
@@ -93,6 +80,7 @@
         m_dFieldDiameterMeters = dFieldDiameterMeters;
         convertFieldDiameterMetersToFeet();
         calculateFieldAngle();
+        angleCheck();
     }
     void FixtureData::enterFieldSizeFeet(double dFieldDiameterFeet)
     {
@@ -100,85 +88,203 @@
         m_dFieldDiameterFeet = dFieldDiameterFeet;
         convertFieldDiameterFeetToMeters();
         calculateFieldAngle();
+        angleCheck();
     }
 
+    //--------------------------------------- 1.1.0
+
+    void FixtureData::enterWattage(double dWattage)
+    {
+        assert(dWattage >= 0);
+        m_dWattage = dWattage;
+        calculateEfficacy();
+    }
+    void FixtureData::enterEfficacy (double dEfficacy)
+    {
+        assert(dEfficacy >= 0);
+        m_dEfficacy = dEfficacy;
+        if(m_dLumens == 0 && m_dWattage > 0)            {m_dLumens = m_dWattage * m_dEfficacy;}
+        else if(m_dLumens > 0)                          {m_dWattage = m_dLumens / m_dEfficacy;}
+
+        else {m_dWattage = DEFAULT_WATTAGE; m_dLumens = DEFAULT_LUMENS;}
+    }
+    void FixtureData::enterBeamAngle(double dBeamAngle)
+    {
+        assert (dBeamAngle >= 0);
+        m_dBeamAngle = dBeamAngle;
+        calculateBeamSize();
+        angleCheck();
+    }
+    void FixtureData::enterBeamSizeMeters(double dBeamDiameterMeters)
+    {
+        assert(dBeamDiameterMeters >= 0);
+        m_dBeamDiameterMeters = dBeamDiameterMeters;
+        convertBeamDiameterMetersToFeet();
+        caluculateBeamAngle();
+        angleCheck();
+    }
+    void FixtureData::enterBeamSizeFeet (double dBeamDiameterFeet)
+    {
+        assert(m_dBeamDiameterFeet >= 0);
+        m_dBeamDiameterFeet = dBeamDiameterFeet;
+        convertBeamDiameterFeetToMeters();
+        caluculateBeamAngle();
+        angleCheck();
+    }
+    void FixtureData::enterColorTemp(QString qstrColorTemp)
+    {
+        m_qstrColorTemp = qstrColorTemp;
+    }
+    void FixtureData::enterStreetPrice(double dStreetPrice)
+    {
+        assert(dStreetPrice >= 0);
+        m_dStreetPrice = dStreetPrice;
+    }
+    void FixtureData::enterListPrice (double dListPrice)
+    {
+        assert(dListPrice >= 0);
+        m_dListPrice = dListPrice;
+    }
+
+
+// =================================================================get functions
     QString FixtureData::getFixtureName(){return  m_FixtureName;}
 
 
     double FixtureData::getValueCandela()
     {
        if (isNotValid(m_dCandela))
-            return 0;
+            return DEFAULT_CANDELA;
         return m_dCandela;
     }
     double FixtureData::getValueLumens()
     {
         if (isNotValid(m_dLumens))
-            return 0;
+            return DEFAULT_LUMENS;
         return m_dLumens;
     }
-
     double FixtureData::getValueDistanceMeters()
     {
         if (isNotValid(m_dDistanceMeters))
-            return 1;
+            return DEFAULT_DIST_METERS;
         return m_dDistanceMeters;
     }
-
     double FixtureData::getValueDistanceFeet()
     {
         if (isNotValid(m_dDistanceFeet))
-            return 3.28;
+            return DEFAULT_DIST_FEET;
         return m_dDistanceFeet;
     }
-
     double FixtureData::getValueLux()
     {
         if (isNotValid(m_dLux))
-            return 0;
+            return DEFAULT_LUX;
         return m_dLux;
     }
-
     double FixtureData::getValueFootCandles()
     {
         if (isNotValid(m_dFc))
-            return 0;
+            return DEFAULT_FC;
         return m_dFc;
     }
-
     double FixtureData::getValueFieldAngle()
     {
         if (isNotValid(m_dFieldAngle))
-            return 0;
+            return DEFAULT_F_ANGLE;
         return m_dFieldAngle;
     }
-
     double FixtureData::getValueFieldSizeMeters()
     {
         if (isNotValid(m_dFieldDiameterMeters))
-            return 0;
+            return DEFAULT_FIELD_SIZE_METERS;
         return m_dFieldDiameterMeters;
     }
-
     double FixtureData::getValueFieldSizeFeet()
     {
         if(isNotValid(m_dFieldDiameterFeet))
-            return 0;
+            return DEFAULT_FIELD_SIZE_FEET;
         return m_dFieldDiameterFeet;}
+
+// ----------------------------------------------------- New 1.1.0
+
+
+    double FixtureData::getValueWattage()
+    {
+        if(isNotValid(m_dWattage))
+                return DEFAULT_WATTAGE;
+        return m_dWattage;
+    }
+    double FixtureData::getValueEfficacy()
+    {
+        if(isNotValid(m_dEfficacy))
+            return DEFAULT_EFFICACY;
+        return m_dEfficacy;
+    }
+    double FixtureData::getValueBeamAngle()
+    {
+        if(isNotValid(m_dBeamAngle))
+            return DEFAULT_B_ANGLE;
+        return m_dBeamAngle;
+    }
+    double FixtureData::getValueBeamSizeMeters()
+    {
+        if(isNotValid(m_dBeamDiameterMeters))
+            return DEFAULT_BEAM_SIZE_METERS;
+        return m_dBeamDiameterMeters;
+    }
+    double FixtureData::getValueBeamSizeFeet ()
+    {
+        if(isNotValid(m_dBeamDiameterFeet))
+            return DEFAULT_BEAM_SIZE_FEET;
+        return m_dBeamDiameterFeet;
+    }
+
+    QString FixtureData::getColorTemp()
+    {
+        return m_qstrColorTemp;
+    }
+
+    double FixtureData::getValueStreetPrice()
+    {
+        if(isNotValid(m_dStreetPrice))
+            return DEFAULT_STREET_PRICE;
+        return m_dStreetPrice;
+    }
+    double FixtureData::getValueListPrice ()
+    {
+        if(isNotValid(m_dListPrice))
+            return DEFAULT_LIST_PRICE;
+        return m_dListPrice;
+    }
+
+
 
     void FixtureData::resetValues()
     {
-        m_FixtureName = "New Fixture";
-        m_dLumens = 0,
-        m_dCandela = 0,
+        m_FixtureName = DEFAULT_NAME;
 
-        m_dDistanceMeters = 10,
-        m_dDistanceFeet = 32.8,
-        m_dLux = 0,
-        m_dFc = 0,
-        m_dFieldAngle = 0,
-        m_dFieldDiameterMeters = 0,
-        m_dFieldDiameterFeet = 0;
+        m_dLumens = DEFAULT_LUMENS,
+        m_dCandela = DEFAULT_CANDELA,
+
+        m_dDistanceMeters = DEFAULT_DIST_METERS,
+        m_dDistanceFeet = DEFAULT_DIST_FEET,
+        m_dLux = DEFAULT_LUX,
+        m_dFc = DEFAULT_FC,
+
+        m_dFieldAngle = DEFAULT_F_ANGLE,
+        m_dFieldDiameterMeters = DEFAULT_FIELD_SIZE_METERS,
+        m_dFieldDiameterFeet = DEFAULT_FIELD_SIZE_FEET;
+
+        m_dWattage = DEFAULT_WATTAGE; //1.1.0
+        m_dEfficacy = DEFAULT_EFFICACY;
+
+        m_dBeamAngle = DEFAULT_B_ANGLE;
+        m_dBeamDiameterMeters = DEFAULT_BEAM_SIZE_METERS;
+        m_dBeamDiameterFeet = DEFAULT_BEAM_SIZE_FEET;
+
+        m_qstrColorTemp = DEFAULT_COLORTEMP;
+        m_dStreetPrice = DEFAULT_STREET_PRICE;
+        m_dListPrice = DEFAULT_LIST_PRICE;
     }
 
     bool FixtureData::isNotValid(double dNumToTest)
@@ -201,6 +307,19 @@
         m_dFieldDiameterMeters = cSource.m_dFieldDiameterMeters;
         m_dFieldDiameterFeet = cSource.m_dFieldDiameterFeet;
 
+        m_dWattage = cSource.m_dWattage;//---1.1.0
+        m_dEfficacy = cSource.m_dEfficacy;
+
+        m_dBeamAngle = cSource.m_dBeamAngle;
+        m_dBeamDiameterMeters = cSource.m_dBeamDiameterMeters;
+        m_dBeamDiameterFeet = cSource.m_dBeamDiameterFeet;
+
+        m_qstrColorTemp = cSource.m_qstrColorTemp;
+        m_dStreetPrice = cSource.m_dStreetPrice;
+        m_dListPrice = cSource.m_dListPrice;
+
+
+
         return *this;
     }
 
@@ -216,6 +335,22 @@
         convertFieldDiameterMetersToFeet();
     }
 
+    void FixtureData::calculateEfficacy()
+    {
+        if(m_dWattage > 0)
+        {
+            m_dEfficacy = m_dLumens / m_dWattage;
+        }
+        else
+            m_dEfficacy = 0;
+    }
+    void FixtureData::calculateBeamSize()
+    {
+        m_dBeamDiameterMeters = (2 * m_dDistanceMeters * tan(m_dBeamAngle * PI / 360.0));
+        convertBeamDiameterMetersToFeet();
+    }
+    void FixtureData::caluculateBeamAngle() {m_dBeamAngle = (atan (m_dBeamDiameterMeters / (2*m_dDistanceMeters)))*360.0 / PI;}
+
     void FixtureData::convertDistanceFeetToMeters() { m_dDistanceMeters =  m_dDistanceFeet / FeetPerMeter ;}
     void FixtureData::convertDistanceMetersToFeet() {m_dDistanceFeet = m_dDistanceMeters * FeetPerMeter;}
     void FixtureData::convertFootcandlesToLux() { m_dLux =  m_dFc / LuxToFootcandleRatio;}
@@ -223,8 +358,32 @@
     void FixtureData::convertFieldDiameterFeetToMeters() {m_dFieldDiameterMeters = m_dFieldDiameterFeet / FeetPerMeter;}
     void FixtureData::convertFieldDiameterMetersToFeet() {m_dFieldDiameterFeet = m_dFieldDiameterMeters * FeetPerMeter;}
 
+    void FixtureData::convertBeamDiameterMetersToFeet() {m_dBeamDiameterFeet = m_dBeamDiameterMeters * FeetPerMeter;}
+    void FixtureData::convertBeamDiameterFeetToMeters() {m_dBeamDiameterMeters = m_dBeamDiameterFeet / FeetPerMeter;}
+
+    void FixtureData::angleCheck()
+    {
+        if (m_dBeamAngle > m_dFieldAngle)
+        {
+            m_dBeamAngle = m_dFieldAngle;
+            m_dBeamDiameterMeters = m_dFieldDiameterMeters;
+            m_dBeamDiameterFeet = m_dFieldDiameterFeet;
+        }
+    }
 
     // AllData Functions =============================================================================================================
+
+
+    AllData::AllData()
+    {
+        bInitialized = 0;
+        bUnsavedInfo = false;
+        bAddingNewFixture = false;
+        nNumberOfFixtures = 0;
+        nCurrentFixture = 1;
+    }
+    AllData::~AllData()
+    {}
 
     void AllData::removeFixture(unsigned int nFixtureToRemove)
     {
@@ -244,7 +403,6 @@
             return;
         }
     }
-
     bool AllData::createCSV(QString &fileName)
     {
 
@@ -255,7 +413,7 @@
 
             stream   << "Number of fixtures = ," << nNumberOfFixtures << endl;
             stream
-                << "Fixture Name ,Lumens ,Candela,Distance in meters,Distance in Feet,Lux,Footcandles,Field Angle,Field Diameter In Meters,Field Diameter In Feet" << endl;
+                << "Fixture Name ,Lumens ,Candela,Wattage,Efficacy,Distance in meters,Distance in Feet,Lux,Footcandles,Field Angle,Field Diameter In Meters,Field Diameter In Feet,Beam Angle,Beam Diameter In Meters,Beam Diameter In Feet,Color Temperature,Street Price,List Price" << endl;
 
                 for (unsigned int iii =1; iii <= nNumberOfFixtures; iii++)
                 {
@@ -263,6 +421,8 @@
                 << Fixture [iii].getFixtureName()			<<","
                 << Fixture [iii].getValueLumens()           <<","
                 << Fixture [iii].getValueCandela()			<<","
+                << Fixture [iii].getValueWattage()          <<","
+                << Fixture [iii].getValueEfficacy()         <<","
                 << Fixture [iii].getValueDistanceMeters()	<<","
                 << Fixture [iii].getValueDistanceFeet()		<<","
                 << Fixture [iii].getValueLux()              <<","
@@ -270,6 +430,12 @@
                 << Fixture [iii].getValueFieldAngle()		<<","
                 << Fixture [iii].getValueFieldSizeMeters()	<<","
                 << Fixture [iii].getValueFieldSizeFeet()	<<","
+                << Fixture [iii].getValueBeamAngle()        <<","
+                << Fixture [iii].getValueBeamSizeMeters()   <<","
+                << Fixture [iii].getValueBeamSizeFeet()     <<","
+                << Fixture [iii].getColorTemp()             <<","
+                << Fixture [iii].getValueStreetPrice()      <<","
+                << Fixture [iii].getValueListPrice()
 
                 << endl;
                 }
@@ -280,7 +446,6 @@
 
         return true;
     }
-
     bool AllData::saveAsFxt (QString &fileName )
     {
         QFile file (fileName);
@@ -306,13 +471,21 @@
                 stream << (double) Fixture [iii].getValueFieldSizeMeters();
                 stream << (double) Fixture [iii].getValueFieldSizeFeet();
 
+                stream << (double) Fixture [iii].getValueWattage(); // --- New 1.1.0
+                stream << (double) Fixture [iii].getValueEfficacy();
+                stream << (double) Fixture [iii].getValueBeamAngle();
+                stream << (double) Fixture [iii].getValueBeamSizeMeters();
+                stream << (double) Fixture [iii].getValueBeamSizeFeet();
+                stream << (QString) Fixture [iii].getColorTemp();
+                stream << (double) Fixture [iii].getValueStreetPrice();
+                stream << (double) Fixture [iii].getValueListPrice();
+
                 }
            return true;
         }
        else
             return false;
 }
-
     bool AllData::readFxt (QString &fileName )
     {
 
@@ -323,11 +496,9 @@
 
            stream >> qstrSoftwareVersion;
 
-           if(qstrSoftwareVersion == "1.0.0")
+           if(qstrSoftwareVersion == "1.0.0")//<----------------------------Read 1.0.0
            {
            stream >> nNumberOfFixtures;
-
-
            for (unsigned int i = 1; i <= nNumberOfFixtures; i++)
            {
 
@@ -350,9 +521,47 @@
             }
            return true;
           }
+         if(qstrSoftwareVersion == "1.1.0")//<----------------------------Read 1.1.0
+         {
+             stream >> nNumberOfFixtures;
+             for (unsigned int i = 1; i <= nNumberOfFixtures; i++)
+             {
+
+                  QString qstrFixtName, qstrColorTemp;
+                  double dLumens,dCandela,dDistMeter,dDistFeet,dLux,dFc,dFAngle,dSizeMeter,dSizeFeet, dWattage, dEfficacy, dBAngle, dBSizeMeter, dBSizeFeet, dStreet, dList;
+
+                  stream >> qstrFixtName;
+                  stream >> dLumens >> dCandela >> dDistMeter >> dDistFeet >> dLux >> dFc >> dFAngle
+                         >> dSizeMeter >> dSizeFeet >> dWattage >> dEfficacy >> dBAngle >> dBSizeMeter >> dBSizeFeet
+                         >> qstrColorTemp >> dStreet >> dList ;
+
+                  Fixture[i].enterFixtureName(qstrFixtName);
+                  Fixture[i].enterLumens(dLumens);
+                  Fixture[i].enterCandela(dCandela);
+                  Fixture[i].enterDistanceMeters(dDistMeter);
+                  Fixture[i].enterDistanceFeet(dDistFeet);
+                  Fixture[i].enterLux(dLux);
+                  Fixture[i].enterFootcandles(dFc);
+                  Fixture[i].enterFieldAngle(dFAngle);
+                  Fixture[i].enterFieldSizeMeters(dSizeMeter);
+                  Fixture[i].enterFieldSizeFeet(dSizeFeet);
+
+                  Fixture[i].enterWattage(dWattage);// -- 1.1.0
+                  Fixture[i].enterEfficacy(dEfficacy);
+                  Fixture[i].enterBeamAngle(dBAngle);
+                  Fixture[i].enterBeamSizeMeters(dBSizeMeter);
+                  Fixture[i].enterBeamSizeFeet(dBSizeFeet);
+                  Fixture[i].enterColorTemp(qstrColorTemp);
+                  Fixture[i].enterStreetPrice(dStreet);
+                  Fixture[i].enterListPrice(dList);
+
+
+
+              }
+             return true;
+         }
         return false;
     }
-
     void AllData::sortDecendingCandela()
     {
         for (unsigned int nStartIndex = 1; nStartIndex <= nNumberOfFixtures; nStartIndex++)
@@ -367,7 +576,6 @@
                 }
             }
        }
-
     void AllData::sortDecendingLumens()
     {
         for (unsigned int nStartIndex = 1; nStartIndex <= nNumberOfFixtures; nStartIndex++)
@@ -382,7 +590,6 @@
                 }
             }
     }
-
     void AllData::sortAscendingLumens()
     {
         for (unsigned int nStartIndex = 1; nStartIndex <= nNumberOfFixtures; nStartIndex++)

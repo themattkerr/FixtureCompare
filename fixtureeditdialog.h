@@ -42,9 +42,9 @@ private slots:
 
     void on_FootCandleSpinBox_editingFinished();
 
-    void on_BeamSizeMetersSpinBox_editingFinished();
+    void on_FieldSizeMetersSpinBox_editingFinished();
 
-    void on_BeamSizeFeetSpinBox_editingFinished();
+    void on_FieldSizeFeetSpinBox_editingFinished();
 
     void on_FieldAngleSpinBox_editingFinished();
 
@@ -57,6 +57,26 @@ private slots:
     void on_NavigationButtons_rejected();
 
 
+
+    void on_showLessButton_clicked();
+
+    void on_showMoreButton_clicked();
+
+    void on_wattageSpinBox_editingFinished();
+
+    void on_efficacySpinBox_editingFinished();
+
+    void on_colorTempBox_editingFinished();
+
+    void on_streetPriceBox_editingFinished();
+
+    void on_listPriceBox_editingFinished();
+
+    void on_BeamSizeMetersSpinBox_editingFinished();
+
+    void on_BeamSizeFeetSpinBox_editingFinished();
+
+    void on_BeamAngleSpinBox_editingFinished();
 
 private:
     Ui::FixtureEditDialog *ui;

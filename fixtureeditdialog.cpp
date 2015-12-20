@@ -17,9 +17,25 @@ FixtureEditDialog::FixtureEditDialog(QWidget *parent, AllData *cData) :
     ui(new Ui::FixtureEditDialog)
 {
     m_cData = cData;
-    m_Parent = parent;
+    m_Parent = qobject_cast<MainWindow*>(parent);
+    assert(m_Parent);
     ui->setupUi(this);
+
+   if(((MainWindow*)parentWidget())->bShowMoreEditFields)
+   {
+       setFixedSize(FIXTURE_EDIT_SIZE_LARGE);
+       ui->showMoreButton->hide();
+       ui->showLessButton->show();
+   }
+   else
+   {
+       setFixedSize(FIXTURE_EDIT_SIZE_SMALL);
+       ui->showLessButton->hide();
+       ui->showMoreButton->show();
+   }
+
     m_cData->Fixture[EDITING] = m_cData->Fixture[cData->nCurrentFixture];
+
     setEditFieldsToCurrentState();
 
    // connect(ui->DistFeetSpinBox_2,SIGNAL( (double)),this,SLOT(bob(double))); <== example from tom
@@ -56,15 +72,26 @@ void FixtureEditDialog::setEditFieldsToCurrentState()
 
     ui->CandelaBox->setText(QLocale(QLocale::English).toString(m_cData->Fixture[EDITING].getValueCandela()));
 
+    ui->wattageSpinBox->setValue(m_cData->Fixture[EDITING].getValueWattage());
+    ui->efficacySpinBox->setValue(m_cData->Fixture[EDITING].getValueEfficacy());
+
     ui->DistMetersSpinBox->setValue((m_cData->Fixture[EDITING].getValueDistanceMeters()));
     ui->DistFeetSpinBox_2->setValue(( m_cData->Fixture[EDITING].getValueDistanceFeet()));
 
     ui->LuxSpinBox->setValue((m_cData->Fixture[EDITING].getValueLux()));
     ui->FootCandleSpinBox->setValue((m_cData->Fixture[EDITING].getValueFootCandles()));
 
-    ui->BeamSizeMetersSpinBox->setValue((m_cData->Fixture[EDITING].getValueFieldSizeMeters()));
-    ui->BeamSizeFeetSpinBox->setValue((m_cData->Fixture[EDITING].getValueFieldSizeFeet()));
+    ui->colorTempBox->setText(m_cData->Fixture[EDITING].getColorTemp());
+    ui->streetPriceBox->setText(QLocale (QLocale::English).toString(m_cData->Fixture[EDITING].getValueStreetPrice()));
+    ui->listPriceBox->setText(QLocale (QLocale::English).toString(m_cData->Fixture[EDITING].getValueListPrice()));
+
+    ui->FieldSizeMetersSpinBox->setValue((m_cData->Fixture[EDITING].getValueFieldSizeMeters()));
+    ui->FieldSizeFeetSpinBox->setValue((m_cData->Fixture[EDITING].getValueFieldSizeFeet()));
     ui->FieldAngleSpinBox->setValue((m_cData->Fixture[EDITING].getValueFieldAngle()));
+
+    ui->BeamSizeMetersSpinBox->setValue(m_cData->Fixture[EDITING].getValueBeamSizeMeters());
+    ui->BeamSizeFeetSpinBox->setValue(m_cData->Fixture[EDITING].getValueBeamSizeFeet());
+    ui->BeamAngleSpinBox->setValue(m_cData->Fixture[EDITING].getValueBeamAngle());
 }
 
 // Field entry -----------------------------------------------------------------------
@@ -129,22 +156,87 @@ void FixtureEditDialog::on_FootCandleSpinBox_editingFinished()
     setEditFieldsToCurrentState();
 }
 
-void FixtureEditDialog::on_BeamSizeMetersSpinBox_editingFinished()
+void FixtureEditDialog::on_FieldSizeMetersSpinBox_editingFinished()
 {
-    if (!doubleIsEqual(m_cData->Fixture[EDITING].getValueFieldSizeMeters(), ui->BeamSizeMetersSpinBox->value(),NUMOFDECIMALS))
-        m_cData->Fixture[EDITING].enterFieldSizeMeters(ui->BeamSizeMetersSpinBox->value());
+    if (!doubleIsEqual(m_cData->Fixture[EDITING].getValueFieldSizeMeters(), ui->FieldSizeMetersSpinBox->value(),NUMOFDECIMALS))
+        m_cData->Fixture[EDITING].enterFieldSizeMeters(ui->FieldSizeMetersSpinBox->value());
     setEditFieldsToCurrentState();
 }
-void FixtureEditDialog::on_BeamSizeFeetSpinBox_editingFinished()
+void FixtureEditDialog::on_FieldSizeFeetSpinBox_editingFinished()
 {
-    if (!doubleIsEqual(m_cData->Fixture[EDITING].getValueFieldSizeFeet(), ui->BeamSizeFeetSpinBox->value(), NUMOFDECIMALS ))
-        m_cData->Fixture[EDITING].enterFieldSizeFeet(ui->BeamSizeFeetSpinBox->value());
+    if (!doubleIsEqual(m_cData->Fixture[EDITING].getValueFieldSizeFeet(), ui->FieldSizeFeetSpinBox->value(), NUMOFDECIMALS ))
+        m_cData->Fixture[EDITING].enterFieldSizeFeet(ui->FieldSizeFeetSpinBox->value());
     setEditFieldsToCurrentState();
 }
 void FixtureEditDialog::on_FieldAngleSpinBox_editingFinished()
 {
     if (!doubleIsEqual(m_cData->Fixture[EDITING].getValueFieldAngle(), ui->FieldAngleSpinBox->value(), NUMOFDECIMALS))
         m_cData->Fixture[EDITING].enterFieldAngle(ui->FieldAngleSpinBox->value());
+    setEditFieldsToCurrentState();
+}
+
+void FixtureEditDialog::on_wattageSpinBox_editingFinished()
+{
+    if (!doubleIsEqual(m_cData->Fixture[EDITING].getValueWattage(), ui->wattageSpinBox->value(), NUMOFDECIMALS))
+         m_cData->Fixture[EDITING].enterWattage(ui->wattageSpinBox->value());
+    setEditFieldsToCurrentState();
+}
+void FixtureEditDialog::on_efficacySpinBox_editingFinished()
+{
+    if (!doubleIsEqual(m_cData->Fixture[EDITING].getValueEfficacy(), ui->efficacySpinBox->value(), NUMOFDECIMALS))
+        m_cData->Fixture[EDITING].enterEfficacy( ui->efficacySpinBox->value());
+    setEditFieldsToCurrentState();
+}
+
+void FixtureEditDialog::on_colorTempBox_editingFinished()
+{
+    if (m_cData->Fixture[EDITING].getColorTemp()!= ui->colorTempBox->text())
+        m_cData->Fixture[EDITING].enterColorTemp(ui->colorTempBox->text());
+
+    setEditFieldsToCurrentState();
+}
+void FixtureEditDialog::on_streetPriceBox_editingFinished()
+{
+    bool ok;
+    QString qstrStreetPrice = ui->streetPriceBox->text();
+    double dStreetPrice = qstrStreetPrice.toDouble(&ok);
+    if(ok)
+    {
+        if (!doubleIsEqual(m_cData->Fixture[EDITING].getValueStreetPrice(), dStreetPrice, NUMOFDECIMALS))
+            m_cData->Fixture[EDITING].enterStreetPrice(dStreetPrice);
+    }
+    setEditFieldsToCurrentState();
+}
+void FixtureEditDialog::on_listPriceBox_editingFinished()
+{
+    bool ok;
+    QString qstrListPrice = ui->listPriceBox->text();
+    double dListPrice = qstrListPrice.toDouble(&ok);
+    if (ok)
+    {
+        if(!doubleIsEqual(m_cData->Fixture[EDITING].getValueListPrice(), dListPrice,NUMOFDECIMALS ))
+            m_cData->Fixture[EDITING].enterListPrice(dListPrice);
+    }
+
+    setEditFieldsToCurrentState();
+}
+
+void FixtureEditDialog::on_BeamSizeMetersSpinBox_editingFinished()
+{
+    if (!doubleIsEqual(m_cData->Fixture[EDITING].getValueBeamSizeMeters(), ui->BeamSizeMetersSpinBox->value(), NUMOFDECIMALS))
+        m_cData->Fixture[EDITING].enterBeamSizeMeters(ui->BeamSizeMetersSpinBox->value());
+    setEditFieldsToCurrentState();
+}
+void FixtureEditDialog::on_BeamSizeFeetSpinBox_editingFinished()
+{
+    if (!doubleIsEqual(m_cData->Fixture[EDITING].getValueBeamSizeFeet(), ui->BeamSizeFeetSpinBox->value(), NUMOFDECIMALS))
+        m_cData->Fixture[EDITING].enterBeamSizeFeet(ui->BeamSizeFeetSpinBox->value());
+    setEditFieldsToCurrentState();
+}
+void FixtureEditDialog::on_BeamAngleSpinBox_editingFinished()
+{
+    if (!doubleIsEqual(m_cData->Fixture[EDITING].getValueBeamAngle(), ui->BeamAngleSpinBox->value(), NUMOFDECIMALS))
+        m_cData->Fixture[EDITING].enterBeamAngle(ui->BeamAngleSpinBox->value());
     setEditFieldsToCurrentState();
 }
 
@@ -206,3 +298,14 @@ void FixtureEditDialog::on_NavigationButtons_rejected()
     close();
 }
 
+void FixtureEditDialog::on_showLessButton_clicked()
+{
+    setFixedSize(FIXTURE_EDIT_SIZE_SMALL);
+    ((MainWindow*)parentWidget())->bShowMoreEditFields = false;
+}
+
+void FixtureEditDialog::on_showMoreButton_clicked()
+{
+    setFixedSize(FIXTURE_EDIT_SIZE_LARGE);
+    ((MainWindow*)parentWidget())->bShowMoreEditFields = true;
+}

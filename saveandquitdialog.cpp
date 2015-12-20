@@ -3,6 +3,7 @@
 #include <QFileDialog>
 #include "fixturedata.h"
 #include "csvdialog.h"
+#include "constsants.h"
 
 SaveAndQuitDialog::SaveAndQuitDialog(QWidget *parent, AllData *cData) :
     QDialog(parent),
@@ -10,6 +11,7 @@ SaveAndQuitDialog::SaveAndQuitDialog(QWidget *parent, AllData *cData) :
 {
     m_cData = cData;
     ui->setupUi(this);
+    setFixedSize(SAVE_AND_QUIT_SIZE);
 }
 
 SaveAndQuitDialog::~SaveAndQuitDialog()

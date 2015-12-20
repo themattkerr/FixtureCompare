@@ -19,7 +19,7 @@ public:
     AllData cData;
     ~MainWindow();
     void SetupFixtureTable();
-
+    bool bShowMoreEditFields;
 private slots:
     void on_tableWidget_cellClicked(int row, int column);
 
@@ -41,6 +41,8 @@ private:
     Ui::MainWindow *ui;
 
 
+    int nMinimumLength;
+    int nMultiplyingFactorForColumns;
 
 
 };
