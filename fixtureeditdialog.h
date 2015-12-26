@@ -67,7 +67,7 @@ private slots:
     void on_efficacySpinBox_editingFinished();
 
     void on_colorTempBox_editingFinished();
-
+    void on_cRISpinBox_editingFinished();
     void on_streetPriceBox_editingFinished();
 
     void on_listPriceBox_editingFinished();
@@ -77,6 +77,12 @@ private slots:
     void on_BeamSizeFeetSpinBox_editingFinished();
 
     void on_BeamAngleSpinBox_editingFinished();
+
+
+
+    void on_otherInfoBox_textChanged();
+
+    void on_LEDMixBox_editingFinished();
 
 private:
     Ui::FixtureEditDialog *ui;

@@ -47,7 +47,7 @@ void startUpDialog::on_buttonBox_rejected()
 
 void startUpDialog::on_pushButton_clicked()
 {
-    QString fileName = QFileDialog::getOpenFileName(this, tr("Select a file"), "C:/", tr("FixtureCompare File (*.fxt)") );
+    QString fileName = QFileDialog::getOpenFileName(this, tr("Select a file"), "Files", tr("FixtureCompare File (*.fxt)") );
 
     m_cData->readFxt(fileName);
     close();

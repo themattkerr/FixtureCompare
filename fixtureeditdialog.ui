@@ -188,6 +188,32 @@
      <double>10000.000000000000000</double>
     </property>
    </widget>
+   <widget class="QPushButton" name="showMoreButton">
+    <property name="geometry">
+     <rect>
+      <x>240</x>
+      <y>10</y>
+      <width>81</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Show More</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="RemoveFixture">
+    <property name="geometry">
+     <rect>
+      <x>140</x>
+      <y>10</y>
+      <width>91</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Remove Fixture</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QFrame" name="Illuminance">
    <property name="geometry">
@@ -416,26 +442,13 @@
     </item>
    </layout>
   </widget>
-  <widget class="QPushButton" name="RemoveFixture">
-   <property name="geometry">
-    <rect>
-     <x>220</x>
-     <y>230</y>
-     <width>121</width>
-     <height>23</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Remove Fixture</string>
-   </property>
-  </widget>
   <widget class="QFrame" name="moreInfo">
    <property name="geometry">
     <rect>
      <x>350</x>
      <y>40</y>
      <width>291</width>
-     <height>351</height>
+     <height>361</height>
     </rect>
    </property>
    <property name="frameShape">
@@ -706,19 +719,6 @@
      </widget>
     </widget>
    </widget>
-   <widget class="QLabel" name="colorTempLabel">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>0</y>
-      <width>101</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Color Temperature</string>
-    </property>
-   </widget>
    <widget class="QLabel" name="priceLabel">
     <property name="geometry">
      <rect>
@@ -732,16 +732,6 @@
      <string>Street Price</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="colorTempBox">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>20</y>
-      <width>113</width>
-      <height>20</height>
-     </rect>
-    </property>
-   </widget>
    <widget class="QLineEdit" name="streetPriceBox">
     <property name="geometry">
      <rect>
@@ -750,6 +740,12 @@
       <width>113</width>
       <height>20</height>
      </rect>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>113</width>
+      <height>16777215</height>
+     </size>
     </property>
    </widget>
    <widget class="QLabel" name="listPriceLabel">
@@ -775,25 +771,161 @@
      </rect>
     </property>
    </widget>
-  </widget>
-  <widget class="QPushButton" name="showMoreButton">
-   <property name="geometry">
-    <rect>
-     <x>260</x>
-     <y>310</y>
-     <width>81</width>
-     <height>23</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Show More</string>
-   </property>
+   <widget class="QLabel" name="otherLabel">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>310</y>
+      <width>31</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Other:</string>
+    </property>
+   </widget>
+   <widget class="QPlainTextEdit" name="otherInfoBox">
+    <property name="geometry">
+     <rect>
+      <x>50</x>
+      <y>310</y>
+      <width>231</width>
+      <height>41</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="LEDMixBox">
+    <property name="geometry">
+     <rect>
+      <x>160</x>
+      <y>70</y>
+      <width>113</width>
+      <height>20</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="LEDMixLabel">
+    <property name="geometry">
+     <rect>
+      <x>160</x>
+      <y>50</y>
+      <width>47</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>LED mix</string>
+    </property>
+   </widget>
+   <widget class="QWidget" name="">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>20</y>
+      <width>241</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QLineEdit" name="colorTempBox">
+       <property name="maximumSize">
+        <size>
+         <width>113</width>
+         <height>16777215</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_5">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QDoubleSpinBox" name="cRISpinBox"/>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>0</y>
+      <width>221</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <widget class="QLabel" name="colorTempLabel">
+       <property name="text">
+        <string>Color Temperature</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_4">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>28</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QLabel" name="cRILabel">
+       <property name="text">
+        <string>CRI</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_3">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </widget>
   </widget>
   <widget class="QPushButton" name="showLessButton">
    <property name="geometry">
     <rect>
-     <x>260</x>
-     <y>310</y>
+     <x>560</x>
+     <y>10</y>
      <width>81</width>
      <height>23</height>
     </rect>

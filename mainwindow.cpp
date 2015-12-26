@@ -56,7 +56,7 @@ void MainWindow::SetupFixtureTable()
     ui->tableWidget->setRowCount(cData.nNumberOfFixtures);
 
     int nLargestStringLength = nMinimumLength;
-    for (int nFixture = 1; nFixture <= cData.nNumberOfFixtures; nFixture++)
+    for (unsigned int nFixture = 1; nFixture <= cData.nNumberOfFixtures; nFixture++)
     {
         int nColumn = 0;
         nLargestStringLength = (nLargestStringLength > (cData.Fixture[nFixture].getFixtureName().size())) ? nLargestStringLength : (cData.Fixture[nFixture].getFixtureName().size() );
@@ -106,7 +106,7 @@ void MainWindow::on_addNewFixtureButton_clicked()
 void MainWindow::on_saveFileButton_clicked()
 {
     bool ok;
-    QString filename =  QFileDialog::getSaveFileName(this, tr("Save as FixtureFile"),  "" ,tr("FixtureFile (*.fxt)"));
+    QString filename =  QFileDialog::getSaveFileName(this, tr("Save as FixtureFile"),  "Files" ,tr("FixtureFile (*.fxt)"));
     ok = cData.saveAsFxt(filename);
     if (ok)
     {
@@ -120,7 +120,7 @@ void MainWindow::on_saveFileButton_clicked()
 void MainWindow::on_createCSVButton_clicked()
 {
     bool ok;
-    QString fileName = QFileDialog::getSaveFileName(this, tr("save File"),  "" , tr("Comma Separated Values(*.csv)"));
+    QString fileName = QFileDialog::getSaveFileName(this, tr("save File"),  "Files" , tr("Comma Separated Values(*.csv)"));
     ok = cData.createCSV(fileName);
     CSVDialog *CSV = new CSVDialog (this, &ok);
     CSV->exec();

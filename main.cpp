@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include <QApplication>
+#include <QDir>
 
 //#include "FixtureData.h"
 
@@ -7,7 +8,10 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    //AllData cData;
+    QDir x;
+    if (!x.exists("Files"))
+        x.mkdir("Files");
+
     MainWindow w;
     w.show();
 

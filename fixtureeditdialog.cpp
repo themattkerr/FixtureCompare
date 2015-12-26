@@ -82,8 +82,11 @@ void FixtureEditDialog::setEditFieldsToCurrentState()
     ui->FootCandleSpinBox->setValue((m_cData->Fixture[EDITING].getValueFootCandles()));
 
     ui->colorTempBox->setText(m_cData->Fixture[EDITING].getColorTemp());
-    ui->streetPriceBox->setText(QLocale (QLocale::English).toString(m_cData->Fixture[EDITING].getValueStreetPrice()));
-    ui->listPriceBox->setText(QLocale (QLocale::English).toString(m_cData->Fixture[EDITING].getValueListPrice()));
+    ui->cRISpinBox->setValue((m_cData->Fixture[EDITING].getValueCRI()));
+    ui->LEDMixBox->setText((m_cData->Fixture[EDITING].getLEDMix()));
+
+    ui->streetPriceBox->setText(doubleToCurrency(m_cData->Fixture[EDITING].getValueStreetPrice(), US_DOLLARS));
+    ui->listPriceBox->setText(doubleToCurrency(m_cData->Fixture[EDITING].getValueListPrice(), US_DOLLARS));
 
     ui->FieldSizeMetersSpinBox->setValue((m_cData->Fixture[EDITING].getValueFieldSizeMeters()));
     ui->FieldSizeFeetSpinBox->setValue((m_cData->Fixture[EDITING].getValueFieldSizeFeet()));
@@ -92,6 +95,8 @@ void FixtureEditDialog::setEditFieldsToCurrentState()
     ui->BeamSizeMetersSpinBox->setValue(m_cData->Fixture[EDITING].getValueBeamSizeMeters());
     ui->BeamSizeFeetSpinBox->setValue(m_cData->Fixture[EDITING].getValueBeamSizeFeet());
     ui->BeamAngleSpinBox->setValue(m_cData->Fixture[EDITING].getValueBeamAngle());
+
+    ui->otherInfoBox->setPlainText((m_cData->Fixture[EDITING].getOtherInfo()));
 }
 
 // Field entry -----------------------------------------------------------------------
@@ -195,29 +200,30 @@ void FixtureEditDialog::on_colorTempBox_editingFinished()
 
     setEditFieldsToCurrentState();
 }
+void FixtureEditDialog::on_cRISpinBox_editingFinished()
+{
+    if(m_cData->Fixture[EDITING].getValueCRI() != ui->cRISpinBox->value())
+        m_cData->Fixture[EDITING].enterCRI(ui->cRISpinBox->value());
+}
+void FixtureEditDialog::on_LEDMixBox_editingFinished()
+{
+    if(m_cData->Fixture[EDITING].getLEDMix() != ui->LEDMixBox->text())
+        m_cData->Fixture[EDITING].enterLEDMix(ui->LEDMixBox->text());
+}
+
 void FixtureEditDialog::on_streetPriceBox_editingFinished()
 {
-    bool ok;
-    QString qstrStreetPrice = ui->streetPriceBox->text();
-    double dStreetPrice = qstrStreetPrice.toDouble(&ok);
-    if(ok)
-    {
-        if (!doubleIsEqual(m_cData->Fixture[EDITING].getValueStreetPrice(), dStreetPrice, NUMOFDECIMALS))
+
+    double dStreetPrice = usDollarsStringToDouble(ui->streetPriceBox->text());
+    if(!doubleIsEqual(m_cData->Fixture[EDITING].getValueStreetPrice(), dStreetPrice, NUMOFDECIMALS ))
             m_cData->Fixture[EDITING].enterStreetPrice(dStreetPrice);
-    }
     setEditFieldsToCurrentState();
 }
 void FixtureEditDialog::on_listPriceBox_editingFinished()
 {
-    bool ok;
-    QString qstrListPrice = ui->listPriceBox->text();
-    double dListPrice = qstrListPrice.toDouble(&ok);
-    if (ok)
-    {
-        if(!doubleIsEqual(m_cData->Fixture[EDITING].getValueListPrice(), dListPrice,NUMOFDECIMALS ))
+    double dListPrice = usDollarsStringToDouble(ui->listPriceBox->text());
+    if(!doubleIsEqual(m_cData->Fixture[EDITING].getValueListPrice(), dListPrice, NUMOFDECIMALS ))
             m_cData->Fixture[EDITING].enterListPrice(dListPrice);
-    }
-
     setEditFieldsToCurrentState();
 }
 
@@ -239,6 +245,11 @@ void FixtureEditDialog::on_BeamAngleSpinBox_editingFinished()
         m_cData->Fixture[EDITING].enterBeamAngle(ui->BeamAngleSpinBox->value());
     setEditFieldsToCurrentState();
 }
+void FixtureEditDialog::on_otherInfoBox_textChanged()
+{
+    m_cData->Fixture[EDITING].enterOtherInfo(ui->otherInfoBox->toPlainText());
+}
+
 
 
 // Buttons ---------------------------------------------------------------------------
@@ -309,3 +320,6 @@ void FixtureEditDialog::on_showMoreButton_clicked()
     setFixedSize(FIXTURE_EDIT_SIZE_LARGE);
     ((MainWindow*)parentWidget())->bShowMoreEditFields = true;
 }
+
+
+

@@ -133,7 +133,16 @@
     }
     void FixtureData::enterColorTemp(QString qstrColorTemp)
     {
+        //qstrColorTemp.remove(',');
         m_qstrColorTemp = qstrColorTemp;
+    }
+    void FixtureData::enterCRI(double dCRI)
+    {
+        m_dCRI = dCRI;
+    }
+    void FixtureData::enterLEDMix(QString qstrLEDMix)
+    {
+        m_qstrLEDMix = qstrLEDMix;
     }
     void FixtureData::enterStreetPrice(double dStreetPrice)
     {
@@ -145,6 +154,11 @@
         assert(dListPrice >= 0);
         m_dListPrice = dListPrice;
     }
+    void FixtureData::enterOtherInfo (QString qstrOtherInfo)
+    {
+        m_qstrOtherInfo = qstrOtherInfo;
+    }
+
 
 
 // =================================================================get functions
@@ -243,7 +257,16 @@
     {
         return m_qstrColorTemp;
     }
-
+    double FixtureData::getValueCRI()
+    {
+        if(isNotValid(m_dCRI))
+            return DEFAULT_CRI;
+        return m_dCRI;
+    }
+    QString FixtureData::getLEDMix()
+    {
+        return m_qstrLEDMix;
+    }
     double FixtureData::getValueStreetPrice()
     {
         if(isNotValid(m_dStreetPrice))
@@ -255,6 +278,10 @@
         if(isNotValid(m_dListPrice))
             return DEFAULT_LIST_PRICE;
         return m_dListPrice;
+    }
+    QString FixtureData::getOtherInfo()
+    {
+        return m_qstrOtherInfo;
     }
 
 
@@ -283,8 +310,13 @@
         m_dBeamDiameterFeet = DEFAULT_BEAM_SIZE_FEET;
 
         m_qstrColorTemp = DEFAULT_COLORTEMP;
+        m_dCRI = DEFAULT_CRI;
+        m_qstrLEDMix = DEFAULT_LED_MIX;
+
         m_dStreetPrice = DEFAULT_STREET_PRICE;
         m_dListPrice = DEFAULT_LIST_PRICE;
+
+        m_qstrOtherInfo = DEFAULT_OTHER_INFO;
     }
 
     bool FixtureData::isNotValid(double dNumToTest)
@@ -315,10 +347,13 @@
         m_dBeamDiameterFeet = cSource.m_dBeamDiameterFeet;
 
         m_qstrColorTemp = cSource.m_qstrColorTemp;
+        m_dCRI = cSource.m_dCRI;
+        m_qstrLEDMix = cSource.m_qstrLEDMix;
+
         m_dStreetPrice = cSource.m_dStreetPrice;
         m_dListPrice = cSource.m_dListPrice;
 
-
+        m_qstrOtherInfo = cSource.m_qstrOtherInfo;
 
         return *this;
     }
@@ -413,7 +448,7 @@
 
             stream   << "Number of fixtures = ," << nNumberOfFixtures << endl;
             stream
-                << "Fixture Name ,Lumens ,Candela,Wattage,Efficacy,Distance in meters,Distance in Feet,Lux,Footcandles,Field Angle,Field Diameter In Meters,Field Diameter In Feet,Beam Angle,Beam Diameter In Meters,Beam Diameter In Feet,Color Temperature,Street Price,List Price" << endl;
+                << "Fixture Name ,Lumens ,Candela,Wattage,Efficacy,Distance in meters,Distance in Feet,Lux,Footcandles,Field Angle,Field Diameter In Meters,Field Diameter In Feet,Beam Angle,Beam Diameter In Meters,Beam Diameter In Feet,Color Temperature,CRI,LED Mix,Street Price,List Price,Other Info" << endl;
 
                 for (unsigned int iii =1; iii <= nNumberOfFixtures; iii++)
                 {
@@ -433,9 +468,12 @@
                 << Fixture [iii].getValueBeamAngle()        <<","
                 << Fixture [iii].getValueBeamSizeMeters()   <<","
                 << Fixture [iii].getValueBeamSizeFeet()     <<","
-                << Fixture [iii].getColorTemp()             <<","
+                << Fixture [iii].getColorTemp().remove(',') <<","
+                << Fixture [iii].getValueCRI()              <<","
+                << Fixture [iii].getLEDMix().remove(',')    <<","
                 << Fixture [iii].getValueStreetPrice()      <<","
-                << Fixture [iii].getValueListPrice()
+                << Fixture [iii].getValueListPrice()        <<","
+                << Fixture [iii].getOtherInfo().remove(',')
 
                 << endl;
                 }
@@ -476,9 +514,12 @@
                 stream << (double) Fixture [iii].getValueBeamAngle();
                 stream << (double) Fixture [iii].getValueBeamSizeMeters();
                 stream << (double) Fixture [iii].getValueBeamSizeFeet();
-                stream << (QString) Fixture [iii].getColorTemp();
+                stream << (QString)Fixture [iii].getColorTemp();
+                stream << (double) Fixture [iii].getValueCRI();
+                stream << (QString)Fixture [iii].getLEDMix();
                 stream << (double) Fixture [iii].getValueStreetPrice();
                 stream << (double) Fixture [iii].getValueListPrice();
+                stream << (QString)Fixture [iii].getOtherInfo();
 
                 }
            return true;
@@ -533,7 +574,7 @@
                   stream >> qstrFixtName;
                   stream >> dLumens >> dCandela >> dDistMeter >> dDistFeet >> dLux >> dFc >> dFAngle
                          >> dSizeMeter >> dSizeFeet >> dWattage >> dEfficacy >> dBAngle >> dBSizeMeter >> dBSizeFeet
-                         >> qstrColorTemp >> dStreet >> dList ;
+                         >> qstrColorTemp >> dStreet >> dList  ;
 
                   Fixture[i].enterFixtureName(qstrFixtName);
                   Fixture[i].enterLumens(dLumens);
@@ -552,8 +593,53 @@
                   Fixture[i].enterBeamSizeMeters(dBSizeMeter);
                   Fixture[i].enterBeamSizeFeet(dBSizeFeet);
                   Fixture[i].enterColorTemp(qstrColorTemp);
+                  //Fixture[i].enterCRI(dCRI);
+                  //Fixture[i].enterLEDMix(qstrLEDMix);
                   Fixture[i].enterStreetPrice(dStreet);
                   Fixture[i].enterListPrice(dList);
+                  //Fixture[i].enterOtherInfo(qstrOtherInfo);
+
+
+
+              }
+             return true;
+         }
+         if(qstrSoftwareVersion == "1.1.1")//<----------------------------Read 1.1.1
+         {
+             stream >> nNumberOfFixtures;
+             for (unsigned int i = 1; i <= nNumberOfFixtures; i++)
+             {
+
+                  QString qstrFixtName, qstrColorTemp, qstrLEDMix, qstrOtherInfo;
+                  double dLumens,dCandela,dDistMeter,dDistFeet,dLux,dFc,dFAngle,dSizeMeter,dSizeFeet, dWattage, dEfficacy, dBAngle, dBSizeMeter, dBSizeFeet, dCRI, dStreet, dList;
+
+                  stream >> qstrFixtName;
+                  stream >> dLumens >> dCandela >> dDistMeter >> dDistFeet >> dLux >> dFc >> dFAngle
+                         >> dSizeMeter >> dSizeFeet >> dWattage >> dEfficacy >> dBAngle >> dBSizeMeter >> dBSizeFeet
+                         >> qstrColorTemp >> dCRI >> qstrLEDMix >> dStreet >> dList >> qstrOtherInfo ;
+
+                  Fixture[i].enterFixtureName(qstrFixtName);
+                  Fixture[i].enterLumens(dLumens);
+                  Fixture[i].enterCandela(dCandela);
+                  Fixture[i].enterDistanceMeters(dDistMeter);
+                  Fixture[i].enterDistanceFeet(dDistFeet);
+                  Fixture[i].enterLux(dLux);
+                  Fixture[i].enterFootcandles(dFc);
+                  Fixture[i].enterFieldAngle(dFAngle);
+                  Fixture[i].enterFieldSizeMeters(dSizeMeter);
+                  Fixture[i].enterFieldSizeFeet(dSizeFeet);
+
+                  Fixture[i].enterWattage(dWattage);
+                  Fixture[i].enterEfficacy(dEfficacy);
+                  Fixture[i].enterBeamAngle(dBAngle);
+                  Fixture[i].enterBeamSizeMeters(dBSizeMeter);
+                  Fixture[i].enterBeamSizeFeet(dBSizeFeet);
+                  Fixture[i].enterColorTemp(qstrColorTemp);
+                  Fixture[i].enterCRI(dCRI);
+                  Fixture[i].enterLEDMix(qstrLEDMix);
+                  Fixture[i].enterStreetPrice(dStreet);
+                  Fixture[i].enterListPrice(dList);
+                  Fixture[i].enterOtherInfo(qstrOtherInfo);
 
 
 

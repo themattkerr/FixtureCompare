@@ -36,8 +36,11 @@ public:
     void enterBeamSizeMeters(double dBeamDiameterMeters);
     void enterBeamSizeFeet (double dBeamDiameterFeet);
     void enterColorTemp(QString qstrColorTemp);
+    void enterCRI(double dCRI);
+    void enterLEDMix(QString qstrLEDMix);
     void enterStreetPrice(double dStreetPrice);
     void enterListPrice (double dListPrice);
+    void enterOtherInfo (QString qstrOtherInfo);
 
 
 
@@ -60,8 +63,11 @@ public:
     double getValueBeamSizeMeters();
     double getValueBeamSizeFeet ();
     QString getColorTemp();
+    double getValueCRI();
+    QString getLEDMix();
     double getValueStreetPrice();
     double getValueListPrice ();
+    QString getOtherInfo();
 
     void resetValues();
     bool loadFixtureData (QDataStream &fileData);
@@ -71,7 +77,7 @@ public:
 private:
 
     // Fixture Data
-    QString m_FixtureName, m_qstrColorTemp;
+    QString m_FixtureName, m_qstrColorTemp, m_qstrLEDMix, m_qstrOtherInfo;
     double	m_dLumens,
             m_dCandela,
             m_dDistanceMeters,
@@ -84,6 +90,7 @@ private:
 
             m_dWattage, //-- 1.1.0
             m_dEfficacy,
+            m_dCRI,
             m_dBeamAngle,
             m_dBeamDiameterMeters,
             m_dBeamDiameterFeet,
