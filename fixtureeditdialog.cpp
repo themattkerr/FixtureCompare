@@ -23,12 +23,16 @@ FixtureEditDialog::FixtureEditDialog(QWidget *parent, AllData *cData) :
 
    if(((MainWindow*)parentWidget())->bShowMoreEditFields)
    {
+
+       //setFixedSize(layout()->sizeHint());
        setFixedSize(FIXTURE_EDIT_SIZE_LARGE);
        ui->showMoreButton->hide();
        ui->showLessButton->show();
    }
    else
    {
+
+       //setFixedSize(layout()->sizeHint());
        setFixedSize(FIXTURE_EDIT_SIZE_SMALL);
        ui->showLessButton->hide();
        ui->showMoreButton->show();
@@ -311,12 +315,14 @@ void FixtureEditDialog::on_NavigationButtons_rejected()
 
 void FixtureEditDialog::on_showLessButton_clicked()
 {
+    //setFixedSize(layout()->sizeHint());
     setFixedSize(FIXTURE_EDIT_SIZE_SMALL);
     ((MainWindow*)parentWidget())->bShowMoreEditFields = false;
 }
 
 void FixtureEditDialog::on_showMoreButton_clicked()
 {
+    //setFixedSize(layout()->sizeHint());
     setFixedSize(FIXTURE_EDIT_SIZE_LARGE);
     ((MainWindow*)parentWidget())->bShowMoreEditFields = true;
 }

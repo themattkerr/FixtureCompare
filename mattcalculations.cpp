@@ -35,3 +35,36 @@ QString doubleToCurrency (double dInput, unsigned int nCurrency = US_DOLLARS)
     qstrCurrency.append(QLocale (QLocale::English).toString(dInput));
     return qstrCurrency;
 }
+
+QString millisecondsToHoursMinsSec (int nMilliseconds)
+{
+    int hours;
+    int mins;
+    int sec;
+
+    hours = nMilliseconds / 3600000;
+    nMilliseconds = nMilliseconds % 3600000;
+
+    mins = nMilliseconds / 60000;
+    nMilliseconds = nMilliseconds % 60000;
+
+    sec = nMilliseconds / 1000;
+
+    QString strE;
+    if (mins >0)
+    {
+        if (hours > 0)
+        {
+            if (hours < 10)
+                strE.append("0");
+            strE = strE.number(hours, 10); strE.append("h:");}
+        if (mins < 10)
+            strE.append("0");
+        strE.append(QString::number(mins,10)); strE.append("m:");
+    }
+    if (sec < 10)
+        strE.append("0");
+    strE.append(QString::number(sec, 10)); strE.append("s");
+
+    return strE;
+}

@@ -1,7 +1,7 @@
 #ifndef CONSTSANTS_H
 #define CONSTSANTS_H
 
-#define VERSION "1.1.1"
+#define VERSION "1.1.3"
 
 #define NUM_FIELDS_SHOWN_IN_MAIN_TABLE 3
 

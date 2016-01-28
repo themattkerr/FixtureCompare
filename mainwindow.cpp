@@ -15,6 +15,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
     bShowMoreEditFields = false;
     nMinimumLength = 15;
     nMultiplyingFactorForColumns = 7;
@@ -74,8 +75,7 @@ void MainWindow::SetupFixtureTable()
         ui->addNewFixtureButton->hide();
 
     cData.bAddingNewFixture = false;
-    //checkNextOrLastClicked();
-    //adjustSize();
+
 }
 
 
@@ -86,7 +86,9 @@ void MainWindow::on_tableWidget_cellClicked(int row, int column)
     AddEdit->exec();
     SetupFixtureTable();
 }
+
 //======= Button Functions =====================================
+
 void MainWindow::on_editAllButton_clicked()
 {
     editAllFixtures *editAll = new editAllFixtures (this, &cData);
@@ -95,7 +97,7 @@ void MainWindow::on_editAllButton_clicked()
 }
 void MainWindow::on_addNewFixtureButton_clicked()
 {
-    //ui->centralWidget->hide();
+
     cData.bAddingNewFixture = true;
     cData.nNumberOfFixtures++;
     cData.nCurrentFixture = cData.nNumberOfFixtures;

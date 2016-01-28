@@ -161,7 +161,7 @@
 
 
 
-// =================================================================get functions
+// ================================================================= get functions
     QString FixtureData::getFixtureName(){return  m_FixtureName;}
 
 
@@ -431,12 +431,12 @@
         }
 
         for (unsigned int nAfter = nFixtureToRemove; nAfter < nNumberOfFixtures; nAfter++)
-        {
             Fixture[nAfter] = Fixture[nAfter + 1];
-            Fixture[nNumberOfFixtures].resetValues();
-            nNumberOfFixtures--;
-            return;
-        }
+
+        Fixture[nNumberOfFixtures].resetValues();
+        nNumberOfFixtures--;
+        return;
+
     }
     bool AllData::createCSV(QString &fileName)
     {
@@ -473,7 +473,7 @@
                 << Fixture [iii].getLEDMix().remove(',')    <<","
                 << Fixture [iii].getValueStreetPrice()      <<","
                 << Fixture [iii].getValueListPrice()        <<","
-                << Fixture [iii].getOtherInfo().remove(',')
+                << Fixture [iii].getOtherInfo().remove(',').replace("\n", " --- ").simplified()
 
                 << endl;
                 }
@@ -509,7 +509,7 @@
                 stream << (double) Fixture [iii].getValueFieldSizeMeters();
                 stream << (double) Fixture [iii].getValueFieldSizeFeet();
 
-                stream << (double) Fixture [iii].getValueWattage(); // --- New 1.1.0
+                stream << (double) Fixture [iii].getValueWattage();
                 stream << (double) Fixture [iii].getValueEfficacy();
                 stream << (double) Fixture [iii].getValueBeamAngle();
                 stream << (double) Fixture [iii].getValueBeamSizeMeters();
@@ -522,6 +522,8 @@
                 stream << (QString)Fixture [iii].getOtherInfo();
 
                 }
+           file.flush();
+           file.close();
            return true;
         }
        else
@@ -560,6 +562,7 @@
                 Fixture[i].enterFieldSizeMeters(dSizeMeter);
                 Fixture[i].enterFieldSizeFeet(dSizeFeet);
             }
+           file.close();
            return true;
           }
          if(qstrSoftwareVersion == "1.1.0")//<----------------------------Read 1.1.0
@@ -593,18 +596,17 @@
                   Fixture[i].enterBeamSizeMeters(dBSizeMeter);
                   Fixture[i].enterBeamSizeFeet(dBSizeFeet);
                   Fixture[i].enterColorTemp(qstrColorTemp);
-                  //Fixture[i].enterCRI(dCRI);
-                  //Fixture[i].enterLEDMix(qstrLEDMix);
                   Fixture[i].enterStreetPrice(dStreet);
                   Fixture[i].enterListPrice(dList);
-                  //Fixture[i].enterOtherInfo(qstrOtherInfo);
+
 
 
 
               }
+             file.close();
              return true;
          }
-         if(qstrSoftwareVersion == "1.1.1")//<----------------------------Read 1.1.1
+         if(qstrSoftwareVersion == "1.1.1" || qstrSoftwareVersion == "1.1.2" || qstrSoftwareVersion == "1.1.3"  )//<----------------------------Read 1.1.1
          {
              stream >> nNumberOfFixtures;
              for (unsigned int i = 1; i <= nNumberOfFixtures; i++)
@@ -644,8 +646,10 @@
 
 
               }
+             file.close();
              return true;
          }
+        file.close();
         return false;
     }
     void AllData::sortDecendingCandela()
