@@ -43,6 +43,7 @@
         calculateLux();
         convertLuxToFootcandles();
         calculateFieldSize();
+        calculateBeamSize();
     }
     void FixtureData::enterDistanceFeet(double dDistanceFeet)
     {
@@ -52,6 +53,7 @@
         calculateLux();
         convertLuxToFootcandles();
         calculateFieldSize();
+        calculateBeamSize();
     }
     void FixtureData::enterLux(double dLux)
     {
@@ -366,7 +368,7 @@
     void FixtureData::calculateFieldAngle(){m_dFieldAngle = (atan (m_dFieldDiameterMeters/(2 * m_dDistanceMeters)))* 360.0 / PI;}
     void FixtureData::calculateFieldSize()
     {
-        m_dFieldDiameterMeters = (2 * m_dDistanceMeters * tan(m_dFieldAngle * PI / 360.0));
+        m_dFieldDiameterMeters = (( 2 * m_dDistanceMeters) * (tan(m_dFieldAngle * ((PI / 180.0)/2))));
         convertFieldDiameterMetersToFeet();
     }
 
