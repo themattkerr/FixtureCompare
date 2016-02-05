@@ -90,16 +90,35 @@
        </spacer>
       </item>
       <item>
-       <widget class="QPushButton" name="SortCandela">
+       <widget class="QPushButton" name="sortFixtureNameButton">
         <property name="sizePolicy">
-         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-          <horstretch>200</horstretch>
+         <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+          <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
         <property name="minimumSize">
          <size>
-          <width>255</width>
+          <width>167</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Sort Fixture Name</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="SortCandela">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>167</width>
           <height>0</height>
          </size>
         </property>
@@ -111,14 +130,14 @@
       <item>
        <widget class="QPushButton" name="SortLumens">
         <property name="sizePolicy">
-         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-          <horstretch>50</horstretch>
+         <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+          <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
         <property name="minimumSize">
          <size>
-          <width>255</width>
+          <width>167</width>
           <height>0</height>
          </size>
         </property>

@@ -37,6 +37,8 @@ private slots:
 
 
 
+    void on_sortFixtureNameButton_clicked();
+
 private:
     Ui::MainWindow *ui;
 

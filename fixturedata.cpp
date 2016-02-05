@@ -10,6 +10,7 @@
 #include <QTextStream>
 #include <QDialog>
 #include <QFileDialog>
+#include <QMessageBox>
 
 //public functions -----------------------------------------------------------------------------------------------------------------
 
@@ -221,9 +222,6 @@
             return DEFAULT_FIELD_SIZE_FEET;
         return m_dFieldDiameterFeet;}
 
-// ----------------------------------------------------- New 1.1.0
-
-
     double FixtureData::getValueWattage()
     {
         if(isNotValid(m_dWattage))
@@ -402,9 +400,14 @@
     {
         if (m_dBeamAngle > m_dFieldAngle)
         {
-            m_dBeamAngle = m_dFieldAngle;
-            m_dBeamDiameterMeters = m_dFieldDiameterMeters;
-            m_dBeamDiameterFeet = m_dFieldDiameterFeet;
+            QMessageBox mbAngleError;
+            mbAngleError.setWindowTitle("Angle Error");
+            mbAngleError.setText("Warning! \nBeam angle is greater than field angle!");
+            mbAngleError.exec();
+
+//            m_dBeamAngle = m_dFieldAngle;
+//            m_dBeamDiameterMeters = m_dFieldDiameterMeters;
+//            m_dBeamDiameterFeet = m_dFieldDiameterFeet;
         }
     }
 
@@ -654,6 +657,21 @@
         file.close();
         return false;
     }
+    void AllData::sortAscendingFixtureName()
+    {
+        for (unsigned int nStartIndex = 1; nStartIndex <= nNumberOfFixtures; nStartIndex++)
+            for (unsigned int nTest = nStartIndex+1; nTest <= nNumberOfFixtures; nTest++)
+            {
+                if (Fixture[nStartIndex].getFixtureName() > Fixture[nTest].getFixtureName())
+                {
+                    Fixture[0] = Fixture[nStartIndex];
+                    Fixture[nStartIndex] = Fixture[nTest];
+                    Fixture[nTest] = Fixture[0];
+                    Fixture[0].resetValues();
+                }
+            }
+    }
+
     void AllData::sortDecendingCandela()
     {
         for (unsigned int nStartIndex = 1; nStartIndex <= nNumberOfFixtures; nStartIndex++)

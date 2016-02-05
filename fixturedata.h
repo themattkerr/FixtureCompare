@@ -148,6 +148,7 @@ public:
     bool createCSV(QString &fileName);
     bool saveAsFxt (QString &fileName);
     bool readFxt (QString &fileName );
+    void sortAscendingFixtureName();
     void sortDecendingCandela ();
     void sortDecendingLumens();
     void sortAscendingLumens();

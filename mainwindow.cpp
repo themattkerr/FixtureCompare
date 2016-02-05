@@ -127,6 +127,11 @@ void MainWindow::on_createCSVButton_clicked()
     CSVDialog *CSV = new CSVDialog (this, &ok);
     CSV->exec();
 }
+void MainWindow::on_sortFixtureNameButton_clicked()
+{
+    cData.sortAscendingFixtureName();
+    SetupFixtureTable();
+}
 void MainWindow::on_SortCandela_clicked()
 {
     cData.sortDecendingCandela();
@@ -137,5 +142,4 @@ void MainWindow::on_SortLumens_clicked()
     cData.sortDecendingLumens();
     SetupFixtureTable();
 }
-
 
