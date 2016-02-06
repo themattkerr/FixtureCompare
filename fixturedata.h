@@ -88,7 +88,7 @@ private:
             m_dFieldDiameterMeters,
             m_dFieldDiameterFeet,
 
-            m_dWattage, //-- 1.1.0
+            m_dWattage,
             m_dEfficacy,
             m_dCRI,
             m_dBeamAngle,
@@ -98,7 +98,8 @@ private:
             m_dListPrice;
 
     bool isNotValid(double dNumToTest);
-    void angleCheck();
+    bool angleCheck();
+    void displayAngleWarning();
 
     /*
     All calculations are done in Metric.
@@ -145,6 +146,8 @@ public:
 
 
     void removeFixture(unsigned int nFixtureToRemove);
+    void copyToNewFixture();
+
     bool createCSV(QString &fileName);
     bool saveAsFxt (QString &fileName);
     bool readFxt (QString &fileName );

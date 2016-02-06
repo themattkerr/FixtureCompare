@@ -84,6 +84,8 @@ private slots:
 
     void on_LEDMixBox_editingFinished();
 
+    void on_copyToNewButton_clicked();
+
 private:
     Ui::FixtureEditDialog *ui;
     void setEditFieldsToCurrentState();

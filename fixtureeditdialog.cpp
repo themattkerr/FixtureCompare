@@ -6,7 +6,7 @@
 #include "confirmfixtureremovedialog.h"
 #include "cassert"
 #include "mattcalculations.h"
-
+#include <QMessageBox>
 
 enum fixtureID
 {
@@ -63,6 +63,7 @@ void FixtureEditDialog::setEditFieldsToCurrentState()
     {
         ui->Next->hide();
         ui->Last->hide();
+        //ui->copyToNewButton->hide();
     }
     else {
         ui->Next->show();
@@ -329,3 +330,17 @@ void FixtureEditDialog::on_showMoreButton_clicked()
 
 
 
+
+void FixtureEditDialog::on_copyToNewButton_clicked()
+{
+    ((MainWindow*)parentWidget())->cData.copyToNewFixture();
+    ((MainWindow*)parentWidget())->SetupFixtureTable();
+    setEditFieldsToCurrentState();
+
+    QMessageBox mbCopySucess;
+    mbCopySucess.setWindowTitle("Copy to new fixture");
+    QString strMessage;
+    strMessage.append("Fixture ").append(QString::number( ((MainWindow*)parentWidget())->cData.nCurrentFixture)).append(" copied to newly created fixture ").append(QString::number(((MainWindow*)parentWidget())->cData.nNumberOfFixtures)).append(".");
+    mbCopySucess.setText(strMessage);
+    mbCopySucess.exec();
+}

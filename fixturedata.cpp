@@ -75,7 +75,8 @@
         assert (dFieldAngle >= 0);
         m_dFieldAngle = dFieldAngle;
         calculateFieldSize();
-        angleCheck();
+        if(!angleCheck())
+            displayAngleWarning();
     }
     void FixtureData::enterFieldSizeMeters(double dFieldDiameterMeters)
     {
@@ -83,7 +84,8 @@
         m_dFieldDiameterMeters = dFieldDiameterMeters;
         convertFieldDiameterMetersToFeet();
         calculateFieldAngle();
-        angleCheck();
+        if(!angleCheck())
+            displayAngleWarning();
     }
     void FixtureData::enterFieldSizeFeet(double dFieldDiameterFeet)
     {
@@ -91,10 +93,9 @@
         m_dFieldDiameterFeet = dFieldDiameterFeet;
         convertFieldDiameterFeetToMeters();
         calculateFieldAngle();
-        angleCheck();
+        if(!angleCheck())
+            displayAngleWarning();
     }
-
-    //--------------------------------------- 1.1.0
 
     void FixtureData::enterWattage(double dWattage)
     {
@@ -116,7 +117,8 @@
         assert (dBeamAngle >= 0);
         m_dBeamAngle = dBeamAngle;
         calculateBeamSize();
-        angleCheck();
+        if(!angleCheck())
+            displayAngleWarning();
     }
     void FixtureData::enterBeamSizeMeters(double dBeamDiameterMeters)
     {
@@ -124,7 +126,8 @@
         m_dBeamDiameterMeters = dBeamDiameterMeters;
         convertBeamDiameterMetersToFeet();
         caluculateBeamAngle();
-        angleCheck();
+        if(!angleCheck())
+            displayAngleWarning();
     }
     void FixtureData::enterBeamSizeFeet (double dBeamDiameterFeet)
     {
@@ -132,7 +135,8 @@
         m_dBeamDiameterFeet = dBeamDiameterFeet;
         convertBeamDiameterFeetToMeters();
         caluculateBeamAngle();
-        angleCheck();
+        if(!angleCheck())
+            displayAngleWarning();
     }
     void FixtureData::enterColorTemp(QString qstrColorTemp)
     {
@@ -396,19 +400,27 @@
     void FixtureData::convertBeamDiameterMetersToFeet() {m_dBeamDiameterFeet = m_dBeamDiameterMeters * FeetPerMeter;}
     void FixtureData::convertBeamDiameterFeetToMeters() {m_dBeamDiameterMeters = m_dBeamDiameterFeet / FeetPerMeter;}
 
-    void FixtureData::angleCheck()
+    bool FixtureData::angleCheck()
     {
         if (m_dBeamAngle > m_dFieldAngle)
         {
-            QMessageBox mbAngleError;
-            mbAngleError.setWindowTitle("Angle Error");
-            mbAngleError.setText("Warning! \nBeam angle is greater than field angle!");
-            mbAngleError.exec();
+            return false;
+
 
 //            m_dBeamAngle = m_dFieldAngle;
 //            m_dBeamDiameterMeters = m_dFieldDiameterMeters;
 //            m_dBeamDiameterFeet = m_dFieldDiameterFeet;
         }
+        else
+            return true;
+    }
+
+    void FixtureData::displayAngleWarning()
+    {
+            QMessageBox mbAngleError;
+            mbAngleError.setWindowTitle("Angle Error");
+            mbAngleError.setText("Warning! \nBeam angle is greater than field angle!");
+            mbAngleError.exec();
     }
 
     // AllData Functions =============================================================================================================
@@ -443,6 +455,15 @@
         return;
 
     }
+    void AllData::copyToNewFixture()
+    {
+        nNumberOfFixtures++;
+        Fixture[nNumberOfFixtures] = Fixture[nCurrentFixture];
+        Fixture[nNumberOfFixtures].enterFixtureName((Fixture[nNumberOfFixtures].getFixtureName().append(" - (Copy)")));
+
+
+    }
+
     bool AllData::createCSV(QString &fileName)
     {
 
@@ -595,7 +616,7 @@
                   Fixture[i].enterFieldSizeMeters(dSizeMeter);
                   Fixture[i].enterFieldSizeFeet(dSizeFeet);
 
-                  Fixture[i].enterWattage(dWattage);// -- 1.1.0
+                  Fixture[i].enterWattage(dWattage);
                   Fixture[i].enterEfficacy(dEfficacy);
                   Fixture[i].enterBeamAngle(dBAngle);
                   Fixture[i].enterBeamSizeMeters(dBSizeMeter);
@@ -611,7 +632,7 @@
              file.close();
              return true;
          }
-         if(qstrSoftwareVersion == "1.1.1" || qstrSoftwareVersion == "1.1.2" || qstrSoftwareVersion == "1.1.3"  )//<----------------------------Read 1.1.1
+         if(qstrSoftwareVersion == "1.1.1" || qstrSoftwareVersion == "1.1.2" || qstrSoftwareVersion == "1.1.3"  || qstrSoftwareVersion == "1.1.4")
          {
              stream >> nNumberOfFixtures;
              for (unsigned int i = 1; i <= nNumberOfFixtures; i++)
@@ -657,6 +678,7 @@
         file.close();
         return false;
     }
+
     void AllData::sortAscendingFixtureName()
     {
         for (unsigned int nStartIndex = 1; nStartIndex <= nNumberOfFixtures; nStartIndex++)
@@ -671,7 +693,6 @@
                 }
             }
     }
-
     void AllData::sortDecendingCandela()
     {
         for (unsigned int nStartIndex = 1; nStartIndex <= nNumberOfFixtures; nStartIndex++)
