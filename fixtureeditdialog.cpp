@@ -23,26 +23,16 @@ FixtureEditDialog::FixtureEditDialog(QWidget *parent, AllData *cData) :
 
    if(((MainWindow*)parentWidget())->bShowMoreEditFields)
    {
-
-       //setFixedSize(layout()->sizeHint());
-       setFixedSize(FIXTURE_EDIT_SIZE_LARGE);
-       ui->showMoreButton->hide();
-       ui->showLessButton->show();
+       showMoreInfo();
    }
    else
    {
-
-       //setFixedSize(layout()->sizeHint());
-       setFixedSize(FIXTURE_EDIT_SIZE_SMALL);
-       ui->showLessButton->hide();
-       ui->showMoreButton->show();
+       hideMoreInfo();
    }
 
-    m_cData->Fixture[EDITING] = m_cData->Fixture[cData->nCurrentFixture];
+   m_cData->Fixture[EDITING] = m_cData->Fixture[cData->nCurrentFixture];
 
     setEditFieldsToCurrentState();
-
-   // connect(ui->DistFeetSpinBox_2,SIGNAL( (double)),this,SLOT(bob(double))); <== example from tom
 
 }
 void FixtureEditDialog::keyPressEvent(QKeyEvent *evt)
@@ -102,6 +92,76 @@ void FixtureEditDialog::setEditFieldsToCurrentState()
     ui->BeamAngleSpinBox->setValue(m_cData->Fixture[EDITING].getValueBeamAngle());
 
     ui->otherInfoBox->setPlainText((m_cData->Fixture[EDITING].getOtherInfo()));
+}
+void FixtureEditDialog::showMoreInfo()
+{
+    ui->showLessButton->show();
+    ui->showMoreButton->hide();
+
+    ui->otherInfoBox->show();
+    ui->otherLabel_2->show();
+    ui->colorTempBox->show();
+    ui->colorTempLabel->show();
+    ui->LEDMixBox->show();
+    ui->LEDMixLabel->show();
+    ui->BeamAngleLabel->show();
+    ui->BeamAngleSpinBox->show();
+    ui->BeamSizeFeetLabel->show();
+    ui->BeamSizeFeetSpinBox->show();
+    ui->BeamSizeLabel->show();
+    ui->BeamSizeMetersLabel->show();
+    ui->BeamSizeMetersSpinBox->show();
+    ui->cRILabel->show();
+    ui->cRISpinBox->show();
+    ui->FieldAngleLabel->show();
+    ui->FieldAngleSpinBox->show();
+    ui->FieldSizeFeetLabel->show();
+    ui->FieldSizeFeetSpinBox->show();
+    ui->FieldSizeLabel->show();
+    ui->FieldSizeMetersLabel->show();
+    ui->FieldSizeMetersSpinBox->show();
+    ui->listPriceBox->show();
+    ui->listPriceLabel->show();
+    ui->priceLabel->show();
+    ui->streetPriceBox->show();
+
+    adjustSize();
+    this->layout()->setSizeConstraint(QLayout::SetFixedSize);
+}
+void FixtureEditDialog::hideMoreInfo()
+{
+    ui->showLessButton->hide();
+    ui->showMoreButton->show();
+
+    ui->otherInfoBox->hide();
+    ui->otherLabel_2->hide();
+    ui->colorTempBox->hide();
+    ui->colorTempLabel->hide();
+    ui->LEDMixBox->hide();
+    ui->LEDMixLabel->hide();
+    ui->BeamAngleLabel->hide();
+    ui->BeamAngleSpinBox->hide();
+    ui->BeamSizeFeetLabel->hide();
+    ui->BeamSizeFeetSpinBox->hide();
+    ui->BeamSizeLabel->hide();
+    ui->BeamSizeMetersLabel->hide();
+    ui->BeamSizeMetersSpinBox->hide();
+    ui->cRILabel->hide();
+    ui->cRISpinBox->hide();
+    ui->FieldAngleLabel->hide();
+    ui->FieldAngleSpinBox->hide();
+    ui->FieldSizeFeetLabel->hide();
+    ui->FieldSizeFeetSpinBox->hide();
+    ui->FieldSizeLabel->hide();
+    ui->FieldSizeMetersLabel->hide();
+    ui->FieldSizeMetersSpinBox->hide();
+    ui->listPriceBox->hide();
+    ui->listPriceLabel->hide();
+    ui->priceLabel->hide();
+    ui->streetPriceBox->hide();
+
+    adjustSize();
+    this->layout()->setSizeConstraint(QLayout::SetFixedSize);
 }
 
 // Field entry -----------------------------------------------------------------------
@@ -296,40 +356,19 @@ void FixtureEditDialog::on_Next_clicked()
     m_cData->bUnsavedInfo = true;
 }
 
-void FixtureEditDialog::on_NavigationButtons_accepted()
-{
-    m_cData->bAddingNewFixture = false;
-    m_cData->Fixture[m_cData->nCurrentFixture] = m_cData->Fixture[EDITING];
-    m_cData->bUnsavedInfo = true;
-    close();
-}
-void FixtureEditDialog::on_NavigationButtons_rejected()
-{
-    if (m_cData->bAddingNewFixture)
-    {
-        m_cData->bAddingNewFixture = false;
-        m_cData->nCurrentFixture--;
-        m_cData->nNumberOfFixtures--;
-    }
-    close();
-}
-
 void FixtureEditDialog::on_showLessButton_clicked()
 {
-    //setFixedSize(layout()->sizeHint());
-    setFixedSize(FIXTURE_EDIT_SIZE_SMALL);
+
     ((MainWindow*)parentWidget())->bShowMoreEditFields = false;
+    hideMoreInfo();
+
 }
 
 void FixtureEditDialog::on_showMoreButton_clicked()
 {
-    //setFixedSize(layout()->sizeHint());
-    setFixedSize(FIXTURE_EDIT_SIZE_LARGE);
     ((MainWindow*)parentWidget())->bShowMoreEditFields = true;
+    showMoreInfo();
 }
-
-
-
 
 void FixtureEditDialog::on_copyToNewButton_clicked()
 {
@@ -346,4 +385,23 @@ void FixtureEditDialog::on_copyToNewButton_clicked()
 
     mbCopySucess.setText(strMessage);
     mbCopySucess.exec();
+}
+
+void FixtureEditDialog::on_oKButton_clicked()
+{
+    m_cData->bAddingNewFixture = false;
+    m_cData->Fixture[m_cData->nCurrentFixture] = m_cData->Fixture[EDITING];
+    m_cData->bUnsavedInfo = true;
+    close();
+}
+
+void FixtureEditDialog::on_cancelButton_clicked()
+{
+    if (m_cData->bAddingNewFixture)
+    {
+        m_cData->bAddingNewFixture = false;
+        m_cData->nCurrentFixture--;
+        m_cData->nNumberOfFixtures--;
+    }
+    close();
 }

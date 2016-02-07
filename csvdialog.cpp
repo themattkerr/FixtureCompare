@@ -7,7 +7,10 @@ CSVDialog::CSVDialog(QWidget *parent, bool *ok) :
     ui(new Ui::CSVDialog)
 {
     ui->setupUi(this);
-    setFixedSize(CSV_DIALOG_SIZE);
+    //setFixedSize(CSV_DIALOG_SIZE);
+    adjustSize();
+    this->layout()->setSizeConstraint(QLayout::SetFixedSize);
+
     if(!(*ok))
     {
         ui->label_2->setText("File WAS NOT created!!!");

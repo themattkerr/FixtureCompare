@@ -11,7 +11,9 @@ SaveAndQuitDialog::SaveAndQuitDialog(QWidget *parent, AllData *cData) :
 {
     m_cData = cData;
     ui->setupUi(this);
-    setFixedSize(SAVE_AND_QUIT_SIZE);
+    //setFixedSize(SAVE_AND_QUIT_SIZE);
+    adjustSize();
+    this->layout()->setSizeConstraint(QLayout::SetFixedSize);
 }
 
 SaveAndQuitDialog::~SaveAndQuitDialog()

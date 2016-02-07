@@ -560,7 +560,7 @@
 
            stream >> qstrSoftwareVersion;
 
-           if(qstrSoftwareVersion == "1.0.0")//<----------------------------Read 1.0.0
+           if(qstrSoftwareVersion == "1.0.0")
            {
            stream >> nNumberOfFixtures;
            for (unsigned int i = 1; i <= nNumberOfFixtures; i++)
@@ -586,7 +586,7 @@
            file.close();
            return true;
           }
-         if(qstrSoftwareVersion == "1.1.0")//<----------------------------Read 1.1.0
+         if(qstrSoftwareVersion == "1.1.0")
          {
              stream >> nNumberOfFixtures;
              for (unsigned int i = 1; i <= nNumberOfFixtures; i++)
@@ -627,7 +627,12 @@
              file.close();
              return true;
          }
-         if(qstrSoftwareVersion == "1.1.1" || qstrSoftwareVersion == "1.1.2" || qstrSoftwareVersion == "1.1.3"  || qstrSoftwareVersion == "1.1.4")
+         if(     qstrSoftwareVersion == "1.1.1"
+              || qstrSoftwareVersion == "1.1.2"
+              || qstrSoftwareVersion == "1.1.3"
+              || qstrSoftwareVersion == "1.1.4"
+              || qstrSoftwareVersion == "1.1.5"
+                    )
          {
              stream >> nNumberOfFixtures;
              for (unsigned int i = 1; i <= nNumberOfFixtures; i++)

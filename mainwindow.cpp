@@ -46,6 +46,8 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+//-------Table Functions----------------------------------------
+
 void MainWindow::SetupFixtureTable()
 {
     ui->centralWidget->show();
@@ -77,7 +79,6 @@ void MainWindow::SetupFixtureTable()
     cData.bAddingNewFixture = false;
 
 }
-
 
 void MainWindow::on_tableWidget_cellClicked(int row, int column)
 {

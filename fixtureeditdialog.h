@@ -32,7 +32,7 @@ private slots:
 
     void on_FixtureName_editingFinished();
 
-    void on_NavigationButtons_accepted();
+
 
     void on_DistMetersSpinBox_editingFinished();
 
@@ -54,7 +54,6 @@ private slots:
 
     void on_Last_clicked();
 
-    void on_NavigationButtons_rejected();
 
 
 
@@ -86,12 +85,18 @@ private slots:
 
     void on_copyToNewButton_clicked();
 
+    void on_oKButton_clicked();
+
+    void on_cancelButton_clicked();
+
 private:
     Ui::FixtureEditDialog *ui;
     void setEditFieldsToCurrentState();
 
     AllData *m_cData;
     QWidget *m_Parent;
+    void hideMoreInfo();
+    void showMoreInfo();
 
 };
 

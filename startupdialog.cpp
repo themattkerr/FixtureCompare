@@ -12,7 +12,10 @@ startUpDialog::startUpDialog(QWidget *parent, AllData *cData) :
     ui(new Ui::startUpDialog)
 {
     ui->setupUi(this);
-    setFixedSize(STARTUP_DIALOG_SIZE);
+   // setFixedSize(STARTUP_DIALOG_SIZE);
+    adjustSize();
+    this->layout()->setSizeConstraint(QLayout::SetFixedSize);
+
     m_cData = cData;
 }
 

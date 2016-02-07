@@ -8,7 +8,10 @@ ConfirmFixtureRemoveDialog::ConfirmFixtureRemoveDialog(QWidget *parent ,AllData 
     ui(new Ui::ConfirmFixtureRemoveDialog)
 {
     ui->setupUi(this);
-    setFixedSize(CONFIRM_FIXTURE_REMOVE_SIZE);
+    //setFixedSize(CONFIRM_FIXTURE_REMOVE_SIZE);
+    adjustSize();
+    this->layout()->setSizeConstraint(QLayout::SetFixedSize);
+
     m_cData = cData;
     ui->fixtureNum->setText(QString::number(m_cData->nCurrentFixture,10));
     ui->FixtureName->setText(m_cData->Fixture[m_cData->nCurrentFixture].getFixtureName());

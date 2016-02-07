@@ -6,9 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>651</width>
-    <height>401</height>
+    <width>675</width>
+    <height>592</height>
    </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
   </property>
   <property name="focusPolicy">
    <enum>Qt::ClickFocus</enum>
@@ -21,927 +27,454 @@
     <normaloff>:/New folder/ColorSource-PAR_72.jpg</normaloff>:/New folder/ColorSource-PAR_72.jpg</iconset>
   </property>
   <property name="sizeGripEnabled">
-   <bool>true</bool>
+   <bool>false</bool>
   </property>
-  <widget class="QFrame" name="LightLevels">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>0</y>
-     <width>331</width>
-     <height>191</height>
-    </rect>
+  <property name="modal">
+   <bool>false</bool>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <property name="sizeConstraint">
+    <enum>QLayout::SetMinimumSize</enum>
    </property>
-   <property name="frameShape">
-    <enum>QFrame::StyledPanel</enum>
-   </property>
-   <property name="frameShadow">
-    <enum>QFrame::Raised</enum>
-   </property>
-   <widget class="QLabel" name="FixtureNameLabel">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>40</y>
-      <width>91</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Fixture Name:</string>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="FixtureName">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>60</y>
-      <width>311</width>
-      <height>20</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QLabel" name="LumenLabel">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>90</y>
-      <width>91</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Lumens</string>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="Lumens">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>110</y>
-      <width>113</width>
-      <height>20</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="CandelaBox">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>160</y>
-      <width>113</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
-   <widget class="QLabel" name="CandelaLabel">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>140</y>
-      <width>91</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Candela</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="wattageLabel">
-    <property name="geometry">
-     <rect>
-      <x>150</x>
-      <y>90</y>
-      <width>91</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Wattage</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label">
-    <property name="geometry">
-     <rect>
-      <x>150</x>
-      <y>140</y>
-      <width>47</width>
-      <height>13</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Efficacy</string>
-    </property>
-   </widget>
-   <widget class="QDoubleSpinBox" name="wattageSpinBox">
-    <property name="geometry">
-     <rect>
-      <x>150</x>
-      <y>110</y>
-      <width>71</width>
-      <height>22</height>
-     </rect>
-    </property>
-    <property name="maximum">
-     <double>10000.000000000000000</double>
-    </property>
-   </widget>
-   <widget class="QDoubleSpinBox" name="efficacySpinBox">
-    <property name="geometry">
-     <rect>
-      <x>150</x>
-      <y>160</y>
-      <width>71</width>
-      <height>22</height>
-     </rect>
-    </property>
-    <property name="maximum">
-     <double>10000.000000000000000</double>
-    </property>
-   </widget>
-   <widget class="QWidget" name="">
-    <property name="geometry">
-     <rect>
-      <x>1</x>
-      <y>9</y>
-      <width>321</width>
-      <height>25</height>
-     </rect>
-    </property>
-    <layout class="QHBoxLayout" name="horizontalLayout_3">
-     <item>
-      <widget class="QLabel" name="FixtureLabel">
-       <property name="text">
-        <string>Fixture:</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLabel" name="FixtureNumberDisplay">
-       <property name="text">
-        <string>#</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <spacer name="horizontalSpacer_6">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item>
-      <widget class="QPushButton" name="copyToNewButton">
-       <property name="text">
-        <string>Copy to New</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="RemoveFixture">
-       <property name="text">
-        <string>Remove Fixture</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="showMoreButton">
-       <property name="text">
-        <string>More Info &gt;&gt;</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </widget>
-  </widget>
-  <widget class="QFrame" name="Illuminance">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>270</y>
-     <width>201</width>
-     <height>81</height>
-    </rect>
-   </property>
-   <property name="frameShape">
-    <enum>QFrame::StyledPanel</enum>
-   </property>
-   <property name="frameShadow">
-    <enum>QFrame::Raised</enum>
-   </property>
-   <widget class="QLabel" name="LuxLabel">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>20</y>
-      <width>71</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Lux</string>
-    </property>
-   </widget>
-   <widget class="QDoubleSpinBox" name="LuxSpinBox">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>40</y>
-      <width>71</width>
-      <height>22</height>
-     </rect>
-    </property>
-    <property name="maximum">
-     <double>5000000.000000000000000</double>
-    </property>
-   </widget>
-   <widget class="QDoubleSpinBox" name="FootCandleSpinBox">
-    <property name="geometry">
-     <rect>
-      <x>110</x>
-      <y>40</y>
-      <width>71</width>
-      <height>22</height>
-     </rect>
-    </property>
-    <property name="maximum">
-     <double>5000000.000000000000000</double>
-    </property>
-   </widget>
-   <widget class="QLabel" name="FootcandleLabel">
-    <property name="geometry">
-     <rect>
-      <x>110</x>
-      <y>20</y>
-      <width>71</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Foot Candles</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="IlluminaceLabel">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>0</y>
-      <width>61</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Illuminance:</string>
-    </property>
-   </widget>
-  </widget>
-  <widget class="QFrame" name="Distance">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>190</y>
-     <width>201</width>
-     <height>81</height>
-    </rect>
-   </property>
-   <property name="frameShape">
-    <enum>QFrame::StyledPanel</enum>
-   </property>
-   <property name="frameShadow">
-    <enum>QFrame::Raised</enum>
-   </property>
-   <widget class="QLabel" name="DistFeetLabel">
-    <property name="geometry">
-     <rect>
-      <x>110</x>
-      <y>20</y>
-      <width>61</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Feet</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="DistMetersLabel">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>20</y>
-      <width>91</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Meters</string>
-    </property>
-   </widget>
-   <widget class="QDoubleSpinBox" name="DistFeetSpinBox_2">
-    <property name="geometry">
-     <rect>
-      <x>110</x>
-      <y>40</y>
-      <width>71</width>
-      <height>22</height>
-     </rect>
-    </property>
-    <property name="maximum">
-     <double>5000.000000000000000</double>
-    </property>
-   </widget>
-   <widget class="QDoubleSpinBox" name="DistMetersSpinBox">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>40</y>
-      <width>71</width>
-      <height>22</height>
-     </rect>
-    </property>
-    <property name="maximum">
-     <double>5000.000000000000000</double>
-    </property>
-   </widget>
-   <widget class="QLabel" name="DistLabel">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>0</y>
-      <width>47</width>
-      <height>13</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Distance:</string>
-    </property>
-   </widget>
-   <widget class="QDialogButtonBox" name="NavigationButtons_2">
-    <property name="geometry">
-     <rect>
-      <x>90</x>
-      <y>490</y>
-      <width>281</width>
-      <height>32</height>
-     </rect>
-    </property>
-    <property name="orientation">
-     <enum>Qt::Horizontal</enum>
-    </property>
-    <property name="standardButtons">
-     <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
-    </property>
-   </widget>
-  </widget>
-  <widget class="QWidget" name="horizontalLayoutWidget">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>360</y>
-     <width>326</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <layout class="QHBoxLayout" name="Navigationbuttons">
-    <item>
-     <widget class="QPushButton" name="Last">
-      <property name="text">
-       <string>&lt;&lt; Last</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QPushButton" name="Next">
-      <property name="text">
-       <string>Next &gt;&gt;</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <spacer name="horizontalSpacer">
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>40</width>
-        <height>20</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
-    <item>
-     <widget class="QDialogButtonBox" name="NavigationButtons">
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-      <property name="standardButtons">
-       <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
-      </property>
-     </widget>
-    </item>
-   </layout>
-  </widget>
-  <widget class="QFrame" name="moreInfo">
-   <property name="geometry">
-    <rect>
-     <x>350</x>
-     <y>40</y>
-     <width>291</width>
-     <height>361</height>
-    </rect>
-   </property>
-   <property name="frameShape">
-    <enum>QFrame::StyledPanel</enum>
-   </property>
-   <property name="frameShadow">
-    <enum>QFrame::Raised</enum>
-   </property>
-   <widget class="QFrame" name="frame_2">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>150</y>
-      <width>291</width>
-      <height>161</height>
-     </rect>
-    </property>
-    <property name="frameShape">
-     <enum>QFrame::StyledPanel</enum>
-    </property>
-    <property name="frameShadow">
-     <enum>QFrame::Raised</enum>
-    </property>
-    <widget class="QFrame" name="FieldAngle_2">
-     <property name="geometry">
-      <rect>
-       <x>160</x>
-       <y>100</y>
-       <width>131</width>
-       <height>61</height>
-      </rect>
+   <item row="0" column="0">
+    <widget class="QLabel" name="FixtureLabel">
+     <property name="text">
+      <string>Fixture:</string>
      </property>
-     <property name="frameShape">
-      <enum>QFrame::StyledPanel</enum>
-     </property>
-     <property name="frameShadow">
-      <enum>QFrame::Raised</enum>
-     </property>
-     <widget class="QLabel" name="BeamAngleLabel">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>0</y>
-        <width>111</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Beam angle (Degrees)</string>
-      </property>
-     </widget>
-     <widget class="QDoubleSpinBox" name="BeamAngleSpinBox">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>20</y>
-        <width>71</width>
-        <height>22</height>
-       </rect>
-      </property>
-      <property name="maximum">
-       <double>1000.000000000000000</double>
-      </property>
-     </widget>
     </widget>
-    <widget class="QFrame" name="Diameter_2">
-     <property name="geometry">
-      <rect>
-       <x>1</x>
-       <y>80</y>
-       <width>161</width>
-       <height>81</height>
-      </rect>
+   </item>
+   <item row="0" column="1">
+    <widget class="QLabel" name="FixtureNumberDisplay">
+     <property name="text">
+      <string>#</string>
      </property>
-     <property name="frameShape">
-      <enum>QFrame::StyledPanel</enum>
-     </property>
-     <property name="frameShadow">
-      <enum>QFrame::Raised</enum>
-     </property>
-     <widget class="QLabel" name="BeamSizeLabel">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>0</y>
-        <width>111</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Beam diameter:</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="BeamSizeFeetLabel">
-      <property name="geometry">
-       <rect>
-        <x>90</x>
-        <y>20</y>
-        <width>91</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Feet</string>
-      </property>
-     </widget>
-     <widget class="QDoubleSpinBox" name="BeamSizeFeetSpinBox">
-      <property name="geometry">
-       <rect>
-        <x>90</x>
-        <y>40</y>
-        <width>62</width>
-        <height>22</height>
-       </rect>
-      </property>
-      <property name="maximum">
-       <double>99999.990000000005239</double>
-      </property>
-     </widget>
-     <widget class="QLabel" name="BeamSizeMetersLabel">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>20</y>
-        <width>91</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Meters</string>
-      </property>
-     </widget>
-     <widget class="QDoubleSpinBox" name="BeamSizeMetersSpinBox">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>40</y>
-        <width>62</width>
-        <height>22</height>
-       </rect>
-      </property>
-      <property name="maximum">
-       <double>9999.989999999999782</double>
-      </property>
-     </widget>
     </widget>
-    <widget class="QFrame" name="Diameter">
-     <property name="geometry">
-      <rect>
-       <x>1</x>
-       <y>0</y>
-       <width>161</width>
-       <height>81</height>
-      </rect>
+   </item>
+   <item row="0" column="2">
+    <widget class="QPushButton" name="copyToNewButton">
+     <property name="text">
+      <string>Copy to New</string>
      </property>
-     <property name="frameShape">
-      <enum>QFrame::StyledPanel</enum>
-     </property>
-     <property name="frameShadow">
-      <enum>QFrame::Raised</enum>
-     </property>
-     <widget class="QLabel" name="FieldSizeLabel">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>0</y>
-        <width>111</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Field diameter:</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="FieldSizeFeetLabel">
-      <property name="geometry">
-       <rect>
-        <x>90</x>
-        <y>20</y>
-        <width>91</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Feet</string>
-      </property>
-     </widget>
-     <widget class="QDoubleSpinBox" name="FieldSizeFeetSpinBox">
-      <property name="geometry">
-       <rect>
-        <x>90</x>
-        <y>40</y>
-        <width>62</width>
-        <height>22</height>
-       </rect>
-      </property>
-      <property name="maximum">
-       <double>99999.990000000005239</double>
-      </property>
-     </widget>
-     <widget class="QLabel" name="FieldSizeMetersLabel">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>20</y>
-        <width>91</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Meters</string>
-      </property>
-     </widget>
-     <widget class="QDoubleSpinBox" name="FieldSizeMetersSpinBox">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>40</y>
-        <width>62</width>
-        <height>22</height>
-       </rect>
-      </property>
-      <property name="maximum">
-       <double>9999.989999999999782</double>
-      </property>
-     </widget>
     </widget>
-    <widget class="QFrame" name="FieldAngle">
-     <property name="geometry">
-      <rect>
-       <x>160</x>
-       <y>20</y>
-       <width>131</width>
-       <height>61</height>
-      </rect>
+   </item>
+   <item row="0" column="3">
+    <widget class="QPushButton" name="RemoveFixture">
+     <property name="text">
+      <string>Remove Fixture</string>
      </property>
-     <property name="frameShape">
-      <enum>QFrame::StyledPanel</enum>
-     </property>
-     <property name="frameShadow">
-      <enum>QFrame::Raised</enum>
-     </property>
-     <widget class="QLabel" name="FieldAngleLabel">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>0</y>
-        <width>111</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Field angle (Degrees)</string>
-      </property>
-     </widget>
-     <widget class="QDoubleSpinBox" name="FieldAngleSpinBox">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>20</y>
-        <width>71</width>
-        <height>22</height>
-       </rect>
-      </property>
-      <property name="maximum">
-       <double>1000.000000000000000</double>
-      </property>
-     </widget>
     </widget>
-   </widget>
-   <widget class="QLabel" name="priceLabel">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>50</y>
-      <width>71</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Street Price</string>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="streetPriceBox">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>70</y>
-      <width>113</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="maximumSize">
-     <size>
-      <width>113</width>
-      <height>16777215</height>
-     </size>
-    </property>
-   </widget>
-   <widget class="QLabel" name="listPriceLabel">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>100</y>
-      <width>71</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>List Price</string>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="listPriceBox">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>120</y>
-      <width>113</width>
-      <height>20</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QLabel" name="otherLabel">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>310</y>
-      <width>31</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Other:</string>
-    </property>
-   </widget>
-   <widget class="QPlainTextEdit" name="otherInfoBox">
-    <property name="geometry">
-     <rect>
-      <x>50</x>
-      <y>310</y>
-      <width>231</width>
-      <height>41</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="LEDMixBox">
-    <property name="geometry">
-     <rect>
-      <x>160</x>
-      <y>70</y>
-      <width>113</width>
-      <height>20</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QLabel" name="LEDMixLabel">
-    <property name="geometry">
-     <rect>
-      <x>160</x>
-      <y>50</y>
-      <width>47</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>LED mix</string>
-    </property>
-   </widget>
-   <widget class="QWidget" name="layoutWidget">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>20</y>
-      <width>241</width>
-      <height>22</height>
-     </rect>
-    </property>
-    <layout class="QHBoxLayout" name="horizontalLayout">
-     <item>
-      <widget class="QLineEdit" name="colorTempBox">
-       <property name="maximumSize">
-        <size>
-         <width>113</width>
-         <height>16777215</height>
-        </size>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <spacer name="horizontalSpacer_5">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item>
-      <widget class="QDoubleSpinBox" name="cRISpinBox"/>
-     </item>
-     <item>
-      <spacer name="horizontalSpacer_2">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-    </layout>
-   </widget>
-   <widget class="QWidget" name="layoutWidget">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>0</y>
-      <width>221</width>
-      <height>22</height>
-     </rect>
-    </property>
-    <layout class="QHBoxLayout" name="horizontalLayout_2">
-     <item>
-      <widget class="QLabel" name="colorTempLabel">
-       <property name="text">
-        <string>Color Temperature</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <spacer name="horizontalSpacer_4">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>28</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item>
-      <widget class="QLabel" name="cRILabel">
-       <property name="text">
-        <string>CRI</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <spacer name="horizontalSpacer_3">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-    </layout>
-   </widget>
-  </widget>
-  <widget class="QPushButton" name="showLessButton">
-   <property name="geometry">
-    <rect>
-     <x>560</x>
-     <y>10</y>
-     <width>81</width>
-     <height>23</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>&lt;&lt; Less Info</string>
-   </property>
-  </widget>
+   </item>
+   <item row="0" column="4">
+    <widget class="QPushButton" name="showMoreButton">
+     <property name="text">
+      <string>More Info &gt;&gt;</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="7">
+    <widget class="QPushButton" name="showLessButton">
+     <property name="text">
+      <string>&lt;&lt; Less Info</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <widget class="QLabel" name="FixtureNameLabel">
+     <property name="text">
+      <string>Fixture Name:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="0">
+    <widget class="QLabel" name="LumenLabel">
+     <property name="text">
+      <string>Lumens</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="3">
+    <widget class="QLabel" name="wattageLabel">
+     <property name="text">
+      <string>Wattage</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="5">
+    <widget class="QLabel" name="colorTempLabel">
+     <property name="text">
+      <string>Color Temperature</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="6">
+    <widget class="QLabel" name="LEDMixLabel">
+     <property name="text">
+      <string>LED mix</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="7">
+    <widget class="QLabel" name="cRILabel">
+     <property name="text">
+      <string>CRI</string>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="0" colspan="3">
+    <widget class="QLineEdit" name="Lumens"/>
+   </item>
+   <item row="4" column="3">
+    <widget class="QDoubleSpinBox" name="wattageSpinBox">
+     <property name="maximum">
+      <double>10000.000000000000000</double>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="5">
+    <widget class="QLineEdit" name="colorTempBox">
+     <property name="maximumSize">
+      <size>
+       <width>113</width>
+       <height>16777215</height>
+      </size>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="6">
+    <widget class="QLineEdit" name="LEDMixBox"/>
+   </item>
+   <item row="4" column="7">
+    <widget class="QDoubleSpinBox" name="cRISpinBox"/>
+   </item>
+   <item row="5" column="0">
+    <widget class="QLabel" name="CandelaLabel">
+     <property name="text">
+      <string>Candela</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="3">
+    <widget class="QLabel" name="label">
+     <property name="text">
+      <string>Efficacy</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="5">
+    <widget class="QLabel" name="priceLabel">
+     <property name="text">
+      <string>Street Price</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="6">
+    <widget class="QLabel" name="listPriceLabel">
+     <property name="text">
+      <string>List Price</string>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="0" colspan="3">
+    <widget class="QLineEdit" name="CandelaBox">
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="3">
+    <widget class="QDoubleSpinBox" name="efficacySpinBox">
+     <property name="maximum">
+      <double>10000.000000000000000</double>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="5">
+    <widget class="QLineEdit" name="streetPriceBox">
+     <property name="maximumSize">
+      <size>
+       <width>113</width>
+       <height>16777215</height>
+      </size>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="6">
+    <widget class="QLineEdit" name="listPriceBox"/>
+   </item>
+   <item row="7" column="0">
+    <widget class="QLabel" name="DistLabel">
+     <property name="text">
+      <string>Distance:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="7" column="5">
+    <widget class="QLabel" name="FieldSizeLabel">
+     <property name="text">
+      <string>Field diameter:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="8" column="0">
+    <widget class="QLabel" name="DistMetersLabel">
+     <property name="text">
+      <string>Meters</string>
+     </property>
+    </widget>
+   </item>
+   <item row="8" column="3">
+    <widget class="QLabel" name="DistFeetLabel">
+     <property name="text">
+      <string>Feet</string>
+     </property>
+    </widget>
+   </item>
+   <item row="8" column="5">
+    <widget class="QLabel" name="FieldSizeMetersLabel">
+     <property name="text">
+      <string>Meters</string>
+     </property>
+    </widget>
+   </item>
+   <item row="8" column="6">
+    <widget class="QLabel" name="FieldSizeFeetLabel">
+     <property name="text">
+      <string>Feet</string>
+     </property>
+    </widget>
+   </item>
+   <item row="8" column="7">
+    <widget class="QLabel" name="FieldAngleLabel">
+     <property name="text">
+      <string>Field angle (Degrees)</string>
+     </property>
+    </widget>
+   </item>
+   <item row="9" column="0">
+    <widget class="QDoubleSpinBox" name="DistMetersSpinBox">
+     <property name="maximum">
+      <double>5000.000000000000000</double>
+     </property>
+    </widget>
+   </item>
+   <item row="9" column="3">
+    <widget class="QDoubleSpinBox" name="DistFeetSpinBox_2">
+     <property name="maximum">
+      <double>5000.000000000000000</double>
+     </property>
+    </widget>
+   </item>
+   <item row="9" column="5">
+    <widget class="QDoubleSpinBox" name="FieldSizeMetersSpinBox">
+     <property name="maximum">
+      <double>9999.989999999999782</double>
+     </property>
+    </widget>
+   </item>
+   <item row="9" column="6">
+    <widget class="QDoubleSpinBox" name="FieldSizeFeetSpinBox">
+     <property name="maximum">
+      <double>99999.990000000005239</double>
+     </property>
+    </widget>
+   </item>
+   <item row="9" column="7">
+    <widget class="QDoubleSpinBox" name="FieldAngleSpinBox">
+     <property name="maximum">
+      <double>1000.000000000000000</double>
+     </property>
+    </widget>
+   </item>
+   <item row="10" column="0">
+    <widget class="QLabel" name="IlluminaceLabel">
+     <property name="text">
+      <string>Illuminance:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="10" column="5">
+    <widget class="QLabel" name="BeamSizeLabel">
+     <property name="text">
+      <string>Beam diameter:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="11" column="0">
+    <widget class="QLabel" name="LuxLabel">
+     <property name="text">
+      <string>Lux</string>
+     </property>
+    </widget>
+   </item>
+   <item row="11" column="3">
+    <widget class="QLabel" name="FootcandleLabel">
+     <property name="text">
+      <string>Foot Candles</string>
+     </property>
+    </widget>
+   </item>
+   <item row="11" column="5">
+    <widget class="QLabel" name="BeamSizeMetersLabel">
+     <property name="text">
+      <string>Meters</string>
+     </property>
+    </widget>
+   </item>
+   <item row="11" column="6">
+    <widget class="QLabel" name="BeamSizeFeetLabel">
+     <property name="text">
+      <string>Feet</string>
+     </property>
+    </widget>
+   </item>
+   <item row="11" column="7">
+    <widget class="QLabel" name="BeamAngleLabel">
+     <property name="text">
+      <string>Beam angle (Degrees)</string>
+     </property>
+    </widget>
+   </item>
+   <item row="12" column="3">
+    <widget class="QDoubleSpinBox" name="FootCandleSpinBox">
+     <property name="maximum">
+      <double>5000000.000000000000000</double>
+     </property>
+    </widget>
+   </item>
+   <item row="12" column="5">
+    <widget class="QDoubleSpinBox" name="BeamSizeMetersSpinBox">
+     <property name="maximum">
+      <double>9999.989999999999782</double>
+     </property>
+    </widget>
+   </item>
+   <item row="12" column="6">
+    <widget class="QDoubleSpinBox" name="BeamSizeFeetSpinBox">
+     <property name="maximum">
+      <double>99999.990000000005239</double>
+     </property>
+    </widget>
+   </item>
+   <item row="12" column="7">
+    <widget class="QDoubleSpinBox" name="BeamAngleSpinBox">
+     <property name="maximum">
+      <double>1000.000000000000000</double>
+     </property>
+    </widget>
+   </item>
+   <item row="13" column="0">
+    <widget class="QPushButton" name="Last">
+     <property name="text">
+      <string>&lt;&lt; Last</string>
+     </property>
+    </widget>
+   </item>
+   <item row="13" column="2">
+    <widget class="QPushButton" name="Next">
+     <property name="text">
+      <string>Next &gt;&gt;</string>
+     </property>
+    </widget>
+   </item>
+   <item row="13" column="3">
+    <widget class="QPushButton" name="oKButton">
+     <property name="text">
+      <string>OK</string>
+     </property>
+    </widget>
+   </item>
+   <item row="13" column="4">
+    <widget class="QPushButton" name="cancelButton">
+     <property name="text">
+      <string>Cancel</string>
+     </property>
+    </widget>
+   </item>
+   <item row="14" column="0" colspan="2">
+    <widget class="QLabel" name="otherLabel_2">
+     <property name="text">
+      <string>Other Information:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="15" column="0" colspan="8">
+    <widget class="QPlainTextEdit" name="otherInfoBox"/>
+   </item>
+   <item row="2" column="0" colspan="5">
+    <widget class="QLineEdit" name="FixtureName"/>
+   </item>
+   <item row="12" column="0">
+    <widget class="QDoubleSpinBox" name="LuxSpinBox">
+     <property name="maximum">
+      <double>5000000.000000000000000</double>
+     </property>
+    </widget>
+   </item>
+  </layout>
+  <zorder>horizontalLayoutWidget</zorder>
+  <zorder>showLessButton</zorder>
+  <zorder>FieldAngleLabel</zorder>
+  <zorder>FieldAngleSpinBox</zorder>
+  <zorder>BeamAngleLabel</zorder>
+  <zorder>BeamAngleSpinBox</zorder>
+  <zorder>BeamSizeFeetLabel</zorder>
+  <zorder>BeamSizeFeetSpinBox</zorder>
+  <zorder>BeamSizeMetersLabel</zorder>
+  <zorder>BeamSizeMetersSpinBox</zorder>
+  <zorder>BeamSizeLabel</zorder>
+  <zorder>FieldSizeFeetLabel</zorder>
+  <zorder>FieldSizeFeetSpinBox</zorder>
+  <zorder>FieldSizeMetersLabel</zorder>
+  <zorder>FieldSizeMetersSpinBox</zorder>
+  <zorder>FieldSizeLabel</zorder>
+  <zorder>FootcandleLabel</zorder>
+  <zorder>FootCandleSpinBox</zorder>
+  <zorder>LuxLabel</zorder>
+  <zorder>LuxSpinBox</zorder>
+  <zorder>IlluminaceLabel</zorder>
+  <zorder>DistFeetLabel</zorder>
+  <zorder>DistFeetSpinBox_2</zorder>
+  <zorder>DistMetersLabel</zorder>
+  <zorder>DistMetersSpinBox</zorder>
+  <zorder>DistLabel</zorder>
+  <zorder>label</zorder>
+  <zorder>CandelaLabel</zorder>
+  <zorder>wattageLabel</zorder>
+  <zorder>wattageSpinBox</zorder>
+  <zorder>LumenLabel</zorder>
+  <zorder>Lumens</zorder>
+  <zorder>FixtureNameLabel</zorder>
+  <zorder>FixtureName</zorder>
+  <zorder>FixtureLabel</zorder>
+  <zorder>copyToNewButton</zorder>
+  <zorder>RemoveFixture</zorder>
+  <zorder>showMoreButton</zorder>
+  <zorder>copyToNewButton</zorder>
+  <zorder>label</zorder>
+  <zorder></zorder>
+  <zorder></zorder>
+  <zorder></zorder>
+  <zorder></zorder>
+  <zorder></zorder>
+  <zorder>otherInfoBox</zorder>
+  <zorder>CandelaBox</zorder>
+  <zorder>efficacySpinBox</zorder>
+  <zorder>priceLabel</zorder>
+  <zorder>streetPriceBox</zorder>
+  <zorder>listPriceBox</zorder>
+  <zorder>listPriceLabel</zorder>
+  <zorder>otherLabel_2</zorder>
+  <zorder>Last</zorder>
+  <zorder>Next</zorder>
+  <zorder>cancelButton</zorder>
+  <zorder>oKButton</zorder>
+  <zorder>FixtureNumberDisplay</zorder>
+  <zorder>colorTempBox</zorder>
+  <zorder>colorTempLabel</zorder>
+  <zorder>cRISpinBox</zorder>
+  <zorder>cRILabel</zorder>
+  <zorder>LEDMixLabel</zorder>
+  <zorder>LEDMixBox</zorder>
  </widget>
  <tabstops>
   <tabstop>FixtureName</tabstop>
@@ -953,11 +486,9 @@
   <tabstop>DistFeetSpinBox_2</tabstop>
   <tabstop>LuxSpinBox</tabstop>
   <tabstop>FootCandleSpinBox</tabstop>
-  <tabstop>Last</tabstop>
-  <tabstop>Next</tabstop>
-  <tabstop>RemoveFixture</tabstop>
-  <tabstop>showLessButton</tabstop>
   <tabstop>colorTempBox</tabstop>
+  <tabstop>LEDMixBox</tabstop>
+  <tabstop>cRISpinBox</tabstop>
   <tabstop>streetPriceBox</tabstop>
   <tabstop>listPriceBox</tabstop>
   <tabstop>FieldSizeMetersSpinBox</tabstop>
@@ -966,76 +497,20 @@
   <tabstop>BeamSizeMetersSpinBox</tabstop>
   <tabstop>BeamSizeFeetSpinBox</tabstop>
   <tabstop>BeamAngleSpinBox</tabstop>
+  <tabstop>oKButton</tabstop>
+  <tabstop>cancelButton</tabstop>
+  <tabstop>Next</tabstop>
+  <tabstop>Last</tabstop>
+  <tabstop>copyToNewButton</tabstop>
+  <tabstop>RemoveFixture</tabstop>
   <tabstop>showMoreButton</tabstop>
+  <tabstop>showLessButton</tabstop>
+  <tabstop>otherInfoBox</tabstop>
  </tabstops>
  <resources>
   <include location="images.qrc"/>
  </resources>
  <connections>
-  <connection>
-   <sender>NavigationButtons</sender>
-   <signal>accepted()</signal>
-   <receiver>FixtureEditDialog</receiver>
-   <slot>accept()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>334</x>
-     <y>364</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>157</x>
-     <y>274</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>NavigationButtons</sender>
-   <signal>rejected()</signal>
-   <receiver>FixtureEditDialog</receiver>
-   <slot>reject()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>334</x>
-     <y>364</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>286</x>
-     <y>274</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>showMoreButton</sender>
-   <signal>clicked()</signal>
-   <receiver>moreInfo</receiver>
-   <slot>show()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>309</x>
-     <y>322</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>489</x>
-     <y>61</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>showLessButton</sender>
-   <signal>clicked()</signal>
-   <receiver>moreInfo</receiver>
-   <slot>hide()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>401</x>
-     <y>321</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>469</x>
-     <y>53</y>
-    </hint>
-   </hints>
-  </connection>
   <connection>
    <sender>showLessButton</sender>
    <signal>clicked()</signal>
