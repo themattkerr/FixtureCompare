@@ -412,10 +412,10 @@
 
     void FixtureData::displayAngleWarning()
     {
-            QMessageBox mbAngleError;
-            mbAngleError.setWindowTitle("Angle Error");
-            mbAngleError.setText("Warning! \nBeam angle is greater than field angle!");
-            mbAngleError.exec();
+//            QMessageBox mbAngleError;
+//            mbAngleError.setWindowTitle("Angle Error");
+//            mbAngleError.setText("Warning! \nBeam angle is greater than field angle!");
+//            mbAngleError.exec();
     }
 
     // AllData Functions =============================================================================================================
