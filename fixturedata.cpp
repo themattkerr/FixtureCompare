@@ -453,7 +453,7 @@
     void AllData::copyToNewFixture()
     {
         nNumberOfFixtures++;
-        Fixture[nNumberOfFixtures] = Fixture[nCurrentFixture];
+        Fixture[nNumberOfFixtures] = Fixture[0];//[nCurrentFixture];
         Fixture[nNumberOfFixtures].enterFixtureName((Fixture[nNumberOfFixtures].getFixtureName().append(" - (Copy)")));
 
 

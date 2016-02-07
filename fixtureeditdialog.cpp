@@ -340,7 +340,10 @@ void FixtureEditDialog::on_copyToNewButton_clicked()
     QMessageBox mbCopySucess;
     mbCopySucess.setWindowTitle("Copy to new fixture");
     QString strMessage;
-    strMessage.append("Fixture ").append(QString::number( ((MainWindow*)parentWidget())->cData.nCurrentFixture)).append(" copied to newly created fixture ").append(QString::number(((MainWindow*)parentWidget())->cData.nNumberOfFixtures)).append(".");
+    //strMessage.append("Fixture ").append(QString::number( ((MainWindow*)parentWidget())->cData.nCurrentFixture)).append(" copied to newly created fixture ").append(QString::number(((MainWindow*)parentWidget())->cData.nNumberOfFixtures)).append(".");
+    strMessage.append("Edit fields copied to newly created fixture ").append(QString::number(((MainWindow*)parentWidget())->cData.nNumberOfFixtures)).append(".");
+
+
     mbCopySucess.setText(strMessage);
     mbCopySucess.exec();
 }
