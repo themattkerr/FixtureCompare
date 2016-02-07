@@ -405,11 +405,6 @@
         if (m_dBeamAngle > m_dFieldAngle)
         {
             return false;
-
-
-//            m_dBeamAngle = m_dFieldAngle;
-//            m_dBeamDiameterMeters = m_dFieldDiameterMeters;
-//            m_dBeamDiameterFeet = m_dFieldDiameterFeet;
         }
         else
             return true;
